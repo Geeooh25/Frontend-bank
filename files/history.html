@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>history MSB</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <link rel="stylesheet" href="../styles/style.css" />
+    
+    <style>
+    :root{
+      --bg:#f8fafc;
+      --card:#ffffff;
+      --primary:#6c5ce7;
+      --secondary:#4f46e5;
+      --success:#16a34a;
+      --danger:#ef4444;
+      --muted:#6b7280;
+      --shadow:0 6px 24px rgba(0,0,0,0.08);
+      font-family:Inter,system-ui,sans-serif;
+    }
+
+    #starforge-root{color:#111827;padding:24px;min-height:100vh;margin-top: 30px;border-radius: 20px;}
+
+    .celestial-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr;gap:20px}
+
+    .nebula-card{background:var(--card);border-radius:14px;padding:18px;box-shadow:var(--shadow)}
+    .skyline{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+
+    .vault{display:flex;flex-direction:column}
+    .vault .whisper{font-size:13px;color:var(--muted)}
+    .vault .credit{font-size:26px;font-weight:700;margin-top:4px}
+
+    .photon-btn{padding:8px 14px;border:none;border-radius:8px;cursor:pointer;font-weight:600}
+    .photon-btn.nova{background:linear-gradient(90deg,var(--primary),var(--secondary));color:white}
+    .photon-btn.pulse{border:1px solid var(--primary);color:var(--primary);background:transparent}
+
+    .astro-controls{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin-top:16px}
+    .orb-search{flex:1;display:flex;align-items:center;background:#f1f5f9;border-radius:10px;padding:6px 10px}
+    .orb-search input{border:0;background:transparent;outline:none;width:100%;font-size:14px}
+
+    .filter-strip{display:flex;gap:8px}
+    .quark{padding:6px 12px;border-radius:999px;border:1px solid #e2e8f0;color:var(--muted);cursor:pointer}
+    .quark.active{background:linear-gradient(90deg,var(--primary),var(--secondary));color:white;border:none}
+
+    .flux-list{margin-top:18px;max-height:500px;overflow:auto;scroll-behavior:smooth}
+    .flux-item{display:flex;align-items:center;gap:10px;padding:10px;border-bottom:1px solid #f1f5f9;cursor:pointer;transition:background 0.2s}
+    .flux-item:hover{background:#f9fafb}
+
+    .glyph{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:700;color:white}
+    .metadata{flex:1}
+    .metadata .headline{font-weight:600}
+    .metadata .micro{font-size:12px;color:var(--muted)}
+    .figure{font-weight:700;font-size:14px}
+    .figure.income{color:var(--success)}
+    .figure.cost{color:var(--danger)}
+
+    .trend-block{margin-top:20px}
+    .star-canvas{width:100%;max-height:220px}
+
+    /* modal uses uncommon ids/classes */
+    #umbra-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.5);display:none;align-items:center;justify-content:center}
+    .umbra-card{background:var(--card);padding:20px;border-radius:12px;min-width:360px;max-width:500px;box-shadow:var(--shadow)}
+
+   
+     @media(max-width: 900px){.celestial-grid{grid-template-columns:1fr}}
+    @media(max-width: 1500px){.celestial-grid{grid-template-columns:1fr}}
+    @media(max-width: 700px){.celestial-grid{grid-template-columns:1fr}}
+    @media(max-width: 800px){.celestial-grid{grid-template-columns:1fr}}
+    @media(max-width: 950px){.celestial-grid{grid-template-columns:1fr}}
+   
+  
+  </style>
+  </head> 
+  <body>
+    <div class="app">
+      <header class="app-header">
+        <div class="app-header-logo">
+          <div class="logo">
+            <span class="logo-icon">
+            
+              <i class="fa-brands fa-maxcdn"></i>
+            </span>
+            <h1 class="logo-title">
+              <span>Miles</span>
+              <span>SmartBank</span>
+            </h1>
+          </div>
+          <div>
+            <h5></h5>
+          </div>
+        </div>
+        <div class="app-header-navigation">
+          <div class="tabs">
+            <a href="#">
+              
+            </a>
+            <a href="dashboard.html" >
+              Dashboard
+            </a>
+            <a href="card.html">
+              Cards
+            </a>
+            <a href="userinfo.html">
+              Profile
+            </a>
+            <a href="transfer.html">
+              Transfers
+            </a>
+            <a href="history.html" >
+              History
+            </a>
+          </div>
+        </div>
+        <div class="app-header-actions">
+          <button class="user-profile">
+            <span>Client Name</span>
+            <span>
+              <i class="fa-solid fa-circle-user"></i>
+            </span>
+          </button>
+          <div class="app-header-actions-buttons">
+            <button class="icon-button large">
+              <i class="ph-magnifying-glass"></i>
+            </button>
+            <button class="icon-button large">
+              <i class="ph-bell"></i>
+            </button>
+          </div>
+        </div>
+        <div class="app-header-mobile">
+          <button class="icon-button large">
+            <i class="ph-list"></i>
+          </button>
+        </div>
+    </header>
+    
+
+  <main id="starforge-root">
+    <div class="celestial-grid">
+      <section class="nebula-card" aria-label="main ledger">
+        <div class="skyline">
+          <div class="vault">
+            <div class="whisper">Available Balance</div>
+            <div class="credit">$0.00</div>
+          </div>
+
+          <div class="starlane-actions">
+            <button class="photon-btn pulse" id="exportCsv">Export</button>
+            <button class="photon-btn nova" id="newPayment">New Payment</button>
+          </div>
+        </div>
+
+        <div class="astro-controls">
+          <div class="orb-search"><input id="searchInput" placeholder="Search transactions..."/></div>
+
+          <div class="filter-strip" id="filterStrip">
+            <div class="quark active" data-type="all">All</div>
+            <div class="quark" data-type="inflow">Inflow</div>
+            <div class="quark" data-type="outflow">Outflow</div>
+          </div>
+
+          <select id="sortSwitcher" class="quark">
+            <option value="newest">Newest</option>
+            <option value="oldest">Oldest</option>
+            <option value="amount_desc">High → Low</option>
+            <option value="amount_asc">Low → High</option>
+          </select>
+        </div>
+
+        <div class="flux-list" id="fluxList"></div>
+
+        <div style="text-align:center;margin-top:12px">
+          <button id="extendList" class="quark">Load more</button>
+        </div>
+
+        <div class="trend-block">
+          <h4 style="margin-bottom:6px">Weekly Transaction Trend</h4>
+          <canvas id="starChart" class="star-canvas"></canvas>
+        </div>
+      </section>
+
+      <aside class="nebula-card" aria-label="side summary">
+        <h4>Quick Summary</h4>
+        <p style="color:var(--muted);margin-top:4px">Inflow and outflow overview for the last 30 days.</p>
+        <div style="display:flex;justify-content:space-between;margin-top:14px">
+          <div><b>Inflow:</b> <span class="figure income">+$5,200</span></div>
+          <div><b>Outflow:</b> <span class="figure cost">-$2,850</span></div>
+        </div>
+        <hr style="margin:16px 0;border:0;border-top:1px solid #f1f5f9">
+        <h4>Account Details</h4>
+        <p class="micro">Account No: **** 4321</p>
+        <p class="micro">Bank: Miles SmartBank Ltd</p>
+        <hr style="margin:16px 0;border:0;border-top:1px solid #f1f5f9">
+        <h4>Insights</h4>
+        <ul style="margin-top:10px;color:var(--muted);font-size:14px;list-style-type:disc;padding-left:16px">
+          <li>Spending increased 10% from last week.</li>
+          <li>Most spent on Shopping and Bills.</li>
+          <li>Top income source: Salary and Freelance.</li>
+        </ul>
+      </aside>
+    </div>
+
+    <div id="umbra-backdrop">
+      <div class="umbra-card">
+        <h3>Transaction Details</h3>
+        <div id="umbraBody"></div>
+        <div style="text-align:right;margin-top:10px"><button class="quark" id="dismissUmbra">Close</button></div>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    /* sample ledger unchanged logically but variable names altered to match new IDs */
+    const ledgerRecords = [
+      {uid:1,type:'inflow',title:'Salary',amount:3000,date:'2025-10-25T09:12:00Z',note:'October Salary'},
+      {uid:2,type:'outflow',title:'Airtime',amount:50.5,date:'2025-10-26T10:00:00Z',note:'Recharge'},
+      {uid:3,type:'outflow',title:'Netflix',amount:13.99,date:'2025-10-27T14:00:00Z',note:'Subscription'},
+      {uid:4,type:'inflow',title:'Education',amount:800,date:'2025-10-28T17:00:00Z',note:'School fee'},
+      {uid:5,type:'outflow',title:'Data',amount:240,date:'2025-10-29T20:00:00Z',note:'Mobile'},
+      {uid:6,type:'inflow',title:'Transfer from',amount:300,date:'2025-10-30T22:00:00Z',note:'Oyedokun lukman'},
+      {uid:7,type:'outflow',title:'Electric Bill',amount:120,date:'2025-10-31T08:00:00Z',note:'Utility'},
+      {uid:8,type:'outflow',title:'Youtube tv',amount:95,date:'2025-11-01T13:00:00Z',note:'TV Subscription'},
+      {uid:9,type:'inflow',title:'Bonus',amount:200,date:'2025-11-01T18:00:00Z',note:'Airtime bonus'},
+      {uid:10,type:'outflow',title:'you sent money',amount:40,date:'2025-11-01T09:00:00Z',note:'Olawunmi bankz'}
+    ];
+
+    /* state variables (kept same behavior) */
+    let nebulaState = {filter:'all',query:'',sort:'newest',offset:0,limit:5};
+
+    const fluxListEl = document.getElementById('fluxList');
+    const searchOrb = document.getElementById('searchInput');
+    const filterStrip = document.getElementById('filterStrip');
+    const sortSwitcher = document.getElementById('sortSwitcher');
+    const extendListBtn = document.getElementById('extendList');
+    const exportBtn = document.getElementById('exportCsv');
+
+    function prettyDate(iso){return new Date(iso).toLocaleString();}
+
+    function renderFlux(){
+      let list = ledgerRecords.slice();
+      if(nebulaState.filter !== 'all') list = list.filter(r => r.type === nebulaState.filter);
+      if(nebulaState.query.trim()){
+        const q = nebulaState.query.toLowerCase();
+        list = list.filter(r => (r.title + r.note).toLowerCase().includes(q));
+      }
+      if(nebulaState.sort === 'newest') list.sort((a,b) => new Date(b.date) - new Date(a.date));
+      if(nebulaState.sort === 'oldest') list.sort((a,b) => new Date(a.date) - new Date(b.date));
+      if(nebulaState.sort === 'amount_desc') list.sort((a,b) => b.amount - a.amount);
+      if(nebulaState.sort === 'amount_asc') list.sort((a,b) => a.amount - b.amount);
+
+      const visible = list.slice(0, nebulaState.offset + nebulaState.limit);
+      fluxListEl.innerHTML = '';
+
+      visible.forEach(r => {
+        const item = document.createElement('div'); item.className = 'flux-item';
+        const glyph = document.createElement('div'); glyph.className = 'glyph';
+        const swatches = ['#6c5ce7','#ff7a59','#10b981','#6366f1','#f59e0b'];
+        glyph.style.background = swatches[r.uid % swatches.length];
+        glyph.textContent = r.title[0];
+
+        const meta = document.createElement('div'); meta.className = 'metadata';
+        meta.innerHTML = `<div class='headline'>${r.title}</div><div class='micro'>${prettyDate(r.date)}</div>`;
+
+        const figure = document.createElement('div'); figure.className = 'figure ' + (r.type === 'inflow' ? 'income' : 'cost');
+        figure.textContent = (r.type === 'inflow' ? '+$' : '-$') + r.amount.toFixed(2);
+
+        item.appendChild(glyph); item.appendChild(meta); item.appendChild(figure);
+        item.onclick = () => revealUmbra(r);
+        fluxListEl.appendChild(item);
+      });
+
+      extendListBtn.style.display = (list.length > nebulaState.offset + nebulaState.limit) ? 'inline-block' : 'none';
+    }
+
+    // wiring interactions
+    searchOrb.addEventListener('input', e => { nebulaState.query = e.target.value; nebulaState.offset = 0; renderFlux(); });
+
+    filterStrip.querySelectorAll('.quark').forEach(q => q.addEventListener('click', () => {
+      filterStrip.querySelectorAll('.quark').forEach(x => x.classList.remove('active'));
+      q.classList.add('active'); nebulaState.filter = q.dataset.type; nebulaState.offset = 0; renderFlux();
+    }));
+
+    sortSwitcher.addEventListener('change', e => { nebulaState.sort = e.target.value; renderFlux(); });
+    extendListBtn.addEventListener('click', () => { nebulaState.offset += nebulaState.limit; renderFlux(); window.scrollBy({top:200,behavior:'smooth'}); });
+
+    // umbra modal (transaction details)
+    const umbra = document.getElementById('umbra-backdrop');
+    const umbraBody = document.getElementById('umbraBody');
+    const dismissUmbraBtn = document.getElementById('dismissUmbra');
+
+    function revealUmbra(rec){
+      umbraBody.innerHTML = `<p><strong>${rec.title}</strong></p><p>${rec.note}</p><p><strong>Amount:</strong> ${(rec.type==='inflow'?'+':'-') + '$' + rec.amount.toFixed(2)}</p><p><strong>Date:</strong> ${prettyDate(rec.date)}</p>`;
+      umbra.style.display = 'flex';
+    }
+    dismissUmbraBtn.addEventListener('click', () => { umbra.style.display = 'none'; });
+
+    // CSV export (same behavior)
+    exportBtn.addEventListener('click', () => {
+      const heads = ['uid','type','title','amount','date','note'];
+      const rows = ledgerRecords.map(r => heads.map(h => '"' + (r[h] ?? '') + '"').join(','));
+      const csv = [heads.join(','), ...rows].join('\n');
+      const blob = new Blob([csv], {type:'text/csv'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href = url; a.download = 'ledger.csv'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+    });
+
+    // initial render
+    renderFlux();
+
+    // Chart (trend) — identical dataset styling, just element id changed
+    const ctx = document.getElementById('starChart').getContext('2d');
+    const trendData = {
+      labels:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+      datasets:[
+        {label:'Outflow',data:[50,90,75,60,120,95,100],borderColor:'#ef4444',backgroundColor:'rgba(239,68,68,0.1)',tension:0.4,fill:true},
+        {label:'Inflow',data:[100,120,80,140,200,180,220],borderColor:'#16a34a',backgroundColor:'rgba(22,163,74,0.1)',tension:0.4,fill:true}
+      ]
+    };
+    new Chart(ctx,{type:'line',data:trendData,options:{responsive:true,plugins:{legend:{display:true}},scales:{y:{beginAtZero:true}}}});
+  </script>
+
+        
+  </body>
+</html>

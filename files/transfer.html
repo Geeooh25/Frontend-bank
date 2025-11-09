@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>transfer MSB</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <link rel="stylesheet" href="../styles/style.css" />
+   
+    <style>
+      .containerTR {
+      background: #fff;
+      width: 100%;
+      max-width: 500px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      animation: fadeIn 0.5s ease;
+      color: #074525;
+    
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .headerTR {
+      background: #000080;
+      color: rgb(242, 242, 245);
+      padding: 1.5rem 2rem;
+      text-align: center;
+      font-size: 1.4rem;
+      font-weight: 600;
+    }
+
+    .progress {
+      display: flex;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      background: #fff;
+      border-bottom: 1px solid #e0e5f0;
+      position: relative;
+    }
+
+    .progress span {
+      font-weight: 500;
+      font-size: 0.95rem;
+      color: #888;
+      position: relative;
+    }
+
+    .progress span.active {
+      color: #182536;
+      font-weight: 700;
+    }
+
+    .progress-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 3px;
+      background: #283d59;
+      width: 33%;
+      transition: width 0.3s ease;
+    }
+
+    .contentTR {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .mainTR, .sidebar {
+      padding: 2rem;
+    }
+
+    .mainTR {
+      flex: 2;
+      min-width: 320px;
+    }
+
+    .sidebarTR {
+      flex: 1;
+      min-width: 250px;
+      background: #f7f9fc;
+      border-left: 1px solid #ddd;
+    }
+
+    form {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    form.active {
+      display: block;
+    }
+
+    label {
+      display: block;
+      margin-top: 1rem;
+      font-weight: 600;
+      color: #222;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 0.7rem;
+      margin-top: 0.4rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: #152d4d;
+      box-shadow: 0 0 0 3px rgba(0,74,173,0.1);
+      outline: none;
+      color: #1c103a;
+    }
+
+    .error {
+      color: #e00;
+      font-size: 0.85rem;
+      margin-top: 4px;
+      display: none;
+    }
+
+    .btn-primary {
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+     
+     .btn-secondary {
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: #19355b;
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: #0b9f52;
+      transform: scale(1.02);
+    }
+
+    .btn-secondary {
+      background: #ddd;
+      color: #000;
+      margin-left: 1rem;
+    }
+
+    .status {
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .status.success { color: #0b8f38; }
+    .status.pending { color: #f5a623; }
+    .status.failed { color: #e00; }
+
+    .recent-transfers {
+      margin-top: 1rem;
+    }
+
+    .recent-item {
+      background: #191b99;
+      border-radius: 10px;
+      padding: 1rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      margin-bottom: 1rem;
+      transition: transform 0.2s ease;
+      color: #fff;
+      width: 70%;
+      font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    }
+
+    .recent-item:hover {
+      transform: scale(1.02);
+    }
+
+    .recent-item p {
+      font-size: 0.9rem;
+      margin-bottom: 5px;
+    }
+
+    @media (max-width: 700px) {
+      .contentTR {
+        flex-direction: column;
+      }
+      .sidebarTR {
+        border-left: none;
+        border-top: 1px solid #ddd;
+      }
+    }
+  
+    </style>
+  </head> 
+  <body>
+    <div class="app">
+      <header class="app-header">
+        <div class="app-header-logo">
+          <div class="logo">
+            <span class="logo-icon">
+            
+              <i class="fa-brands fa-maxcdn"></i>
+            </span>
+            <h1 class="logo-title">
+              <span>Miles</span>
+              <span>SmartBank</span>
+            </h1>
+          </div>
+          <div>
+            <h5></h5>
+          </div>
+        </div>
+        <div class="app-header-navigation">
+          <div class="tabs">
+            <a href="#">
+              
+            </a>
+            <a href="dashboard.html">
+              Dashboard
+            </a>
+            <a href="card.html">
+              Cards
+            </a>
+            <a href="userinfo.html">
+              Profile
+            </a>
+            <a href="transfer.html" class="active">
+              Transfers
+            </a>
+            <a href="history.html">
+              History
+            </a>
+          </div>
+        </div>
+        <div class="app-header-actions">
+          <button class="user-profile">
+            <span>Client Name</span>
+            <span>
+              <i class="fa-solid fa-circle-user"></i>
+            </span>
+          </button>
+          <div class="app-header-actions-buttons">
+            <button class="icon-button large">
+              <i class="ph-magnifying-glass"></i>
+            </button>
+            <button class="icon-button large">
+              <i class="ph-bell"></i>
+            </button>
+          </div>
+        </div>
+        <div class="app-header-mobile">
+          <button class="icon-button large">
+            <i class="ph-list"></i>
+          </button>
+        </div>
+
+      </header>
+      <div class="app-body">
+        <div class="app-body-navigation">
+          <nav class="navigation">
+            <a href="dashboard.html">
+              <i class="ph-browsers"></i>
+              <span>Dashboard</span>
+            </a>
+            <a href="topup.html">
+              <i class="ph-check-square"></i>
+              <span>Top-up</span>
+            </a>
+            <a href="transfer.html">
+              <i class="ph-swap"></i>
+              <span>Transfers</span>
+            </a>
+            <a href="card.html">
+              <i class="ph-file-text"></i>
+              <span>Card</span>
+            </a>
+            <a href="history.html">
+              <i class="ph-globe"></i>
+              <span>History</span>
+            </a>
+            <a href="exchange.html">
+              <i class="ph-clipboard-text"></i>
+              <span>Exchange</span>
+            </a>
+          </nav>
+          <footer class="footer">
+            <h1>Miles<small>©</small></h1>
+            <div>
+              Miles ©<br />
+              All Rights Reserved 2021
+            </div>
+          </footer>
+        </div>
+        <div class="app-body-main-content">
+          <section class="service-section">
+
+<div class="containerTR">
+  <header class="headerTR"> Transfer </header>
+
+  <div class="progress">
+    <span id="step1Label" class="active">Step 1</span>
+    <span id="step2Label">Step 2</span>
+    <span id="step3Label">Step 3</span>
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+
+  <div class="contentTR">
+    <div class="mainTR">
+      <!-- Step 1 -->
+      <form id="step1" class="active">
+        <label>Transfer Type</label>
+        <select id="transferType" required onchange="toggleBankSelection()">
+          <option value="">Select...</option>
+          <option value="myBank">Miles Bank</option>
+          <option value="otherBank">Other Bank</option>
+        </select>
+
+        <label>Recipient's Full Name</label>
+        <input type="text" id="recipientName" placeholder="e.g., John Doe" required>
+
+        <label>Recipient's Account Number</label>
+        <input type="number" id="accountNumber" placeholder="10 digits" required oninput="validateAccountLength(this)">
+        <span id="accountError" class="error">Account number must be exactly 10 digits.</span>
+
+        <div id="bankField">
+          <label>Recipient's Bank</label>
+          <select id="recipientBank">
+            <option value="">Select Bank...</option>
+            <option>Chase Bank</option>
+            <option>Bank of America</option>
+            <option>Citibank</option>
+            <option>Wells Fargo</option>
+            <option>Capital One</option>
+          </select>
+        </div>
+
+        <label>Currency</label>
+        <select id="currency" required>
+          <option value="">Select Currency...</option>
+          <option>USD</option>
+          <option>EUR</option>
+          <option>GBP</option>
+        </select>
+
+        <label>Transfer Amount</label>
+        <input type="number" id="amount" placeholder="e.g., 500.00" required min="1" step="0.01">
+
+        <label>Payment Reference (Optional)</label>
+        <textarea id="memo" placeholder="e.g., Rent payment"></textarea>
+
+        <button type="button" class="btn-primary" onclick="goToConfirm()">Next</button>
+      </form>
+
+      <!-- Step 2 -->
+      <form id="step2">
+        <h3>Confirm Transfer Details</h3>
+        <div id="confirmDetails"></div>
+        <button type="button" id="confirmBtn" class="btn-primary" onclick="submitTransfer()">Confirm & Send</button>
+        <button type="button" class="btn-secondary" onclick="backToForm()">Back</button>
+      </form>
+
+      <!-- Step 3 -->
+      <form id="step3">
+        <div id="transferStatus" class="status"></div>
+        <div id="statusDetails"></div>
+        <button type="button" class="btn-primary" onclick="restart()">New Transfer</button>
+      </form>
+    </div>
+
+    <div class="sidebarTR">
+       <h3></h3>
+       <div id="recentTransfers" class="recent-transfers">
+      
+       </div>
+    </div>
+       </div>
+    </div>
+   </section>
+        </div>
+       
+        
+        <div class="app-body-sidebar">
+          <section class="payment-section">
+            <h2>New Payment</h2>
+            <div class="payment-section-header">
+              <p>Choose a card to transfer money</p>
+              <div>
+                <button class="card-button mastercard">
+                  <svg width="2001" height="1237" viewBox="0 0 2001 1237" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g id="a624784f2834e21c94a1c0c9a58bbbaa">
+                      <path id="7869b07bea546aa59a5ee138adbcfd5a" d="M1270.57 1104.15H729.71V132.15H1270.58L1270.57 1104.15Z" fill="currentColor"></path>
+                      <path id="b54e3ab4d7044a9f288082bc6b864ae6" d="M764 618.17C764 421 856.32 245.36 1000.08 132.17C891.261 46.3647 756.669 -0.204758 618.09 9.6031e-07C276.72 9.6031e-07 0 276.76 0 618.17C0 959.58 276.72 1236.34 618.09 1236.34C756.672 1236.55 891.268 1189.98 1000.09 1104.17C856.34 991 764 815.35 764 618.17Z" fill="currentColor"></path>
+                      <path id="67f94b4d1b83252a6619ed6e0cc0a3a1" d="M2000.25 618.17C2000.25 959.58 1723.53 1236.34 1382.16 1236.34C1243.56 1236.54 1108.95 1189.97 1000.11 1104.17C1143.91 990.98 1236.23 815.35 1236.23 618.17C1236.23 420.99 1143.91 245.36 1000.11 132.17C1108.95 46.3673 1243.56 -0.201169 1382.15 -2.24915e-05C1723.52 -2.24915e-05 2000.24 276.76 2000.24 618.17" fill="currentColor"></path>
+                    </g>
+                  </svg>
+                </button>
+                <button class="card-button visa active">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="2500" height="2500" viewBox="0 0 141.732 141.732">
+                    <g fill="currentColor">
+                      <path d="M62.935 89.571h-9.733l6.083-37.384h9.734zM45.014 52.187L35.735 77.9l-1.098-5.537.001.002-3.275-16.812s-.396-3.366-4.617-3.366h-15.34l-.18.633s4.691.976 10.181 4.273l8.456 32.479h10.141l15.485-37.385H45.014zM121.569 89.571h8.937l-7.792-37.385h-7.824c-3.613 0-4.493 2.786-4.493 2.786L95.881 89.571h10.146l2.029-5.553h12.373l1.14 5.553zm-10.71-13.224l5.114-13.99 2.877 13.99h-7.991zM96.642 61.177l1.389-8.028s-4.286-1.63-8.754-1.63c-4.83 0-16.3 2.111-16.3 12.376 0 9.658 13.462 9.778 13.462 14.851s-12.075 4.164-16.06.965l-1.447 8.394s4.346 2.111 10.986 2.111c6.642 0 16.662-3.439 16.662-12.799 0-9.72-13.583-10.625-13.583-14.851.001-4.227 9.48-3.684 13.645-1.389z" />
+                    </g>
+                    <path d="M34.638 72.364l-3.275-16.812s-.396-3.366-4.617-3.366h-15.34l-.18.633s7.373 1.528 14.445 7.253c6.762 5.472 8.967 12.292 8.967 12.292z" fill="currentColor" />
+                    <path fill="none" d="M0 0h141.732v141.732H0z" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div class="payments">
+              <div class="payment">
+                <div class="card green">
+                  <span>01/22</span>
+                  <span>
+                    •••• 4012
+                  </span>
+                </div>
+                <div class="payment-details">
+                  <h3>Internet</h3>
+                  <div>
+                    <span>$ 2,110</span>
+                    <button class="icon-button">
+                      <i class="ph-caret-right-bold"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="payment">
+                <div class="card olive">
+                  <span>12/23</span>
+                  <span>
+                    •••• 2228
+                  </span>
+                </div>
+                <div class="payment-details">
+                  <h3>Universal</h3>
+                  <div>
+                    <span>$ 5,621</span>
+                    <button class="icon-button">
+                      <i class="ph-caret-right-bold"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="payment">
+                <div class="card gray">
+                  <span>03/22</span>
+                  <span>
+                    •••• 5214
+                  </span>
+                </div>
+                <div class="payment-details">
+                  <h3>Gold</h3>
+                  <div>
+                    <span>$ 3,473</span>
+                    <button class="icon-button">
+                      <i class="ph-caret-right-bold"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="faq">
+              <p>Most frequently asked questions</p>
+              <div>
+                <label>Question</label>
+                <input type="text" placeholder="Type here">
+              </div>
+            </div>
+            <div class="payment-section-footer">
+              <button class="save-button">
+                Save
+              </button>
+              <button class="settings-button">
+                <i class="ph-gear"></i>
+                <span>More settings</span>
+              </button>
+            </div>
+          </section>
+        </div>
+
+
+      </div>
+    </div>
+ <script src="https://unpkg.com/phosphor-icons"></script>
+   <script>
+  const step1 = document.getElementById("step1");
+  const step2 = document.getElementById("step2");
+  const step3 = document.getElementById("step3");
+  const progressBar = document.getElementById("progressBar");
+  const accountInput = document.getElementById("accountNumber");
+  const accountError = document.getElementById("accountError");
+  const stepLabels = [
+    document.getElementById("step1Label"),
+    document.getElementById("step2Label"),
+    document.getElementById("step3Label")
+  ];
+  const recentTransfersContainer = document.getElementById("recentTransfers");
+
+  let transferData = {};
+  let recentTransfers = JSON.parse(localStorage.getItem("recentTransfers") || "[]");
+
+  function setActiveStep(step) {
+    [step1, step2, step3].forEach((s, i) => {
+      s.classList.toggle("active", i === step - 1);
+      stepLabels[i].classList.toggle("active", i === step - 1);
+    });
+    progressBar.style.width = (step * 33) + "%";
+  }
+
+  function validateAccountLength(input) {
+    const value = input.value;
+    if (value.length > 10) input.value = value.slice(0, 10);
+    if (value.length !== 10) {
+      input.style.borderColor = "#e00";
+      accountError.style.display = "block";
+    } else {
+      input.style.borderColor = "#0b8f38";
+      accountError.style.display = "none";
+    }
+  }
+
+  function toggleBankSelection() {
+    const type = document.getElementById("transferType").value;
+    document.getElementById("bankField").style.display = type === "myBank" ? "none" : "block";
+  }
+
+  function goToConfirm() {
+    const type = document.getElementById("transferType").value;
+    const name = document.getElementById("recipientName").value.trim();
+    const acc = accountInput.value;
+    const bank = document.getElementById("recipientBank").value;
+    const amount = document.getElementById("amount").value;
+    const memo = document.getElementById("memo").value || "—";
+    const currency = document.getElementById("currency").value;
+
+    if (!name || !acc || !amount || !currency || !type) {
+      alert("Please fill in all required fields.");
+      return;
+    }
+    if (acc.length !== 10) {
+      alert("Account number must be exactly 10 digits.");
+      return;
+    }
+
+    transferData = { type, name, acc, bank, amount, memo, currency };
+
+    document.getElementById("confirmDetails").innerHTML = `
+      <p><strong>Transfer Type:</strong> ${type === 'myBank' ? 'My Bank' : 'Other Bank'}</p>
+      <p><strong>Recipient Name:</strong> ${name}</p>
+      <p><strong>Account Number:</strong> ${acc}</p>
+      ${type === "otherBank" ? `<p><strong>Bank:</strong> ${bank}</p>` : ""}
+      <p><strong>Currency:</strong> ${currency}</p>
+      <p><strong>Amount:</strong> ${parseFloat(amount).toFixed(2)}</p>
+      <p><strong>Memo:</strong> ${memo}</p>
+    `;
+    setActiveStep(2);
+  }
+
+  function backToForm() { setActiveStep(1); }
+
+  function submitTransfer() {
+    const confirmBtn = document.getElementById("confirmBtn");
+    confirmBtn.disabled = true;
+    setActiveStep(3);
+
+    const statusEl = document.getElementById("transferStatus");
+    statusEl.textContent = "Processing...";
+    statusEl.className = "status pending";
+    document.getElementById("statusDetails").innerHTML = "";
+
+    setTimeout(() => {
+      const now = new Date().toLocaleString();
+      const statusResult = Math.random() < 0.85 ? "success" : "failed";
+      statusEl.className = `status ${statusResult}`;
+      statusEl.textContent = statusResult === "success" ? "Transfer Successful!" : "Transfer Failed!";
+
+      document.getElementById("statusDetails").innerHTML = `
+        <p><strong>Recipient:</strong> ${transferData.name}</p>
+        <p><strong>Account:</strong> ${transferData.acc}</p>
+        ${transferData.type === "otherBank" ? `<p><strong>Bank:</strong> ${transferData.bank}</p>` : ""}
+        <p><strong>Amount:</strong> ${transferData.amount} ${transferData.currency}</p>
+        <p><strong>Status:</strong> ${statusResult}</p>
+        <p><strong>Date & Time:</strong> ${now}</p>
+      `;
+
+      const record = { ...transferData, date: now, status: statusResult };
+      recentTransfers.unshift(record);
+      if (recentTransfers.length > 5) recentTransfers.pop();
+      localStorage.setItem("recentTransfers", JSON.stringify(recentTransfers));
+      renderRecentTransfers();
+
+      confirmBtn.disabled = false;
+    }, 3000);
+  }
+
+  function restart() {
+    document.querySelectorAll("form").forEach(f => f.reset());
+    accountError.style.display = "none";
+    accountInput.style.borderColor = "#ccc";
+    setActiveStep(1);
+  }
+
+  
+
+  
+</script>
+
+  </body>
+</html>

@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>tv MSB</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <link rel="stylesheet" href="../styles/style.css" />
+      <style>
+
+    .cards {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+      padding: 2rem;
+      width: 90%;
+      max-width: 420px;
+      animation: fadeIn 0.7s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .cards  h2 {
+      text-align: center;
+      color: #2563eb;
+      margin-bottom: 1.5rem;
+      font-size: 1.6rem;
+    }
+    label {
+      display: block;
+      margin-bottom: 0.4rem;
+      color: #374151;
+      font-weight: 500;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+      outline: none;
+      font-size: 1rem;
+      transition: border-color 0.2s;
+    }
+    input:focus, select:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 2px rgba(37,99,235,0.1);
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 1rem;
+      border: none;
+      border-radius: 8px;
+      background: #2563eb;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover { background:  #1e40af ; }
+    .error { color: #dc2626; font-size: 0.85rem; margin-top: 4px; }
+    .footer { text-align: center; font-size: 0.8rem; color: #6b7280; margin-top: 1rem; }
+
+    .loading { background: #93c5fd !important; cursor: not-allowed; }
+
+    /* Modal */
+    .modal {
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.4);
+      display: flex; justify-content: center; align-items: center;
+      visibility: hidden; opacity: 0;
+      transition: 0.3s ease;
+    }
+    .modal.active { visibility: visible; opacity: 1; }
+    .modal-content {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 12px;
+      text-align: center;
+      width: 90%;
+      max-width: 320px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+      animation: fadeIn 0.4s ease;
+    }
+    .modal-content h3 { color: #16a34a; margin-bottom: 0.5rem; }
+    .close-btn {
+      background: #2563eb; color: #fff;
+      border: none; padding: 10px 18px;
+      border-radius: 6px; cursor: pointer; font-weight: 600;
+    }
+  </style>
+  </head> 
+  <body>
+    <div class="app">
+      <header class="app-header">
+        <div class="app-header-logo">
+          <div class="logo">
+            <span class="logo-icon">
+            
+              <i class="fa-brands fa-maxcdn"></i>
+            </span>
+            <h1 class="logo-title">
+              <span>Miles</span>
+              <span>SmartBank</span>
+            </h1>
+          </div>
+          <div>
+            <h5></h5>
+          </div>
+        </div>
+        <div class="app-header-navigation">
+          <div class="tabs">
+            <a href="#">
+              
+            </a>
+            <a href="dashboard.html" >
+              Dashboard
+            </a>
+            <a href="card.html">
+              Cards
+            </a>
+            <a href="account.html">
+              Account
+            </a>
+            <a href="transfer.html">
+              Transfers
+            </a>
+            <a href="history.html">
+              History
+            </a>
+          </div>
+        </div>
+        <div class="app-header-actions">
+          <button class="user-profile">
+            <span>Client Name</span>
+            <span>
+              <i class="fa-solid fa-circle-user"></i>
+            </span>
+          </button>
+          <div class="app-header-actions-buttons">
+            <button class="icon-button large">
+              <i class="ph-magnifying-glass"></i>
+            </button>
+            <button class="icon-button large">
+              <i class="ph-bell"></i>
+            </button>
+          </div>
+        </div>
+        <div class="app-header-mobile">
+          <button class="icon-button large">
+            <i class="ph-list"></i>
+          </button>
+        </div>
+
+      </header>
+      <div class="app-body">
+        <div class="app-body-navigation">
+          <nav class="navigation">
+            <a href="dashboard.html">
+              <i class="ph-browsers"></i>
+              <span>Dashboard</span>
+            </a>
+            <a href="topup.html">
+              <i class="ph-check-square"></i>
+              <span>Top-up</span>
+            </a>
+            <a href="transfer.html">
+              <i class="ph-swap"></i>
+              <span>Transfers</span>
+            </a>
+            <a href="card.html">
+              <i class="ph-file-text"></i>
+              <span>Card</span>
+            </a>
+            <a href="history.html">
+              <i class="ph-globe"></i>
+              <span>History</span>
+            </a>
+            <a href="exchange.html">
+              <i class="ph-clipboard-text"></i>
+              <span>Exchange</span>
+            </a>
+          </nav>
+          <footer class="footer">
+            <h1>Miles<small>©</small></h1>
+            <div>
+              Miles ©<br />
+              All Rights Reserved 2021
+            </div>
+          </footer>
+        </div>
+        <div class="app-body-main-content">
+          <section class="service-section">
+        
+  <div class="cards">
+    <h2>TV & Streaming Payment</h2>
+    <form id="tvForm">
+      <label for="provider">Select Provider</label>
+      <select id="provider" required>
+        <option value="">Choose Provider</option>
+        <optgroup label="Cable TV Providers">
+          <option value="Comcast">Comcast</option>
+          <option value="Spectrum">Spectrum</option>
+          <option value="DirecTV">DirecTV</option>
+          <option value="Dish Network">Dish Network</option>
+        </optgroup>
+        <optgroup label="Streaming Services">
+          <option value="Netflix">Netflix</option>
+          <option value="Hulu">Hulu</option>
+          <option value="Disney+">Disney+</option>
+          <option value="Amazon Prime Video">Amazon Prime Video</option>
+          <option value="YouTube TV">YouTube TV</option>
+          <option value="HBO Max">HBO Max</option>
+        </optgroup>
+      </select>
+
+      <div id="accountSection" style="margin-top:1rem;"></div>
+
+      <label for="plan" style="margin-top:1rem;">Subscription Plan</label>
+      <select id="plan" required>
+        <option value="">Select Plan</option>
+        <option value="Basic">Basic ($10)</option>
+        <option value="Standard">Standard ($20)</option>
+        <option value="Premium">Premium ($30)</option>
+        <option value="Family">Family ($40)</option>
+      </select>
+
+      <button type="submit" id="submitBtn">Pay Now</button>
+    </form>
+
+    <div class="footer">Secure & Smart TV Payments 📺</div>
+  </div>
+
+  <div class="modal" id="successModal">
+    <div class="modal-content">
+      <h3>✅ Payment Successful!</h3>
+      <p id="successText"></p>
+      <button class="close-btn" onclick="closeModal()">OK</button>
+    </div>
+  </div>
+          </section>
+        </div>
+        <div class="app-body-sidebar">
+          <section class="payment-section">
+            <h2>New Payment</h2>
+            <div class="payment-section-header">
+              <p>Choose a card to transfer money</p>
+              <div>
+                <button class="card-button mastercard">
+                  <svg width="2001" height="1237" viewBox="0 0 2001 1237" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g id="a624784f2834e21c94a1c0c9a58bbbaa">
+                      <path id="7869b07bea546aa59a5ee138adbcfd5a" d="M1270.57 1104.15H729.71V132.15H1270.58L1270.57 1104.15Z" fill="currentColor"></path>
+                      <path id="b54e3ab4d7044a9f288082bc6b864ae6" d="M764 618.17C764 421 856.32 245.36 1000.08 132.17C891.261 46.3647 756.669 -0.204758 618.09 9.6031e-07C276.72 9.6031e-07 0 276.76 0 618.17C0 959.58 276.72 1236.34 618.09 1236.34C756.672 1236.55 891.268 1189.98 1000.09 1104.17C856.34 991 764 815.35 764 618.17Z" fill="currentColor"></path>
+                      <path id="67f94b4d1b83252a6619ed6e0cc0a3a1" d="M2000.25 618.17C2000.25 959.58 1723.53 1236.34 1382.16 1236.34C1243.56 1236.54 1108.95 1189.97 1000.11 1104.17C1143.91 990.98 1236.23 815.35 1236.23 618.17C1236.23 420.99 1143.91 245.36 1000.11 132.17C1108.95 46.3673 1243.56 -0.201169 1382.15 -2.24915e-05C1723.52 -2.24915e-05 2000.24 276.76 2000.24 618.17" fill="currentColor"></path>
+                    </g>
+                  </svg>
+                </button>
+                <button class="card-button visa active">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="2500" height="2500" viewBox="0 0 141.732 141.732">
+                    <g fill="currentColor">
+                      <path d="M62.935 89.571h-9.733l6.083-37.384h9.734zM45.014 52.187L35.735 77.9l-1.098-5.537.001.002-3.275-16.812s-.396-3.366-4.617-3.366h-15.34l-.18.633s4.691.976 10.181 4.273l8.456 32.479h10.141l15.485-37.385H45.014zM121.569 89.571h8.937l-7.792-37.385h-7.824c-3.613 0-4.493 2.786-4.493 2.786L95.881 89.571h10.146l2.029-5.553h12.373l1.14 5.553zm-10.71-13.224l5.114-13.99 2.877 13.99h-7.991zM96.642 61.177l1.389-8.028s-4.286-1.63-8.754-1.63c-4.83 0-16.3 2.111-16.3 12.376 0 9.658 13.462 9.778 13.462 14.851s-12.075 4.164-16.06.965l-1.447 8.394s4.346 2.111 10.986 2.111c6.642 0 16.662-3.439 16.662-12.799 0-9.72-13.583-10.625-13.583-14.851.001-4.227 9.48-3.684 13.645-1.389z" />
+                    </g>
+                    <path d="M34.638 72.364l-3.275-16.812s-.396-3.366-4.617-3.366h-15.34l-.18.633s7.373 1.528 14.445 7.253c6.762 5.472 8.967 12.292 8.967 12.292z" fill="currentColor" />
+                    <path fill="none" d="M0 0h141.732v141.732H0z" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div class="payments">
+              <div class="payment">
+                <div class="card green">
+                  <span>01/22</span>
+                  <span>
+                    •••• 4012
+                  </span>
+                </div>
+                <div class="payment-details">
+                  <h3>Internet</h3>
+                  <div>
+                    <span>$ 2,110</span>
+                    <button class="icon-button">
+                      <i class="ph-caret-right-bold"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="payment">
+                <div class="card olive">
+                  <span>12/23</span>
+                  <span>
+                    •••• 2228
+                  </span>
+                </div>
+                <div class="payment-details">
+                  <h3>Universal</h3>
+                  <div>
+                    <span>$ 5,621</span>
+                    <button class="icon-button">
+                      <i class="ph-caret-right-bold"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="payment">
+                <div class="card gray">
+                  <span>03/22</span>
+                  <span>
+                    •••• 5214
+                  </span>
+                </div>
+                <div class="payment-details">
+                  <h3>Gold</h3>
+                  <div>
+                    <span>$ 3,473</span>
+                    <button class="icon-button">
+                      <i class="ph-caret-right-bold"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="faq">
+              <p>Most frequently asked questions</p>
+              <div>
+                <label>Question</label>
+                <input type="text" placeholder="Type here">
+              </div>
+            </div>
+            <div class="payment-section-footer">
+              <button class="save-button">
+                Save
+              </button>
+              <button class="settings-button">
+                <i class="ph-gear"></i>
+                <span>More settings</span>
+              </button>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+    <script src="https://unpkg.com/phosphor-icons"></script>
+    
+  <script>
+    const providerSelect = document.getElementById("provider");
+    const accountSection = document.getElementById("accountSection");
+    const form = document.getElementById("tvForm");
+    const submitBtn = document.getElementById("submitBtn");
+    const modal = document.getElementById("successModal");
+    const successText = document.getElementById("successText");
+
+    providerSelect.addEventListener("change", () => {
+      const provider = providerSelect.value;
+      if (!provider) {
+        accountSection.innerHTML = "";
+        return;
+      }
+
+      if (["Comcast", "Spectrum", "DirecTV", "Dish Network"].includes(provider)) {
+        accountSection.innerHTML = `
+          <label for="smartcard">Smartcard Number</label>
+          <input type="text" id="smartcard" placeholder="Enter 10–11 digit smartcard" maxlength="11" required />
+          <div id="errorText" class="error"></div>
+        `;
+      } else {
+        accountSection.innerHTML = `
+          <label for="email">Account Email</label>
+          <input type="email" id="email" placeholder="Enter account email" required />
+          <div id="errorText" class="error"></div>
+        `;
+      }
+    });
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const provider = providerSelect.value;
+      const plan = document.getElementById("plan").value;
+      const errorText = document.getElementById("errorText");
+      let accountValue;
+
+      if (["Comcast", "Spectrum", "DirecTV", "Dish Network"].includes(provider)) {
+        const smartcard = document.getElementById("smartcard").value.trim();
+        if (smartcard.length < 10 || smartcard.length > 11) {
+          errorText.textContent = "Smartcard must be 10–11 digits.";
+          return;
+        }
+        errorText.textContent = "";
+        accountValue = `Smartcard ${smartcard}`;
+      } else {
+        const email = document.getElementById("email").value.trim();
+        if (!email.includes("@")) {
+          errorText.textContent = "Enter a valid email.";
+          return;
+        }
+        errorText.textContent = "";
+        accountValue = `Account ${email}`;
+      }
+
+      submitBtn.textContent = "Processing...";
+      submitBtn.classList.add("loading");
+      submitBtn.disabled = true;
+
+      setTimeout(() => {
+        successText.textContent = `Your ${plan} plan payment for ${provider} (${accountValue}) was successful.`;
+        modal.classList.add("active");
+        form.reset();
+        accountSection.innerHTML = "";
+        submitBtn.textContent = "Pay Now";
+        submitBtn.classList.remove("loading");
+        submitBtn.disabled = false;
+      }, 1800);
+    });
+
+    function closeModal() {
+      modal.classList.remove("active");
+    }
+  </script>
+  </body>
+</html>

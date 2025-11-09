@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login / Signup MSB</title>
+  <style>
+    /* auth.css */
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background-color: #eff1f3;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .auth-container {
+      background: white;
+      width: 380px;
+      padding: 30px;
+      border-radius: 25px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .form-toggle {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 25px;
+    }
+
+    .form-toggle button {
+      flex: 1;
+      padding: 10px 0;
+      border: none;
+      background-color: #e6e6e6;
+      color: #555;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .form-toggle button.active {
+      background-color: #000080;
+      color: white;
+    }
+
+    .auth-form {
+      display: none;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .auth-form.show {
+      display: block;
+      opacity: 1;
+    }
+
+    .auth-form h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #333;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+      position: relative;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 500;
+      margin-bottom: 5px;
+      color: #444;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 15px;
+    }
+
+    input.error {
+      border-color: red;
+    }
+
+    input.valid {
+      border-color: #4caf50;
+    }
+
+    .error-message {
+      color: red;
+      font-size: 13px;
+      margin-top: 4px;
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 10px;
+      top: 36px;
+      cursor: pointer;
+      font-size: 14px;
+      color: #777;
+    }
+
+    .btn-submit {
+      width: 100%;
+      background-color: #45a;
+      color: white;
+      border: none;
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .btn-submit:hover {
+      background-color: #000080;
+    }
+
+    .alt-text {
+      text-align: center;
+      margin-top: 12px;
+      font-size: 14px;
+    }
+
+    .alt-text a {
+      color: #000080;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .alt-text a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="auth-container">
+    <div class="form-toggle">
+      <button id="login-btn" class="active">Login</button>
+      <button id="signup-btn">Sign Up</button>
+    </div>
+
+    <!-- LOGIN FORM -->
+    <form id="login-form" class="auth-form show">
+      <h2>Welcome Back 👋</h2>
+      <div class="form-group">
+        <label for="login-email">Email</label>
+        <input type="email" id="login-email" placeholder="Enter your email" required />
+      </div>
+      <div class="form-group">
+        <label for="login-password">Password</label>
+        <input type="password" id="login-password" placeholder="Enter your password" required />
+        <span class="toggle-password" data-target="login-password">👁️</span>
+      </div>
+      <button type="submit" class="btn-submit">Login</button>
+      <p class="alt-text">
+        Don’t have an account? <a href="#" id="go-signup">Sign up here</a>
+      </p>
+    </form>
+
+    <!-- SIGNUP FORM -->
+    <form id="signup-form" class="auth-form">
+      <h2>Create an Account </h2>
+      <div class="form-group">
+        <label for="signup-name">Full Name</label>
+        <input type="text" id="signup-name" placeholder="John Doe" required />
+      </div>
+      <div class="form-group">
+        <label for="signup-email">Email</label>
+        <input type="email" id="signup-email" placeholder="Enter your email" required />
+      </div>
+      <div class="form-group">
+        <label for="signup-password">Password</label>
+        <input type="password" id="signup-password" placeholder="At least 6 characters" required />
+        <span class="toggle-password" data-target="signup-password">👁️</span>
+      </div>
+      <div class="form-group">
+        <label for="signup-confirm">Confirm Password</label>
+        <input type="password" id="signup-confirm" placeholder="Re-enter password" required />
+        <span class="toggle-password" data-target="signup-confirm">👁️</span>
+      </div>
+      <button type="submit" class="btn-submit">Sign Up</button>
+      <p class="alt-text">
+        Already have an account? <a href="#" id="go-login">Login here</a>
+      </p>
+    </form>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const loginForm = document.getElementById("login-form");
+      const signupForm = document.getElementById("signup-form");
+      const loginBtn = document.getElementById("login-btn");
+      const signupBtn = document.getElementById("signup-btn");
+
+      const goSignup = document.getElementById("go-signup");
+      const goLogin = document.getElementById("go-login");
+
+      // Toggle between Login and Signup
+      function showLogin() {
+        signupForm.classList.remove("show");
+        loginForm.classList.add("show");
+        loginBtn.classList.add("active");
+        signupBtn.classList.remove("active");
+      }
+
+      function showSignup() {
+        loginForm.classList.remove("show");
+        signupForm.classList.add("show");
+        signupBtn.classList.add("active");
+        loginBtn.classList.remove("active");
+      }
+
+      loginBtn.addEventListener("click", showLogin);
+      signupBtn.addEventListener("click", showSignup);
+      goSignup.addEventListener("click", (e) => {
+        e.preventDefault();
+        showSignup();
+      });
+      goLogin.addEventListener("click", (e) => {
+        e.preventDefault();
+        showLogin();
+      });
+
+      // Password toggle
+      document.querySelectorAll(".toggle-password").forEach((toggle) => {
+        toggle.addEventListener("click", () => {
+          const targetId = toggle.getAttribute("data-target");
+          const input = document.getElementById(targetId);
+          if (input.type === "password") {
+            input.type = "text";
+            toggle.textContent = "🙈";
+          } else {
+            input.type = "password";
+            toggle.textContent = "👁️";
+          }
+        });
+      });
+
+      // Helper functions
+      function showError(input, message) {
+        input.classList.add("error");
+        const msg = document.createElement("div");
+        msg.className = "error-message";
+        msg.textContent = message;
+        input.insertAdjacentElement("afterend", msg);
+      }
+
+      function clearErrors(form) {
+        form.querySelectorAll(".error-message").forEach((e) => e.remove());
+        form.querySelectorAll(".error").forEach((e) => e.classList.remove("error"));
+        form.querySelectorAll(".valid").forEach((e) => e.classList.remove("valid"));
+      }
+
+      // Login validation
+      loginForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const email = document.getElementById("login-email");
+        const password = document.getElementById("login-password");
+
+        clearErrors(loginForm);
+        let valid = true;
+
+        if (!email.value.trim()) {
+          showError(email, "Email is required.");
+          valid = false;
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
+          showError(email, "Enter a valid email address.");
+          valid = false;
+        } else {
+          email.classList.add("valid");
+        }
+
+        if (!password.value.trim()) {
+          showError(password, "Password is required.");
+          valid = false;
+        } else {
+          password.classList.add("valid");
+        }
+
+        if (valid) {
+          alert("✅ Logged in successfully!");
+          loginForm.reset();
+        }
+      });
+
+      // Signup validation
+      signupForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const name = document.getElementById("signup-name");
+        const email = document.getElementById("signup-email");
+        const password = document.getElementById("signup-password");
+        const confirm = document.getElementById("signup-confirm");
+
+        clearErrors(signupForm);
+        let valid = true;
+
+        if (!name.value.trim()) {
+          showError(name, "Full name is required.");
+          valid = false;
+        } else {
+          name.classList.add("valid");
+        }
+
+        if (!email.value.trim()) {
+          showError(email, "Email is required.");
+          valid = false;
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
+          showError(email, "Enter a valid email address.");
+          valid = false;
+        } else {
+          email.classList.add("valid");
+        }
+
+        if (!password.value.trim()) {
+          showError(password, "Password is required.");
+          valid = false;
+        } else if (password.value.length < 6) {
+          showError(password, "Password must be at least 6 characters.");
+          valid = false;
+        } else {
+          password.classList.add("valid");
+        }
+
+        if (!confirm.value.trim()) {
+          showError(confirm, "Please confirm your password.");
+          valid = false;
+        } else if (confirm.value !== password.value) {
+          showError(confirm, "Passwords do not match.");
+          valid = false;
+        } else {
+          confirm.classList.add("valid");
+        }
+
+        if (valid) {
+          alert("🎉 Account created successfully!");
+          signupForm.reset();
+          showLogin();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
+
+
+
+
+
+

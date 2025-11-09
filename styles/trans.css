@@ -1,0 +1,188 @@
+
+    .containerTR {
+      background: #fff;
+      width: 100%;
+      max-width: 550px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      animation: fadeIn 0.5s ease;
+      color: #074525;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .headerTR {
+      background: #000080;
+      color: rgb(242, 242, 245);
+      padding: 1.5rem 2rem;
+      text-align: center;
+      font-size: 1.4rem;
+      font-weight: 600;
+    }
+
+    .progress {
+      display: flex;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      background: #fff;
+      border-bottom: 1px solid #e0e5f0;
+      position: relative;
+    }
+
+    .progress span {
+      font-weight: 500;
+      font-size: 0.95rem;
+      color: #888;
+      position: relative;
+    }
+
+    .progress span.active {
+      color: #182536;
+      font-weight: 700;
+    }
+
+    .progress-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 3px;
+      background: #283d59;
+      width: 33%;
+      transition: width 0.3s ease;
+    }
+
+    .contentTR {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .mainTR, .sidebar {
+      padding: 2rem;
+    }
+
+    .mainTR {
+      flex: 2;
+      min-width: 320px;
+    }
+
+    .sidebar {
+      flex: 1;
+      min-width: 250px;
+      background: #f7f9fc;
+      border-left: 1px solid #ddd;
+    }
+
+    form {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    form.active {
+      display: block;
+    }
+
+    label {
+      display: block;
+      margin-top: 1rem;
+      font-weight: 600;
+      color: #222;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 0.7rem;
+      margin-top: 0.4rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: #152d4d;
+      box-shadow: 0 0 0 3px rgba(0,74,173,0.1);
+      outline: none;
+      color: #1c103a;
+    }
+
+    .error {
+      color: #e00;
+      font-size: 0.85rem;
+      margin-top: 4px;
+      display: none;
+    }
+
+    button {
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: #19355b;
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: #0b9f52;
+      transform: scale(1.02);
+    }
+
+    .btn-secondary {
+      background: #ddd;
+      color: #000;
+      margin-left: 1rem;
+    }
+
+    .status {
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .status.success { color: #0b8f38; }
+    .status.pending { color: #f5a623; }
+    .status.failed { color: #e00; }
+
+    .recent-transfers {
+      margin-top: 1rem;
+    }
+
+    .recent-item {
+      background: #191b99;
+      border-radius: 10px;
+      padding: 1rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      margin-bottom: 1rem;
+      transition: transform 0.2s ease;
+      color: #fff;
+      width: 70%;
+      font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    }
+
+    .recent-item:hover {
+      transform: scale(1.02);
+    }
+
+    .recent-item p {
+      font-size: 0.9rem;
+      margin-bottom: 5px;
+    }
+
+    @media (max-width: 900px) {
+      .content {
+        flex-direction: column;
+      }
+      .sidebar {
+        border-left: none;
+        border-top: 1px solid #ddd;
+      }
+    }
+  
