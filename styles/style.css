@@ -71,6 +71,8 @@ a {
   
 }
 
+
+
 .app-header {
   display: grid;
   grid-template-columns: minmax(min-content, 175px) minmax(max-content, 1fr) minmax(max-content, 400px);
@@ -1122,5 +1124,78 @@ input::-webkit-outer-spin-button {
 
 
 
-/*transfer*/
-    
+
+/* =================== HEADER DROPDOWN =================== */
+.app-header {
+  position: relative; /* for absolute dropdown inside */
+  overflow: visible;  /* allow dropdown to show */
+}
+
+/* Hamburger button arrow */
+#mobile-menu-toggle {
+  position: relative;
+}
+
+#mobile-menu-toggle::after {
+  content: ""; /* downward arrow ▼ */
+  display: inline-block;
+  margin-left: 0;
+  font-size: 0.7em;
+}
+
+/* hide original tabs on mobile */
+@media (max-width: 768px) {
+  .app-header-navigation .tabs {
+    display: none;
+  }
+}
+
+/* dropdown container inside header */
+#mobile-header-dropdown {
+  position: absolute;
+  top: 100%;       /* directly below header content */
+  right: 0;        /* align to header right */
+  width: 50%;      /* half of header width */
+  background: #fff;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  display: none;   /* toggled by JS */
+  z-index: 999;
+}
+
+/* show when open */
+#mobile-header-dropdown.open {
+  display: block;
+}
+
+/* style the cloned tabs inside dropdown */
+#mobile-header-dropdown .tabs {
+  display: flex;
+  flex-direction: column;
+  padding: 8px 0;
+}
+
+#mobile-header-dropdown .tabs a {
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  color: #333;
+  font-weight: 500;
+}
+
+#mobile-header-dropdown .tabs a + a {
+  border-top: 1px solid rgba(0,0,0,0.08);
+}
+
+/* Dropdown animation */
+#mobile-header-dropdown {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
+}
+
+#mobile-header-dropdown.open {
+  max-height: 500px; /* enough to show all links */
+  opacity: 1;
+}

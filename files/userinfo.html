@@ -276,12 +276,13 @@
             <h5></h5>
           </div>
         </div>
-        <div class="app-header-navigation">
-          <div class="tabs">
+         <div class="app-header-navigation" id="mobile-header-nav">
+  <div class="tabs" id="tabs">
+
             <a href="#">
               
             </a>
-            <a href="dashboard.html" >
+            <a href="index.html" >
               Dashboard
             </a>
             <a href="card.html">
@@ -314,8 +315,8 @@
             </button>
           </div>
         </div>
-        <div class="app-header-mobile">
-          <button class="icon-button large">
+         <div class="app-header-mobile">
+          <button class="icon-button large" id="mobile-menu-toggle">
             <i class="ph-list"></i>
           </button>
         </div>
@@ -324,7 +325,7 @@
      <div class="app-body">
         <div class="app-body-navigation">
           <nav class="navigation">
-            <a href="dashboard.html">
+            <a href="index.html">
               <i class="ph-browsers"></i>
               <span>Dashboard</span>
             </a>
@@ -610,7 +611,48 @@
         document.getElementById("profilePic").innerHTML = `<img src="${pic}" alt="Profile" style="width:110px;height:110px;border-radius:50%;object-fit:cover;">`;
       }
     };
+
+
+    
+document.addEventListener('DOMContentLoaded', function () {
+  const toggleBtn = document.getElementById('mobile-menu-toggle');
+  const header = document.querySelector('.app-header');
+  const headerNav = document.querySelector('.app-header-navigation .tabs');
+
+  if (!toggleBtn || !header || !headerNav) return;
+
+  // create dropdown inside header
+  let dropdown = document.getElementById('mobile-header-dropdown');
+  if (!dropdown) {
+    dropdown = document.createElement('div');
+    dropdown.id = 'mobile-header-dropdown';
+    const tabsClone = headerNav.cloneNode(true);
+    dropdown.appendChild(tabsClone);
+    header.appendChild(dropdown);
+  }
+
+  // toggle open/close
+  toggleBtn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    dropdown.classList.toggle('open');
+  });
+
+  // close dropdown if click outside
+  document.addEventListener('click', function (e) {
+    if (!dropdown.contains(e.target) && !toggleBtn.contains(e.target)) {
+      dropdown.classList.remove('open');
+    }
+  });
+
+  // close on Escape key
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') dropdown.classList.remove('open');
+  });
+});
+
+
   </script>
+ 
 
   </body>
 </html>
