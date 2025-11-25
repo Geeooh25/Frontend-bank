@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="en">
   <head>
     <title>Education MSB</title>
@@ -8,15 +8,243 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
     <link rel="stylesheet" href="../styles/style.css" />
       <style>
-    
+    /* Hamburger Menu Styles */
+    .app-header-mobile {
+      display: none;
+    }
+
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      right: -300px;
+      width: 280px;
+      height: 100vh;
+      background: white;
+      box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
+      z-index: 1001;
+      transition: right 0.3s ease-in-out;
+      padding: 2rem 1rem;
+      overflow-y: auto;
+    }
+
+    .mobile-menu.show {
+      right: 0;
+    }
+
+    .mobile-menu-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      display: none;
+    }
+
+    .mobile-menu-overlay.show {
+      display: block;
+    }
+
+    .mobile-menu-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #eee;
+    }
+
+    .mobile-menu-header h3 {
+      margin: 0;
+      color: #333;
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+
+    .mobile-user-info {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+      padding: 1rem;
+      background: #f8f9fa;
+      border-radius: 8px;
+    }
+
+    .mobile-user-info i {
+      font-size: 1.5rem;
+      color: #000080;
+    }
+
+    .mobile-user-info strong {
+      display: block;
+      color: #333;
+      margin-bottom: 0.25rem;
+    }
+
+    .mobile-user-info div div {
+      font-size: 0.875rem;
+      color: #666;
+    }
+
+    .mobile-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .mobile-nav a {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      color: #333;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+
+    .mobile-nav a:hover {
+      background-color: #000080;
+      color: white;
+      transform: translateX(5px);
+    }
+
+    .mobile-nav a.active {
+      background-color: #000080;
+      color: white;
+    }
+
+    .mobile-nav i {
+      width: 20px;
+      text-align: center;
+      font-size: 1.1rem;
+    }
+
+    /* User Profile Dropdown Styles */
+    .app-header-actions {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .user-profile {
+      background: none;
+      border: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      color: inherit;
+      font-family: inherit;
+      font-size: inherit;
+    }
+
+    .user-profile:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .user-dropdown {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      min-width: 200px;
+      z-index: 1000;
+      margin-top: 0.5rem;
+      display: none;
+      overflow: hidden;
+    }
+
+    .user-dropdown.show {
+      display: block;
+      animation: fadeIn 0.2s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .user-dropdown a {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      color: #333;
+      text-decoration: none;
+      transition: background-color 0.3s;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .user-dropdown a:last-child {
+      border-bottom: none;
+    }
+
+    .user-dropdown a:hover {
+      background-color: #f8f9fa;
+      color: #000080;
+    }
+
+    .user-dropdown i {
+      width: 16px;
+      text-align: center;
+      color: #666;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .app-header-mobile {
+        display: block;
+      }
+
+      .app-header-navigation {
+        display: none;
+      }
+
+      .user-profile {
+        display: none;
+      }
+
+      .app-header-actions-buttons {
+        display: none;
+      }
+    }
+
+    @media (min-width: 769px) {
+      .app-header-mobile {
+        display: none;
+      }
+      
+      .mobile-menu,
+      .mobile-menu-overlay {
+        display: none !important;
+      }
+    }
+
+    /* Body scroll lock when menu is open */
+    body.menu-open {
+      overflow: hidden;
+    }
+
+    /* Education Payment Styles */
     .cards {
       background: #fff;
       border-radius: 16px;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
       padding: 2rem;
       width: 90%;
-      max-width: 420px;
+      max-width: 480px;
       animation: fadeIn 0.8s ease;
+      margin: 0 auto;
     }
 
     @keyframes fadeIn {
@@ -24,43 +252,123 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    .cards h2 {
+    h2 {
       text-align: center;
-      color: #ca8a04;
+      color: #000080;
       margin-bottom: 1.5rem;
       font-size: 1.6rem;
     }
 
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
     label {
       display: block;
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.5rem;
       color: #374151;
-      font-weight: 500;
-      font-size: 0.9rem;
+      font-weight: 600;
+      font-size: 0.95rem;
     }
 
     input, select {
       width: 100%;
-      padding: 10px;
+      padding: 12px;
       border-radius: 8px;
       border: 1px solid #cbd5e1;
       outline: none;
       font-size: 1rem;
-      transition: border-color 0.2s;
-      color: #312f2f;
+      transition: border-color 0.2s, box-shadow 0.2s;
     }
 
     input:focus, select:focus {
-      border-color: #ca8a04;
-      box-shadow: 0 0 0 2px rgba(202,138,4,0.1);
+      border-color: #0047ab;
+      box-shadow: 0 0 0 3px rgba(202,138,4,0.1);
+    }
+
+    .quick-actions {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .quick-action {
+      padding: 1rem;
+      border: 2px solid #e5e7eb;
+      border-radius: 12px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: white;
+    }
+
+    .quick-action:hover {
+      border-color: #000080;
+      transform: translateY(-2px);
+    }
+
+    .quick-action i {
+      font-size: 1.5rem;
+      color: #000080;
+      margin-bottom: 0.5rem;
+    }
+
+    .quick-action span {
+      display: block;
+      font-weight: 600;
+      color: #374151;
+    }
+
+    .fee-categories {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+
+    .fee-category {
+      padding: 1rem;
+      border: 2px solid #e5e7eb;
+      border-radius: 8px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: white;
+    }
+
+    .fee-category:hover {
+      border-color: #000080;
+      background: #fefce8;
+    }
+
+    .fee-category.selected {
+      border-color: #0047ab;
+      background: #0047ab;
+      color: white;
+    }
+
+    .category-name {
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .category-desc {
+      font-size: 0.8rem;
+      opacity: 0.7;
+    }
+
+    .fee-category.selected .category-desc {
+      color: rgba(255,255,255,0.9);
     }
 
     button {
       width: 100%;
-      padding: 12px;
+      padding: 14px;
       border: none;
       border-radius: 8px;
-      background: #ca8a04;
+      background: #0047ab;
       color: white;
       font-size: 1rem;
       font-weight: 600;
@@ -70,7 +378,7 @@
     }
 
     button:hover {
-      background: #a16207;
+      background: #0047ab;
     }
 
     button:active {
@@ -92,7 +400,9 @@
       text-align: center;
       font-size: 0.8rem;
       color: #6b7280;
-      margin-top: 1rem;
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid #e5e7eb;
     }
 
     /* Modal */
@@ -109,6 +419,7 @@
       visibility: hidden;
       opacity: 0;
       transition: 0.3s ease;
+      z-index: 1002;
     }
 
     .modal.active {
@@ -136,10 +447,11 @@
       color: #374151;
       font-size: 0.95rem;
       margin-bottom: 1rem;
+      line-height: 1.5;
     }
 
     .close-btn {
-      background: #ca8a04;
+      background: #000080;
       color: #fff;
       border: none;
       padding: 10px 18px;
@@ -149,12 +461,20 @@
     }
 
     @media (max-width: 500px) {
-      .card {
+      .cards {
         padding: 1.5rem;
       }
 
-      .cards h2 {
+      h2 {
         font-size: 1.4rem;
+      }
+      
+      .fee-categories {
+        grid-template-columns: 1fr;
+      }
+      
+      .quick-actions {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -165,7 +485,6 @@
         <div class="app-header-logo">
           <div class="logo">
             <span class="logo-icon">
-            
               <i class="fa-brands fa-maxcdn"></i>
             </span>
             <h1 class="logo-title">
@@ -178,18 +497,15 @@
           </div>
         </div>
         <div class="app-header-navigation" id="mobile-header-nav">
-  <div class="tabs" id="tabs">
-            <a href="#">
-              
-            </a>
-            <a href="index.html" >
+          <div class="tabs" id="tabs">
+            <a href="dashboard.html">
               Dashboard
             </a>
             <a href="card.html">
               Cards
             </a>
-            <a href="account.html">
-              Account
+            <a href="userinfo.html">
+              Profile
             </a>
             <a href="transfer.html">
               Transfers
@@ -200,12 +516,26 @@
           </div>
         </div>
         <div class="app-header-actions">
-          <button class="user-profile">
+          <button class="user-profile" id="userProfileBtn">
             <span>Client Name</span>
             <span>
               <i class="fa-solid fa-circle-user"></i>
             </span>
           </button>
+          <div class="user-dropdown" id="userDropdown">
+            <a href="userinfo.html">
+              <i class="fas fa-user"></i>
+              <span>Profile</span>
+            </a>
+            <a href="settings.html">
+              <i class="fas fa-cog"></i>
+              <span>Settings</span>
+            </a>
+            <a href="../index.html">
+              <i class="fas fa-sign-out-alt"></i>
+              <span>Logout</span>
+            </a>
+          </div>
           <div class="app-header-actions-buttons">
             <button class="icon-button large">
               <i class="ph-magnifying-glass"></i>
@@ -216,16 +546,74 @@
           </div>
         </div>
         <div class="app-header-mobile">
-          <button class="icon-button large" id="mobile-menu-toggle">
-            <i class="ph-list"></i>
+          <button class="icon-button large" id="mobileMenuBtn">
+            <i class="fas fa-bars"></i>
           </button>
         </div>
-
       </header>
+
+      <!-- Mobile Menu -->
+      <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+      <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+          <h3>Menu</h3>
+          <button class="icon-button" id="closeMobileMenu">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        
+        <div class="mobile-user-info">
+          <i class="fa-solid fa-circle-user"></i>
+          <div>
+            <strong>Client Name</strong>
+            <div>Welcome back!</div>
+          </div>
+        </div>
+
+        <nav class="mobile-nav">
+          <a href="dashboard.html">
+            <i class="fas fa-home"></i>
+            <span>Dashboard</span>
+          </a>
+          <a href="card.html">
+            <i class="fas fa-credit-card"></i>
+            <span>Cards</span>
+          </a>
+          <a href="userinfo.html">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+          </a>
+          <a href="transfer.html">
+            <i class="fas fa-exchange-alt"></i>
+            <span>Transfers</span>
+          </a>
+          <a href="history.html">
+            <i class="fas fa-history"></i>
+            <span>History</span>
+          </a>
+          <a href="topup.html">
+            <i class="fas fa-wallet"></i>
+            <span>Top-up</span>
+          </a>
+          <a href="exchange.html">
+            <i class="fas fa-chart-line"></i>
+            <span>Exchange</span>
+          </a>
+          <a href="settings.html">
+            <i class="fas fa-cog"></i>
+            <span>Settings</span>
+          </a>
+          <a href="../index.html">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+          </a>
+        </nav>
+      </div>
+
       <div class="app-body">
         <div class="app-body-navigation">
           <nav class="navigation">
-            <a href="index.html">
+            <a href="dashboard.html">
               <i class="ph-browsers"></i>
               <span>Dashboard</span>
             </a>
@@ -260,53 +648,101 @@
         </div>
         <div class="app-body-main-content">
           <section class="service-section">
-            
-  <div class="cards">
-    <h2>Education Fee Payment</h2>
-    <form id="eduForm">
-      <label for="school">Select Institution</label>
-      <select id="school" required>
-        <option value="">Select School</option>
-        <option value="Harvard University">Harvard University</option>
-        <option value="Stanford University">Stanford University</option>
-        <option value="MIT">MIT</option>
-        <option value="UCLA">UCLA</option>
-        <option value="NYU">NYU</option>
-      </select>
+            <div class="cards">
+              <h2>Education Fee Payment</h2>
+              
+              <!-- Quick Actions -->
+              <div class="quick-actions">
+                <div class="quick-action" onclick="quickPayment('tuition')">
+                  <i class="fas fa-graduation-cap"></i>
+                  <span>Tuition Fee</span>
+                </div>
+                <div class="quick-action" onclick="quickPayment('semester')">
+                  <i class="fas fa-book"></i>
+                  <span>Semester Fee</span>
+                </div>
+              </div>
 
-      <label for="studentId">Student ID</label>
-      <input type="text" id="studentId" placeholder="Enter student ID" maxlength="12" required />
-      <div id="idError" class="error"></div>
+              <form id="eduForm">
+                <div class="form-group">
+                  <label for="school">Educational Institution</label>
+                  <select id="school" required>
+                    <option value="">Select Institution</option>
+                    <option value="Harvard University">Harvard University</option>
+                    <option value="Stanford University">Stanford University</option>
+                    <option value="MIT">Massachusetts Institute of Technology</option>
+                    <option value="UCLA">University of California, Los Angeles</option>
+                    <option value="NYU">New York University</option>
+                    <option value="Columbia University">Columbia University</option>
+                    <option value="Princeton University">Princeton University</option>
+                  </select>
+                </div>
 
-      <label for="feeType">Fee Type</label>
-      <select id="feeType" required>
-        <option value="">Select Fee Type</option>
-        <option value="Tuition">Tuition</option>
-        <option value="Exam">Exam Fees</option>
-        <option value="Hostel">Hostel</option>
-        <option value="Library">Library Fine</option>
-      </select>
+                <div class="form-group">
+                  <label for="studentId">Student ID</label>
+                  <input type="text" id="studentId" placeholder="Enter student ID" maxlength="12" required />
+                  <div id="idError" class="error"></div>
+                </div>
 
-      <label for="amount">Amount (USD)</label>
-      <input type="number" id="amount" placeholder="Enter amount" min="10" max="10000" required />
+                <div class="form-group">
+                  <label>Fee Category</label>
+                  <div class="fee-categories">
+                    <div class="fee-category" data-type="Tuition" data-amount="5000">
+                      <div class="category-name">Tuition</div>
+                      <div class="category-desc">Academic Fees</div>
+                    </div>
+                    <div class="fee-category" data-type="Hostel" data-amount="2000">
+                      <div class="category-name">Hostel</div>
+                      <div class="category-desc">Accommodation</div>
+                    </div>
+                    <div class="fee-category" data-type="Library" data-amount="150">
+                      <div class="category-name">Library</div>
+                      <div class="category-desc">Books & Resources</div>
+                    </div>
+                    <div class="fee-category" data-type="Exam" data-amount="300">
+                      <div class="category-name">Examination</div>
+                      <div class="category-desc">Test Fees</div>
+                    </div>
+                  </div>
+                  <input type="hidden" id="selectedFeeType" required>
+                </div>
 
-      <button type="submit" id="submitBtn">Pay Now</button>
-    </form>
+                <div class="form-group">
+                  <label for="amount">Amount (USD)</label>
+                  <input type="number" id="amount" placeholder="Enter amount" min="10" max="50000" required />
+                </div>
 
-    <div class="footers">
-      Safe & Easy Education Payments 🎓
-    </div>
-  </div>
+                <div class="form-group">
+                  <label for="paymentMethod">Payment Method</label>
+                  <select id="paymentMethod" required>
+                    <option value="">Select Payment</option>
+                    <option value="wallet">Miles Wallet</option>
+                    <option value="card">Credit/Debit Card</option>
+                    <option value="bank">Bank Transfer</option>
+                    <option value="loan">Student Loan</option>
+                  </select>
+                </div>
 
-  <!-- Success Modal -->
-  <div class="modal" id="successModal">
-    <div class="modal-content">
-      <h3>✅ Payment Successful!</h3>
-      <p id="successText"></p>
-      <button class="close-btn" onclick="closeModal()">OK</button>
-    </div>
-  </div>
+                <button type="submit" id="submitBtn">
+                  <i class="fas fa-graduation-cap"></i>
+                  Pay Education Fee
+                </button>
+              </form>
 
+              <div class="footers">
+                <i class="fas fa-shield-alt"></i>
+                Secure Education Payments • 24/7 Support
+              </div>
+            </div>
+
+            <!-- Success Modal -->
+            <div class="modal" id="successModal">
+              <div class="modal-content">
+                <h3>✅ Payment Successful!</h3>
+                <p id="successText"></p>
+                <button class="close-btn" onclick="closeModal()">Continue</button>
+              </div>
+            </div>
           </section>
         </div>
         <div class="app-body-sidebar">
@@ -409,57 +845,225 @@
       </div>
     </div>
     <script src="https://unpkg.com/phosphor-icons"></script>
-    
-  <script>
-    const form = document.getElementById("eduForm");
-    const submitBtn = document.getElementById("submitBtn");
-    const studentIdInput = document.getElementById("studentId");
-    const idError = document.getElementById("idError");
-    const modal = document.getElementById("successModal");
-    const successText = document.getElementById("successText");
-
-    // Validate Student ID (at least 6 characters)
-    studentIdInput.addEventListener("input", () => {
-      const value = studentIdInput.value.trim();
-      if (value.length < 6) {
-        idError.textContent = "Student ID must be at least 6 characters.";
-      } else {
-        idError.textContent = "";
-      }
-    });
-
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-
-      const studentId = studentIdInput.value.trim();
-      if (studentId.length < 6) {
-        idError.textContent = "Please enter a valid Student ID.";
-        return;
-      }
-
-      submitBtn.textContent = "Processing...";
-      submitBtn.classList.add("loading");
-      submitBtn.disabled = true;
-
-      setTimeout(() => {
-        const amount = document.getElementById("amount").value;
-        const school = document.getElementById("school").value;
-        const feeType = document.getElementById("feeType").value;
-        successText.textContent = `Your payment of $${amount} for ${feeType} at ${school} (Student ID: ${studentId}) was successful.`;
-        modal.classList.add("active");
-
-        form.reset();
-        submitBtn.textContent = "Pay Now";
-        submitBtn.classList.remove("loading");
-        submitBtn.disabled = false;
-      }, 1800);
-    });
-
-    function closeModal() {
-      modal.classList.remove("active");
-    }
-  </script>
-   <script src="../app/dropdown.js"></script>
   
+    <script>
+    // Hamburger Menu and User Profile Functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+      const closeMobileMenu = document.getElementById('closeMobileMenu');
+      const mobileMenu = document.getElementById('mobileMenu');
+      const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+      const userProfileBtn = document.getElementById('userProfileBtn');
+      const userDropdown = document.getElementById('userDropdown');
+
+      // Mobile menu functionality
+      if (mobileMenuBtn && mobileMenu) {
+        mobileMenuBtn.addEventListener('click', function() {
+          mobileMenu.classList.add('show');
+          mobileMenuOverlay.classList.add('show');
+          document.body.classList.add('menu-open');
+        });
+
+        closeMobileMenu.addEventListener('click', function() {
+          closeMobileMenuFunc();
+        });
+
+        mobileMenuOverlay.addEventListener('click', function() {
+          closeMobileMenuFunc();
+        });
+
+        function closeMobileMenuFunc() {
+          mobileMenu.classList.remove('show');
+          mobileMenuOverlay.classList.remove('show');
+          document.body.classList.remove('menu-open');
+        }
+
+        // Close on escape key
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape') {
+            closeMobileMenuFunc();
+            userDropdown.classList.remove('show');
+          }
+        });
+
+        // Close when clicking on mobile nav links
+        const mobileNavLinks = mobileMenu.querySelectorAll('.mobile-nav a');
+        mobileNavLinks.forEach(link => {
+          link.addEventListener('click', function() {
+            closeMobileMenuFunc();
+          });
+        });
+      }
+
+      // User profile dropdown functionality
+      if (userProfileBtn && userDropdown) {
+        userProfileBtn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          userDropdown.classList.toggle('show');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+          if (!e.target.closest('.app-header-actions')) {
+            userDropdown.classList.remove('show');
+          }
+        });
+
+        // Close dropdown when clicking on dropdown items
+        userDropdown.addEventListener('click', function(e) {
+          if (e.target.tagName === 'A') {
+            userDropdown.classList.remove('show');
+          }
+        });
+      }
+
+      // Education Form Functionality
+      const form = document.getElementById("eduForm");
+      const submitBtn = document.getElementById("submitBtn");
+      const studentIdInput = document.getElementById("studentId");
+      const idError = document.getElementById("idError");
+      const modal = document.getElementById("successModal");
+      const successText = document.getElementById("successText");
+      const feeCategories = document.querySelectorAll('.fee-category');
+      const selectedFeeTypeInput = document.getElementById('selectedFeeType');
+      const amountInput = document.getElementById('amount');
+
+      // Fee category selection
+      feeCategories.forEach(category => {
+        category.addEventListener('click', function() {
+          // Remove selected class from all categories
+          feeCategories.forEach(c => c.classList.remove('selected'));
+          // Add selected class to clicked category
+          this.classList.add('selected');
+          // Set the selected fee type
+          const feeType = this.getAttribute('data-type');
+          const suggestedAmount = this.getAttribute('data-amount');
+          selectedFeeTypeInput.value = feeType;
+          amountInput.value = suggestedAmount;
+        });
+      });
+
+      // Validate Student ID (at least 6 characters)
+      studentIdInput.addEventListener("input", () => {
+        const value = studentIdInput.value.trim();
+        if (value.length < 6) {
+          idError.textContent = "Student ID must be at least 6 characters.";
+        } else {
+          idError.textContent = "";
+        }
+      });
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const studentId = studentIdInput.value.trim();
+        const amount = amountInput.value;
+        const school = document.getElementById("school").value;
+        const feeType = selectedFeeTypeInput.value;
+        const paymentMethod = document.getElementById("paymentMethod").value;
+
+        if (studentId.length < 6) {
+          idError.textContent = "Please enter a valid Student ID.";
+          return;
+        }
+
+        if (!feeType) {
+          alert("Please select a fee category.");
+          return;
+        }
+
+        if (!school) {
+          alert("Please select an educational institution.");
+          return;
+        }
+
+        if (!paymentMethod) {
+          alert("Please select a payment method.");
+          return;
+        }
+
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+        submitBtn.classList.add("loading");
+        submitBtn.disabled = true;
+
+        setTimeout(() => {
+          const paymentMethodText = {
+            'wallet': 'Miles Wallet',
+            'card': 'Credit/Debit Card',
+            'bank': 'Bank Transfer',
+            'loan': 'Student Loan'
+          }[paymentMethod];
+
+          successText.textContent = `Your payment of $${amount} for ${feeType} fees at ${school} (Student ID: ${studentId}) was successful. Payment method: ${paymentMethodText}.`;
+          modal.classList.add("active");
+
+          // reset form
+          form.reset();
+          feeCategories.forEach(c => c.classList.remove('selected'));
+          selectedFeeTypeInput.value = '';
+          submitBtn.innerHTML = '<i class="fas fa-graduation-cap"></i> Pay Education Fee';
+          submitBtn.classList.remove("loading");
+          submitBtn.disabled = false;
+        }, 2000);
+      });
+
+      console.log('Education payment system initialized successfully');
+    });
+
+    // Quick payment functions
+    function quickPayment(type) {
+      const amountInput = document.getElementById('amount');
+      
+      if (type === 'tuition') {
+        amountInput.value = '5000';
+        // Auto-select tuition category
+        const tuitionCategory = document.querySelector('.fee-category[data-type="Tuition"]');
+        if (tuitionCategory) {
+          tuitionCategory.click();
+        }
+      } else if (type === 'semester') {
+        amountInput.value = '7500';
+        // Auto-select tuition category for semester fees
+        const tuitionCategory = document.querySelector('.fee-category[data-type="Tuition"]');
+        if (tuitionCategory) {
+          tuitionCategory.click();
+        }
+      }
+      
+      // Scroll to amount input for better UX
+      amountInput.focus();
+    }
+
+    // Modal functions
+    function closeModal() {
+      const modal = document.getElementById('successModal');
+      modal.classList.remove('active');
+    }
+
+    // Close modal on outside click
+    document.addEventListener('click', function(e) {
+      const modal = document.getElementById('successModal');
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+
+    // Close modal on escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeModal();
+      }
+    });
+
+    // Add some visual feedback for quick actions
+    document.querySelectorAll('.quick-action').forEach(action => {
+      action.addEventListener('click', function() {
+        this.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+          this.style.transform = '';
+        }, 200);
+      });
+    });
+    </script>
   </body>
 </html>

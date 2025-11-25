@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Settings - MSB</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <link rel="stylesheet" href="../styles/style.css" />
+    <link rel="stylesheet" href="../styles/site.css">
+</head>
+<body>
+    <div class="app">
+      <header class="app-header">
+        <div class="app-header-logo">
+          <div class="logo">
+            <span class="logo-icon">
+              <i class="fa-brands fa-maxcdn"></i>
+            </span>
+            <h1 class="logo-title">
+              <span>Miles</span>
+              <span>SmartBank</span>
+            </h1>
+          </div>
+          <div>
+            <h5></h5>
+          </div>
+        </div>
+        <div class="app-header-navigation">
+          <div class="tabs">
+            <a href="dashboard.html">
+              Dashboard
+            </a>
+            <a href="card.html">
+              Cards
+            </a>
+            <a href="userinfo.html">
+              Profile
+            </a>
+            <a href="transfer.html">
+              Transfers
+            </a>
+            <a href="topup.html">
+              Top-up
+            </a>
+            <a href="history.html">
+              History
+            </a>
+           
+          </div>
+        </div>
+        <div class="app-header-actions">
+          <button class="user-profile" id="userProfileBtn">
+            <span>Client Name</span>
+            <span>
+              <i class="fa-solid fa-circle-user"></i>
+            </span>
+          </button>
+          <div class="user-dropdown" id="userDropdown">
+            <a href="userinfo.html">
+              <i class="fas fa-user"></i>
+              <span>Profile</span>
+            </a>
+            <a href="settings.html">
+              <i class="fas fa-cog"></i>
+              <span>Settings</span>
+            </a>
+            <a href="../index.html">
+              <i class="fas fa-sign-out-alt"></i>
+              <span>Logout</span>
+            </a>
+          </div>
+          <div class="app-header-actions-buttons">
+            <button class="icon-button large">
+              <i class="ph-magnifying-glass"></i>
+            </button>
+            <button class="icon-button large">
+              <i class="ph-bell"></i>
+            </button>
+          </div>
+        </div>
+        <div class="app-header-mobile">
+          <button class="icon-button large" id="mobileMenuBtn">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+      </header>
+
+      <!-- Mobile Menu -->
+      <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+      <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+          <h3>Menu</h3>
+          <button class="icon-button" id="closeMobileMenu">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        
+        <div class="mobile-user-info">
+          <i class="fa-solid fa-circle-user"></i>
+          <div>
+            <strong>Client Name</strong>
+            <div style="font-size: 0.875rem; color: #666;">Welcome back!</div>
+          </div>
+        </div>
+
+        <nav class="mobile-nav">
+          <a href="dashboard.html">
+            <i class="fas fa-home"></i>
+            <span>Dashboard</span>
+          </a>
+          <a href="card.html">
+            <i class="fas fa-credit-card"></i>
+            <span>Cards</span>
+          </a>
+          <a href="userinfo.html">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+          </a>
+          <a href="transfer.html">
+            <i class="fas fa-exchange-alt"></i>
+            <span>Transfers</span>
+          </a>
+          <a href="topup.html">
+            <i class="fas fa-wallet"></i>
+            <span>Top-up</span>
+          </a>
+          <a href="history.html">
+            <i class="fas fa-history"></i>
+            <span>History</span>
+          </a>
+          <a href="settings.html" class="active">
+            <i class="fas fa-cog"></i>
+            <span>Settings</span>
+          </a>
+          <a href="../index.html">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+          </a>
+        </nav>
+      </div>
+
+      <div class="app-body">
+        <div class="app-body-navigation">
+          <nav class="navigation">
+            <a href="dashboard.html">
+              <i class="ph-browsers"></i>
+              <span>Dashboard</span>
+            </a>
+            <a href="topup.html">
+              <i class="ph-check-square"></i>
+              <span>Top-up</span>
+            </a>
+            <a href="transfer.html">
+              <i class="ph-swap"></i>
+              <span>Transfers</span>
+            </a>
+            <a href="card.html">
+              <i class="ph-file-text"></i>
+              <span>Card</span>
+            </a>
+            <a href="history.html">
+              <i class="ph-globe"></i>
+              <span>History</span>
+            </a>
+            <a href="exchange.html">
+              <i class="ph-clipboard-text"></i>
+              <span>Exchange</span>
+            </a>
+          </nav>
+          <footer class="footer">
+            <h1>Miles<small>©</small></h1>
+            <div>
+              Miles ©<br />
+              All Rights Reserved 2021
+            </div>
+          </footer>
+        </div>
+        
+        <!-- Settings Page Content -->
+        <div class="app-body-main-content">
+          <div class="settings-page">
+            <div class="settings-header">
+              <h1>Settings</h1>
+              <div class="settings-actions">
+                <button class="btn btn-outline" id="exportSettingsBtn">
+                  <i class="fas fa-download"></i> Export Settings
+                </button>
+                <button class="btn btn-outline" id="resetSettingsBtn">
+                  <i class="fas fa-undo"></i> Reset to Default
+                </button>
+              </div>
+            </div>
+
+            <!-- Settings Navigation -->
+            <div class="settings-nav">
+              <div class="settings-nav-item active" data-section="general">General</div>
+              <div class="settings-nav-item" data-section="security">Security</div>
+              <div class="settings-nav-item" data-section="notifications">Notifications</div>
+              <div class="settings-nav-item" data-section="privacy">Privacy</div>
+              <div class="settings-nav-item" data-section="appearance">Appearance</div>
+              <div class="settings-nav-item" data-section="advanced">Advanced</div>
+            </div>
+
+            <!-- General Settings -->
+            <section class="settings-section" id="general-section">
+              <h2>General Settings</h2>
+              <div class="settings-grid">
+                <div>
+                  <div class="settings-group">
+                    <div class="settings-group-title">
+                      <i class="fas fa-globe"></i>
+                      Language & Region
+                    </div>
+                    <div class="settings-items">
+                      <div class="settings-item">
+                        <div class="settings-info">
+                          <div class="settings-title">Language</div>
+                          <div class="settings-description">Choose your preferred language</div>
+                        </div>
+                        <div class="settings-control">
+                          <select class="select-control" id="languageSelect">
+                            <option value="en">English</option>
+                            <option value="fr">French</option>
+                            <option value="es">Spanish</option>
+                            <option value="pt">Portuguese</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="settings-item">
+                        <div class="settings-info">
+                          <div class="settings-title">Timezone</div>
+                          <div class="settings-description">Set your local timezone</div>
+                        </div>
+                        <div class="settings-control">
+                          <select class="select-control" id="timezoneSelect">
+                            <option value="UTC+1">West Africa Time (UTC+1)</option>
+                            <option value="UTC+0">Greenwich Mean Time (UTC+0)</option>
+                            <option value="UTC+2">Central Africa Time (UTC+2)</option>
+                            <option value="UTC-5">Eastern Time (UTC-5)</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="settings-item">
+                        <div class="settings-info">
+                          <div class="settings-title">Currency</div>
+                          <div class="settings-description">Default currency for transactions</div>
+                        </div>
+                        <div class="settings-control">
+                          <select class="select-control" id="currencySelect">
+                            <option value="NGN">Nigerian Naira (NGN)</option>
+                            <option value="USD">US Dollar (USD)</option>
+                            <option value="EUR">Euro (EUR)</option>
+                            <option value="GBP">British Pound (GBP)</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="settings-group">
+                    <div class="settings-group-title">
+                      <i class="fas fa-bell"></i>
+                      Alert Preferences
+                    </div>
+                    <div class="settings-items">
+                      <div class="settings-item">
+                        <div class="settings-info">
+                          <div class="settings-title">Low Balance Alerts</div>
+                          <div class="settings-description">Get notified when balance falls below threshold</div>
+                        </div>
+                        <div class="settings-control">
+                          <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                          </label>
+                        </div>
+                      </div>
+
+                      <div class="settings-item">
+                        <div class="settings-info">
+                          <div class="settings-title">Large Transaction Alerts</div>
+                          <div class="settings-description">Notify for transactions above ₦50,000</div>
+                        </div>
+                        <div class="settings-control">
+                          <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="settings-group">
+                    <div class="settings-group-title">
+                      <i class="fas fa-exchange-alt"></i>
+                      Transaction Settings
+                    </div>
+                    <div class="settings-items">
+                      <div class="settings-item">
+                        <div class="settings-info">
+                          <div class="settings-title">Default Transfer Speed</div>
+                          <div class="settings-description">Choose how fast transfers should process</div>
+                        </div>
+                        <div class="settings-control">
+                          <select class="select-control" id="transferSpeedSelect">
+                            <option value="instant">Instant</option>
+                            <option value="fast">Fast (1-2 hours)</option>
+                            <option value="standard">Standard (24 hours)</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="settings-item">
+                        <div class="settings-info">
+                          <div class="settings-title">Auto-Save Receipts</div>
+                          <div class="settings-description">Automatically save transaction receipts</div>
+                        </div>
+                        <div class="settings-control">
+                          <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                          </label>
+                        </div>
+                      </div>
+
+                      <div class="settings-item">
+                        <div class="settings-info">
+                          <div class="settings-title">Transaction Categories</div>
+                          <div class="settings-description">Auto-categorize your transactions</div>
+                        </div>
+                        <div class="settings-control">
+                          <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="settings-group">
+                    <div class="settings-group-title">
+                      <i class="fas fa-shield-alt"></i>
+                      Security Level
+                    </div>
+                    <div class="settings-items">
+                      <div class="settings-item">
+                        <div class="settings-info">
+                          <div class="settings-title">Current Security Level</div>
+                          <div class="settings-description">Based on your security settings</div>
+                        </div>
+                        <div class="settings-control">
+                          <div class="security-level">
+                            <span class="security-badge security-high">High</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Quick Actions -->
+              <div class="quick-actions">
+                <div class="quick-action" id="backupSettings">
+                  <i class="fas fa-save"></i>
+                  <div class="quick-action-title">Backup Settings</div>
+                  <div class="quick-action-description">Save your current configuration</div>
+                </div>
+
+                <div class="quick-action" id="importSettings">
+                  <i class="fas fa-file-import"></i>
+                  <div class="quick-action-title">Import Settings</div>
+                  <div class="quick-action-description">Restore from backup file</div>
+                </div>
+
+                <div class="quick-action" id="helpCenter">
+                  <i class="fas fa-question-circle"></i>
+                  <div class="quick-action-title">Help Center</div>
+                  <div class="quick-action-description">Get help with settings</div>
+                </div>
+
+                <div class="quick-action" id="contactSupport">
+                  <i class="fas fa-headset"></i>
+                  <div class="quick-action-title">Contact Support</div>
+                  <div class="quick-action-description">24/7 customer support</div>
+                </div>
+              </div>
+            </section>
+
+            <!-- Security Settings -->
+            <section class="settings-section" id="security-section" style="display: none;">
+              <h2>Security Settings</h2>
+              <div class="settings-grid">
+                <div>
+                  <div class="settings-group">
+                    <div class="settings-group-title">
+                      <i class="fas fa-lock"></i>
+                      Authentication
+                    </div>
+                    <div class="settings-items">
+                      <div class="settings-item">
+                        <div class="settings-info">
+                          <div class="settings-title">Two-Factor Authentication</div>
+                          <div class="settings-description">Add an extra layer of security</div>
+                        </div>
+                        <div class="settings-control">
+                          <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                          </label>
+                        </div>
+                      </div>
+
+                      <div class="settings-item">
+                        <div class="settings-info">
+                          <div class="settings-title">Biometric Login</div>
+                          <div class="settings-description">Use fingerprint or face recognition</div>
+                        </div>
+                        <div class="settings-control">
+                          <label class="toggle-switch">
+                            <input type="checkbox">
+                            <span class="toggle-slider"></span>
+                          </label>
+                        </div>
+                      </div>
+
+                      <div class="settings-item">
+                        <div class="settings-info">
+                          <div class="settings-title">Session Timeout</div>
+                          <div class="settings-description">Auto-logout after inactivity</div>
+                        </div>
+                        <div class="settings-control">
+                          <select class="select-control" id="sessionTimeoutSelect">
+                            <option value="5">5 minutes</option>
+                            <option value="15">15 minutes</option>
+                            <option value="30">30 minutes</option>
+                            <option value="60">1 hour</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="settings-group">
+                    <div class="settings-group-title">
+                      <i class="fas fa-shield-alt"></i>
+                      Advanced Security
+                    </div>
+                    <div class="settings-items">
+                      <div class="settings-item">
+                        <div class="settings-info">
+                          <div class="settings-title">Login Alerts</div>
+                          <div class="settings-description">Email notifications for new logins</div>
+                        </div>
+                        <div class="settings-control">
+                          <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                          </label>
+                        </div>
+                      </div>
+
+                      <div class="settings-item">
+                        <div class="settings-info">
+                          <div class="settings-title">Device Management</div>
+                          <div class="settings-description">Manage trusted devices</div>
+                        </div>
+                        <div class="settings-control">
+                          <button class="btn btn-sm btn-outline">Manage</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="settings-group">
+                    <div class="settings-group-title">
+                      <i class="fas fa-key"></i>
+                      Password & PIN
+                    </div>
+                    <div class="settings-items">
+                      <div class="settings-item">
+                        <div class="settings-info">
+                          <div class="settings-title">Change Password</div>
+                          <div class="settings-description">Last changed 30 days ago</div>
+                        </div>
+                        <div class="settings-control">
+                          <button class="btn btn-sm btn-primary" id="changePasswordBtn">Change</button>
+                        </div>
+                      </div>
+
+                      <div class="settings-item">
+                        <div class="settings-info">
+                          <div class="settings-title">Transaction PIN</div>
+                          <div class="settings-description">Set a PIN for transactions</div>
+                        </div>
+                        <div class="settings-control">
+                          <button class="btn btn-sm btn-outline" id="changePinBtn">Change</button>
+                        </div>
+                      </div>
+
+                      <div class="settings-item">
+                        <div class="settings-info">
+                          <div class="settings-title">Password Strength</div>
+                          <div class="settings-description">Your password is strong</div>
+                        </div>
+                        <div class="settings-control">
+                          <div class="security-level">
+                            <span class="security-badge security-high">Strong</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="settings-group">
+                    <div class="settings-group-title">
+                      <i class="fas fa-history"></i>
+                      Security History
+                    </div>
+                    <div class="settings-items">
+                      <div class="settings-item">
+                        <div class="settings-info">
+                          <div class="settings-title">Last Login</div>
+                          <div class="settings-description">Today at 09:23 AM from Lagos, Nigeria</div>
+                        </div>
+                      </div>
+
+                      <div class="settings-item">
+                        <div class="settings-info">
+                          <div class="settings-title">Security Events</div>
+                          <div class="settings-description">View recent security activities</div>
+                        </div>
+                        <div class="settings-control">
+                          <button class="btn btn-sm btn-outline">View Log</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- Notifications Settings -->
+            <section class="settings-section" id="notifications-section" style="display: none;">
+              <h2>Notification Settings</h2>
+              <div class="settings-grid">
+                <div>
+                  <div class="settings-group">
+                    <div class="settings-group-title">
+                      <i class="fas fa-envelope"></i>
+                      Email Notifications
+                    </div>
+                    <div class="settings-items">
+                      <div class="settings-item">
+                        <div class="settings-info">
+                          <div class="settings-title">Transaction Alerts</div>
+                          <div class="settings-description">Get emails for all transactions</div>
+                        </div>
+                        <div class="settings-control">
+                          <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                          </label>
+                        </div>
+                      </div>
+
+                      <div class="settings-item">
+                        <div class="settings-info">
+                          <div class="settings-title">Security Alerts</div>
+                          <div class="settings-description">Important security notifications</div>
+                        </div>
+                        <div class="settings-control">
+                          <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                          </label>
+                        </div>
+                      </div>
+
+                      <div class="settings-item">
+                        <div class="settings-info">
+                          <div class="settings-title">Marketing Emails</div>
+                          <div class="settings-description">Product updates and offers</div>
+                        </div>
+                        <div class="settings-control">
+                          <label class="toggle-switch">
+                            <input type="checkbox">
+                            <span class="toggle-slider"></span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="settings-group">
+                    <div class="settings-group-title">
+                      <i class="fas fa-mobile-alt"></i>
+                      Push Notifications
+                    </div>
+                    <div class="settings-items">
+                      <div class="settings-item">
+                        <div class="settings-info">
+                          <div class="settings-title">Push Notifications</div>
+                          <div class="settings-description">Receive notifications on your device</div>
+                        </div>
+                        <div class="settings-control">
+                          <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                          </label>
+                        </div>
+                      </div>
+
+                      <div class="settings-item">
+                        <div class="settings-info">
+                          <div class="settings-title">Sound Alerts</div>
+                          <div class="settings-description">Play sound for notifications</div>
+                        </div>
+                        <div class="settings-control">
+                          <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="settings-group">
+                    <div class="settings-group-title">
+                      <i class="fas fa-bell"></i>
+                      Notification Types
+                    </div>
+                    <div class="settings-items">
+                      <div class="settings-item">
+                        <div class="settings-info">
+                          <div class="settings-title">Deposit Alerts</div>
+                          <div class="settings-description">Notify when money is deposited</div>
+                        </div>
+                        <div class="settings-control">
+                          <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                          </label>
+                        </div>
+                      </div>
+
+                      <div class="settings-item">
+                        <div class="settings-info">
+                          <div class="settings-title">Withdrawal Alerts</div>
+                          <div class="settings-description">Notify when money is withdrawn</div>
+                        </div>
+                        <div class="settings-control">
+                          <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                          </label>
+                        </div>
+                      </div>
+
+                      <div class="settings-item">
+                        <div class="settings-info">
+                          <div class="settings-title">Transfer Alerts</div>
+                          <div class="settings-description">Notify for incoming/outgoing transfers</div>
+                        </div>
+                        <div class="settings-control">
+                          <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                          </label>
+                        </div>
+                      </div>
+
+                      <div class="settings-item">
+                        <div class="settings-info">
+                          <div class="settings-title">Bill Payment Alerts</div>
+                          <div class="settings-description">Notify for bill payments</div>
+                        </div>
+                        <div class="settings-control">
+                          <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- Privacy Settings -->
+            <section class="settings-section" id="privacy-section" style="display: none;">
+              <h2>Privacy Settings</h2>
+              <div class="settings-grid">
+                <div>
+                  <div class="settings-group">
+                    <div class="settings-group-title">
+                      <i class="fas fa-user-shield"></i>
+                      Data Privacy
+                    </div>
+                    <div class="settings-items">
+                      <div class="settings-item">
+                        <div class="settings-info">
+                          <div class="settings-title">Data Collection</div>
+                          <div class="settings-description">Allow us to collect usage data</div>
+                        </div>
+                        <div class="settings-control">
+                          <label class="toggle-switch">
+                            <input type="checkbox">
+                            <span class="toggle-slider"></span>
+                          </label>
+                        </div>
+                      </div>
+
+                      <div class="settings-item">
+                        <div class="settings-info">
+                          <div class="settings-title">Personalized Ads</div>
+                          <div class="settings-description">Show personalized advertisements</div>
+                        </div>
+                        <div class="settings-control">
+                          <label class="toggle-switch">
+                            <input type="checkbox">
+                            <span class="toggle-slider"></span>
+                          </label>
+                        </div>
+                      </div>
+
+                      <div class="settings-item">
+                        <div class="settings-info">
+                          <div class="settings-title">Data Sharing</div>
+                          <div class="settings-description">Share data with trusted partners</div>
+                        </div>
+                        <div class="settings-control">
+                          <label class="toggle-switch">
+                            <input type="checkbox">
+                            <span class="toggle-slider"></span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="settings-group">
+                    <div class="settings-group-title">
+                      <i class="fas fa-eye"></i>
+                      Visibility
+                    </div>
+                    <div class="settings-items">
+                      <div class="settings-item">
+                        <div class="settings-info">
+                          <div class="settings-title">Profile Visibility</div>
+                          <div class="settings-description">Who can see your profile</div>
+                        </div>
+                        <div class="settings-control">
+                          <select class="select-control">
+                            <option value="private">Private</option>
+                            <option value="contacts">Contacts Only</option>
+                            <option value="public">Public</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="settings-item">
+                        <div class="settings-info">
+                          <div class="settings-title">Online Status</div>
+                          <div class="settings-description">Show when you're online</div>
+                        </div>
+                        <div class="settings-control">
+                          <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="settings-group">
+                    <div class="settings-group-title">
+                      <i class="fas fa-download"></i>
+                      Data Management
+                    </div>
+                    <div class="settings-items">
+                      <div class="settings-item">
+                        <div class="settings-info">
+                          <div class="settings-title">Download Your Data</div>
+                          <div class="settings-description">Get a copy of your personal data</div>
+                        </div>
+                        <div class="settings-control">
+                          <button class="btn btn-sm btn-outline">Request Data</button>
+                        </div>
+                      </div>
+
+                      <div class="settings-item">
+                        <div class="settings-info">
+                          <div class="settings-title">Delete Account</div>
+                          <div class="settings-description">Permanently delete your account</div>
+                        </div>
+                        <div class="settings-control">
+                          <button class="btn btn-sm btn-outline">Delete</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="settings-group">
+                    <div class="settings-group-title">
+                      <i class="fas fa-cookie"></i>
+                      Cookie Preferences
+                    </div>
+                    <div class="settings-items">
+                      <div class="settings-item">
+                        <div class="settings-info">
+                          <div class="settings-title">Essential Cookies</div>
+                          <div class="settings-description">Required for the app to function</div>
+                        </div>
+                        <div class="settings-control">
+                          <label class="toggle-switch">
+                            <input type="checkbox" checked disabled>
+                            <span class="toggle-slider"></span>
+                          </label>
+                        </div>
+                      </div>
+
+                      <div class="settings-item">
+                        <div class="settings-info">
+                          <div class="settings-title">Analytics Cookies</div>
+                          <div class="settings-description">Help us improve our services</div>
+                        </div>
+                        <div class="settings-control">
+                          <label class="toggle-switch">
+                            <input type="checkbox">
+                            <span class="toggle-slider"></span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- Appearance Settings -->
+            <section class="settings-section" id="appearance-section" style="display: none;">
+              <h2>Appearance Settings</h2>
+              <div class="settings-grid">
+                <div>
+                  <div class="settings-group">
+                    <div class="settings-group-title">
+                      <i class="fas fa-palette"></i>
+                      Theme
+                    </div>
+                    <div class="settings-items">
+                      <div class="settings-item">
+                        <div class="settings-info">
+                          <div class="settings-title">Theme Mode</div>
+                          <div class="settings-description">Choose your preferred theme</div>
+                        </div>
+                        <div class="settings-control">
+                          <select class="select-control" id="themeSelect">
+                            <option value="light">Light</option>
+                            <option value="dark">Dark</option>
+                            <option value="auto">Auto (System)</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="settings-item">
+                        <div class="settings-info">
+                          <div class="settings-title">Accent Color</div>
+                          <div class="settings-description">Choose your accent color</div>
+                        </div>
+                        <div class="settings-control">
+                          <select class="select-control" id="accentColorSelect">
+                            <option value="blue">Blue</option>
+                            <option value="green">Green</option>
+                            <option value="purple">Purple</option>
+                            <option value="red">Red</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="settings-group">
+                    <div class="settings-group-title">
+                      <i class="fas fa-text-height"></i>
+                      Text & Display
+                    </div>
+                    <div class="settings-items">
+                      <div class="settings-item">
+                        <div class="settings-info">
+                          <div class="settings-title">Font Size</div>
+                          <div class="settings-description">Adjust the text size</div>
+                        </div>
+                        <div class="settings-control">
+                          <select class="select-control" id="fontSizeSelect">
+                            <option value="small">Small</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="large">Large</option>
+                            <option value="xlarge">Extra Large</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="settings-item">
+                        <div class="settings-info">
+                          <div class="settings-title">Reduced Motion</div>
+                          <div class="settings-description">Minimize animations and effects</div>
+                        </div>
+                        <div class="settings-control">
+                          <label class="toggle-switch">
+                            <input type="checkbox">
+                            <span class="toggle-slider"></span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="settings-group">
+                    <div class="settings-group-title">
+                      <i class="fas fa-columns"></i>
+                      Layout
+                    </div>
+                    <div class="settings-items">
+                      <div class="settings-item">
+                        <div class="settings-info">
+                          <div class="settings-title">Dashboard Layout</div>
+                          <div class="settings-description">Choose how your dashboard is organized</div>
+                        </div>
+                        <div class="settings-control">
+                          <select class="select-control" id="dashboardLayoutSelect">
+                            <option value="standard">Standard</option>
+                            <option value="compact">Compact</option>
+                            <option value="detailed">Detailed</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="settings-item">
+                        <div class="settings-info">
+                          <div class="settings-title">Sidebar Position</div>
+                          <div class="settings-description">Choose sidebar location</div>
+                        </div>
+                        <div class="settings-control">
+                          <select class="select-control" id="sidebarPositionSelect">
+                            <option value="left">Left</option>
+                            <option value="right">Right</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="settings-item">
+                        <div class="settings-info">
+                          <div class="settings-title">Density</div>
+                          <div class="settings-description">Control the spacing of UI elements</div>
+                        </div>
+                        <div class="settings-control">
+                          <select class="select-control" id="densitySelect">
+                            <option value="comfortable">Comfortable</option>
+                            <option value="compact">Compact</option>
+                            <option value="spacious">Spacious</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- Advanced Settings -->
+            <section class="settings-section" id="advanced-section" style="display: none;">
+              <h2>Advanced Settings</h2>
+              <div class="settings-grid">
+                <div>
+                  <div class="settings-group">
+                    <div class="settings-group-title">
+                      <i class="fas fa-code"></i>
+                      Developer Options
+                    </div>
+                    <div class="settings-items">
+                      <div class="settings-item">
+                        <div class="settings-info">
+                          <div class="settings-title">Developer Mode</div>
+                          <div class="settings-description">Enable advanced developer options</div>
+                        </div>
+                        <div class="settings-control">
+                          <label class="toggle-switch">
+                            <input type="checkbox">
+                            <span class="toggle-slider"></span>
+                          </label>
+                        </div>
+                      </div>
+
+                      <div class="settings-item">
+                        <div class="settings-info">
+                          <div class="settings-title">API Access</div>
+                          <div class="settings-description">Enable access to developer API</div>
+                        </div>
+                        <div class="settings-control">
+                          <label class="toggle-switch">
+                            <input type="checkbox">
+                            <span class="toggle-slider"></span>
+                          </label>
+                        </div>
+                      </div>
+
+                      <div class="settings-item">
+                        <div class="settings-info">
+                          <div class="settings-title">Debug Mode</div>
+                          <div class="settings-description">Enable debugging information</div>
+                        </div>
+                        <div class="settings-control">
+                          <label class="toggle-switch">
+                            <input type="checkbox">
+                            <span class="toggle-slider"></span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="settings-group">
+                    <div class="settings-group-title">
+                      <i class="fas fa-database"></i>
+                      Data & Storage
+                    </div>
+                    <div class="settings-items">
+                      <div class="settings-item">
+                        <div class="settings-info">
+                          <div class="settings-title">Cache Size</div>
+                          <div class="settings-description">Currently using 125 MB</div>
+                        </div>
+                        <div class="settings-control">
+                          <button class="btn btn-sm btn-outline">Clear Cache</button>
+                        </div>
+                      </div>
+
+                      <div class="settings-item">
+                        <div class="settings-info">
+                          <div class="settings-title">Offline Mode</div>
+                          <div class="settings-description">Enable offline functionality</div>
+                        </div>
+                        <div class="settings-control">
+                          <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="settings-group">
+                    <div class="settings-group-title">
+                      <i class="fas fa-tools"></i>
+                      System
+                    </div>
+                    <div class="settings-items">
+                      <div class="settings-item">
+                        <div class="settings-info">
+                          <div class="settings-title">Auto-update</div>
+                          <div class="settings-description">Automatically download updates</div>
+                        </div>
+                        <div class="settings-control">
+                          <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                          </label>
+                        </div>
+                      </div>
+
+                      <div class="settings-item">
+                        <div class="settings-info">
+                          <div class="settings-title">Performance Mode</div>
+                          <div class="settings-description">Optimize for performance</div>
+                        </div>
+                        <div class="settings-control">
+                          <label class="toggle-switch">
+                            <input type="checkbox">
+                            <span class="toggle-slider"></span>
+                          </label>
+                        </div>
+                      </div>
+
+                      <div class="settings-item">
+                        <div class="settings-info">
+                          <div class="settings-title">Error Reporting</div>
+                          <div class="settings-description">Automatically report errors</div>
+                        </div>
+                        <div class="settings-control">
+                          <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="settings-group">
+                    <div class="settings-group danger-zone">
+                      <div class="settings-group-title">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Danger Zone
+                      </div>
+                      <div class="settings-items">
+                        <div class="settings-item">
+                          <div class="settings-info">
+                            <div class="settings-title">Reset All Settings</div>
+                            <div class="settings-description">Restore all settings to default values</div>
+                          </div>
+                          <div class="settings-control">
+                            <button class="btn btn-sm" id="resetAllBtn">Reset All</button>
+                          </div>
+                        </div>
+
+                        <div class="settings-item">
+                          <div class="settings-info">
+                            <div class="settings-title">Delete Account</div>
+                            <div class="settings-description">Permanently delete your account and all data</div>
+                          </div>
+                          <div class="settings-control">
+                            <button class="btn btn-sm" id="deleteAccountBtn">Delete Account</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Change Password Modal -->
+    <div class="modal-overlay" id="changePasswordModal">
+      <div class="modal">
+        <div class="modal-header">
+          <h3 class="modal-title">Change Password</h3>
+          <button class="close-modal" id="closePasswordModal">&times;</button>
+        </div>
+        <form id="passwordForm">
+          <div class="form-group">
+            <label for="currentPassword">Current Password</label>
+            <input type="password" id="currentPassword" required>
+          </div>
+          <div class="form-group">
+            <label for="newPassword">New Password</label>
+            <input type="password" id="newPassword" required>
+          </div>
+          <div class="form-group">
+            <label for="confirmPassword">Confirm New Password</label>
+            <input type="password" id="confirmPassword" required>
+          </div>
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary" id="cancelPasswordChange">Cancel</button>
+            <button type="submit" class="btn btn-primary">Change Password</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Change PIN Modal -->
+    <div class="modal-overlay" id="changePinModal">
+      <div class="modal">
+        <div class="modal-header">
+          <h3 class="modal-title">Change Transaction PIN</h3>
+          <button class="close-modal" id="closePinModal">&times;</button>
+        </div>
+        <form id="pinForm">
+          <div class="form-group">
+            <label for="currentPin">Current PIN</label>
+            <input type="password" id="currentPin" maxlength="4" required>
+          </div>
+          <div class="form-group">
+            <label for="newPin">New PIN</label>
+            <input type="password" id="newPin" maxlength="4" required>
+          </div>
+          <div class="form-group">
+            <label for="confirmPin">Confirm New PIN</label>
+            <input type="password" id="confirmPin" maxlength="4" required>
+          </div>
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary" id="cancelPinChange">Cancel</button>
+            <button type="submit" class="btn btn-primary">Change PIN</button>
+          </div>
+        </form>
+      </div>
+    </div>
+   <script src="../app/main.js"></script>
+  </body>
+</html>

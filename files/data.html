@@ -1,164 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>data MSB</title>
+    <title>Data Top-Up | Miles SmartBank</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
     <link rel="stylesheet" href="../styles/style.css" />
-      <style>
-   
-    
-    .cards {
-      background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-      padding: 2rem;
-      width: 90%;
-      max-width: 400px;
-      animation: fadeIn 0.8s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    h2 {
-      text-align: center;
-      color: #2563eb;
-      margin-bottom: 1.5rem;
-      font-size: 1.6rem;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 0.4rem;
-      color: #374151;
-      font-weight: 500;
-      font-size: 0.9rem;
-    }
-
-    input, select {
-      width: 100%;
-      padding: 10px;
-      border-radius: 8px;
-      border: 1px solid #cbd5e1;
-      outline: none;
-      font-size: 1rem;
-      transition: border-color 0.2s;
-    }
-
-    input:focus, select:focus {
-      border-color: #2563eb;
-      box-shadow: 0 0 0 2px rgba(37,99,235,0.1);
-    }
-
-    button {
-      width: 100%;
-      padding: 12px;
-      border: none;
-      border-radius: 8px;
-      background: #2563eb;
-      color: white;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      margin-top: 1rem;
-      transition: background 0.3s, transform 0.1s;
-    }
-
-    button:hover {
-      background: #1d4ed8;
-    }
-
-    button:active {
-      transform: scale(0.98);
-    }
-
-    .loading {
-      background: #93c5fd !important;
-      cursor: not-allowed;
-    }
-
-    .error {
-      color: #dc2626;
-      font-size: 0.85rem;
-      margin-top: 4px;
-    }
-
-    .footer {
-      text-align: center;
-      font-size: 0.8rem;
-      color: #6b7280;
-      margin-top: 1rem;
-    }
-
-    /* Modal */
-    .modal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.4);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      visibility: hidden;
-      opacity: 0;
-      transition: 0.3s ease;
-    }
-
-    .modal.active {
-      visibility: visible;
-      opacity: 1;
-    }
-
-    .modal-content {
-      background: #fff;
-      padding: 2rem;
-      border-radius: 12px;
-      text-align: center;
-      width: 90%;
-      max-width: 320px;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
-      animation: fadeIn 0.4s ease;
-    }
-
-    .modal-content h3 {
-      color: #16a34a;
-      margin-bottom: 0.5rem;
-    }
-
-    .modal-content p {
-      color: #374151;
-      font-size: 0.95rem;
-      margin-bottom: 1rem;
-    }
-
-    .close-btn {
-      background: #2563eb;
-      color: #fff;
-      border: none;
-      padding: 10px 18px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: 600;
-    }
-
-    @media (max-width: 500px) {
-      .card {
-        padding: 1.5rem;
-      }
-
-      h2 {
-        font-size: 1.4rem;
-      }
-    }
-  </style>
-
+    <link rel="stylesheet" href="../styles/layout.css">
   </head> 
   <body>
     <div class="app">
@@ -166,7 +15,6 @@
         <div class="app-header-logo">
           <div class="logo">
             <span class="logo-icon">
-            
               <i class="fa-brands fa-maxcdn"></i>
             </span>
             <h1 class="logo-title">
@@ -178,19 +26,16 @@
             <h5></h5>
           </div>
         </div>
-       <div class="app-header-navigation" id="mobile-header-nav">
-  <div class="tabs" id="tabs">
-            <a href="#">
-              
-            </a>
-            <a href="index.html" >
+        <div class="app-header-navigation" id="mobile-header-nav">
+          <div class="tabs" id="tabs">
+            <a href="dashboard.html">
               Dashboard
             </a>
             <a href="card.html">
               Cards
             </a>
-            <a href="account.html">
-              Account
+            <a href="userinfo.html">
+              Profile
             </a>
             <a href="transfer.html">
               Transfers
@@ -201,53 +46,125 @@
           </div>
         </div>
         <div class="app-header-actions">
-          <button class="user-profile">
+          <button class="user-profile" id="userProfileBtn">
             <span>Client Name</span>
             <span>
               <i class="fa-solid fa-circle-user"></i>
             </span>
           </button>
+          <div class="user-dropdown" id="userDropdown">
+            <a href="userinfo.html">
+              <i class="fas fa-user"></i>
+              <span>Profile</span>
+            </a>
+            <a href="settings.html">
+              <i class="fas fa-cog"></i>
+              <span>Settings</span>
+            </a>
+            <a href="../index.html">
+              <i class="fas fa-sign-out-alt"></i>
+              <span>Logout</span>
+            </a>
+          </div>
           <div class="app-header-actions-buttons">
             <button class="icon-button large">
-              <i class="ph-magnifying-glass"></i>
+              <i class="fas fa-search"></i>
             </button>
             <button class="icon-button large">
-              <i class="ph-bell"></i>
+              <i class="fas fa-bell"></i>
             </button>
           </div>
         </div>
-         <div class="app-header-mobile">
-          <button class="icon-button large" id="mobile-menu-toggle">
-            <i class="ph-list"></i>
+        <div class="app-header-mobile">
+          <button class="icon-button large" id="mobileMenuBtn">
+            <i class="fas fa-bars"></i>
           </button>
         </div>
-
       </header>
+
+      <!-- Mobile Menu -->
+      <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+      <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+          <h3>Menu</h3>
+          <button class="icon-button" id="closeMobileMenu">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        
+        <div class="mobile-user-info">
+          <i class="fa-solid fa-circle-user"></i>
+          <div>
+            <strong>Client Name</strong>
+            <div>Welcome back!</div>
+          </div>
+        </div>
+
+        <nav class="mobile-nav">
+          <a href="dashboard.html">
+            <i class="fas fa-home"></i>
+            <span>Dashboard</span>
+          </a>
+          <a href="card.html">
+            <i class="fas fa-credit-card"></i>
+            <span>Cards</span>
+          </a>
+          <a href="userinfo.html">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+          </a>
+          <a href="transfer.html">
+            <i class="fas fa-exchange-alt"></i>
+            <span>Transfers</span>
+          </a>
+          <a href="history.html">
+            <i class="fas fa-history"></i>
+            <span>History</span>
+          </a>
+          <a href="topup.html" class="active">
+            <i class="fas fa-wifi"></i>
+            <span> Top-Up</span>
+          </a>
+          <a href="exchange.html">
+            <i class="fas fa-chart-line"></i>
+            <span>Exchange</span>
+          </a>
+          <a href="settings.html">
+            <i class="fas fa-cog"></i>
+            <span>Settings</span>
+          </a>
+          <a href="../index.html">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+          </a>
+        </nav>
+      </div>
+
       <div class="app-body">
         <div class="app-body-navigation">
           <nav class="navigation">
-            <a href="index.html">
-              <i class="ph-browsers"></i>
+            <a href="dashboard.html">
+              <i class="fas fa-home"></i>
               <span>Dashboard</span>
             </a>
-            <a href="topup.html">
-              <i class="ph-check-square"></i>
-              <span>Top-up</span>
+            <a href="topup.html" class="active">
+              <i class="fas fa-wifi"></i>
+              <span> Top-Up</span>
             </a>
             <a href="transfer.html">
-              <i class="ph-swap"></i>
+              <i class="fas fa-exchange-alt"></i>
               <span>Transfers</span>
             </a>
             <a href="card.html">
-              <i class="ph-file-text"></i>
+              <i class="fas fa-credit-card"></i>
               <span>Card</span>
             </a>
             <a href="history.html">
-              <i class="ph-globe"></i>
+              <i class="fas fa-history"></i>
               <span>History</span>
             </a>
             <a href="exchange.html">
-              <i class="ph-clipboard-text"></i>
+              <i class="fas fa-chart-line"></i>
               <span>Exchange</span>
             </a>
           </nav>
@@ -261,42 +178,138 @@
         </div>
         <div class="app-body-main-content">
           <section class="service-section">
+            <div class="cards">
+              <h2>Data Top-Up</h2>
+              
+              <!-- Quick Actions -->
+              <div class="quick-actions">
+                <div class="quick-action" onclick="quickData('self')" tabindex="0" role="button">
+                  <i class="fas fa-mobile-alt"></i>
+                  <span>My Number</span>
+                </div>
+                <div class="quick-action" onclick="quickData('family')" tabindex="0" role="button">
+                  <i class="fas fa-users"></i>
+                  <span>Family</span>
+                </div>
+              </div>
 
-  <div class="cards">
-    <h2> Data Top-Up</h2>
-    <form id="topupForm">
-      <label for="network">Carrier</label>
-      <select id="network" required>
-        <option value="">Select Carrier</option>
-        <option value="AT&T">AT&amp;T</option>
-        <option value="Verizon">Verizon</option>
-        <option value="T-Mobile">T-Mobile</option>
-        <option value="Sprint">Sprint</option>
-      </select>
+              <!-- Beneficiary Management -->
+              <div class="beneficiary-section">
+                <div class="beneficiary-header">
+                  <h3>Saved Beneficiaries</h3>
+                  <button class="add-beneficiary-btn" onclick="openAddBeneficiaryModal()">
+                    <i class="fas fa-plus"></i>
+                    Add New
+                  </button>
+                </div>
+                <div class="beneficiary-list" id="beneficiaryList">
+                  <!-- Beneficiaries will be loaded here -->
+                </div>
+              </div>
 
-      <label for="phone">Phone Number</label>
-      <input type="tel" id="phone" placeholder="e.g. 4155551234" maxlength="10" required />
-      <div id="phoneError" class="error"></div>
+              <form id="topupForm">
+                <div class="form-group">
+                  <label for="network">Network Provider</label>
+                  <select id="network" required onchange="updateDataPlans()">
+                    <option value="">Select Network</option>
+                    <option value="MTN">MTN</option>
+                    <option value="GLO">GLO</option>
+                    <option value="AIRTEL">AIRTEL</option>
+                    <option value="9MOBILE">9MOBILE</option>
+                  </select>
+                </div>
 
-      <label for="amount">Amount (USD)</label>
-      <input type="number" id="amount" placeholder="Enter amount" required min="1" max="100" />
+                <div class="form-group">
+                  <label for="phone">Phone Number</label>
+                  <input type="tel" id="phone" placeholder="e.g. 08012345678" maxlength="11" required />
+                  <div id="phoneError" class="error"></div>
+                </div>
 
-      <button type="submit" id="submitBtn">Top Up Now</button>
-    </form>
+                <div class="form-group">
+                  <label>Data Plan</label>
+                  <div class="data-plans" id="dataPlansContainer">
+                    <!-- Data plans will be dynamically populated here -->
+                    <div class="no-plans">Please select a network provider to view available data plans</div>
+                  </div>
+                  <input type="hidden" id="selectedPlan" required>
+                </div>
 
-    <div class="footer">
-      Secure & Fast Data Recharge 🇺🇸
-    </div>
-  </div>
+                <div class="form-group">
+                  <label for="paymentMethod">Payment Method</label>
+                  <select id="paymentMethod" required>
+                    <option value="">Select Payment</option>
+                    <option value="balance">Account Balance</option>
+                    <option value="card">Credit/Debit Card</option>
+                  </select>
+                </div>
 
-  <!-- Success Modal -->
-  <div class="modal" id="successModal">
-    <div class="modal-content">
-      <h3>✅ Success!</h3>
-      <p id="successText"></p>
-      <button class="close-btn" onclick="closeModal()">OK</button>
-    </div>
-  </div>
+                <button type="submit" id="submitBtn">
+                  <i class="fas fa-wifi"></i>
+                  Buy Data Now
+                </button>
+              </form>
+
+              <div class="footer">
+                <i class="fas fa-shield-alt"></i>
+                Secure & Instant Data Recharge • 24/7 Support
+              </div>
+            </div>
+
+            <!-- Success Modal -->
+            <div class="modal" id="successModal">
+              <div class="modal-content">
+                <div class="success-animation">
+                  <svg viewBox="0 0 52 52">
+                    <circle class="checkmark" cx="26" cy="26" r="25" fill="none"/>
+                    <path class="checkmark" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                  </svg>
+                </div>
+                <h3>Data Purchase Successful!</h3>
+                <p id="successText"></p>
+                <button class="close-btn" onclick="closeModal()">Continue</button>
+              </div>
+            </div>
+
+            <!-- Error Modal -->
+            <div class="modal error-modal" id="errorModal">
+              <div class="modal-content">
+                <i class="fas fa-exclamation-circle" style="font-size: 3rem; color: #dc2626; margin-bottom: 1rem;"></i>
+                <h3>Purchase Failed</h3>
+                <p id="errorText"></p>
+                <button class="close-btn" onclick="closeErrorModal()">Try Again</button>
+              </div>
+            </div>
+
+            <!-- Add Beneficiary Modal -->
+            <div class="modal add-beneficiary-modal" id="addBeneficiaryModal">
+              <div class="modal-content">
+                <h3>Add New Beneficiary</h3>
+                <form id="addBeneficiaryForm">
+                  <div class="form-group">
+                    <label for="beneficiaryName">Beneficiary Name</label>
+                    <input type="text" id="beneficiaryName" placeholder="e.g. My Number, Family, etc." required />
+                  </div>
+                  <div class="form-group">
+                    <label for="beneficiaryNetwork">Network Provider</label>
+                    <select id="beneficiaryNetwork" required>
+                      <option value="">Select Network</option>
+                      <option value="MTN">MTN</option>
+                      <option value="GLO">GLO</option>
+                      <option value="AIRTEL">AIRTEL</option>
+                      <option value="9MOBILE">9MOBILE</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="beneficiaryPhone">Phone Number</label>
+                    <input type="tel" id="beneficiaryPhone" placeholder="e.g. 08012345678" maxlength="11" required />
+                  </div>
+                  <div class="form-actions">
+                    <button type="button" class="cancel-btn" onclick="closeAddBeneficiaryModal()">Cancel</button>
+                    <button type="submit" id="saveBeneficiaryBtn">Save Beneficiary</button>
+                  </div>
+                </form>
+              </div>
+            </div>
           </section>
         </div>
         <div class="app-body-sidebar">
@@ -338,7 +351,7 @@
                   <div>
                     <span>$ 2,110</span>
                     <button class="icon-button">
-                      <i class="ph-caret-right-bold"></i>
+                      <i class="fas fa-chevron-right"></i>
                     </button>
                   </div>
                 </div>
@@ -355,7 +368,7 @@
                   <div>
                     <span>$ 5,621</span>
                     <button class="icon-button">
-                      <i class="ph-caret-right-bold"></i>
+                      <i class="fas fa-chevron-right"></i>
                     </button>
                   </div>
                 </div>
@@ -372,7 +385,7 @@
                   <div>
                     <span>$ 3,473</span>
                     <button class="icon-button">
-                      <i class="ph-caret-right-bold"></i>
+                      <i class="fas fa-chevron-right"></i>
                     </button>
                   </div>
                 </div>
@@ -390,7 +403,7 @@
                 Save
               </button>
               <button class="settings-button">
-                <i class="ph-gear"></i>
+                <i class="fas fa-cog"></i>
                 <span>More settings</span>
               </button>
             </div>
@@ -398,57 +411,7 @@
         </div>
       </div>
     </div>
-    <script src="https://unpkg.com/phosphor-icons"></script>
-     <script>
-    const form = document.getElementById("topupForm");
-    const submitBtn = document.getElementById("submitBtn");
-    const phoneInput = document.getElementById("phone");
-    const phoneError = document.getElementById("phoneError");
-    const modal = document.getElementById("successModal");
-    const successText = document.getElementById("successText");
-
-    // Validate phone number length (US = 10 digits)
-    phoneInput.addEventListener("input", () => {
-      const value = phoneInput.value.replace(/\D/g, ""); // allow only digits
-      phoneInput.value = value;
-      if (value.length !== 10) {
-        phoneError.textContent = "Phone number must be exactly 10 digits.";
-      } else {
-        phoneError.textContent = "";
-      }
-    });
-
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-
-      const phone = phoneInput.value;
-      if (phone.length !== 10) {
-        phoneError.textContent = "Please enter a valid 10-digit US phone number.";
-        return;
-      }
-
-      submitBtn.textContent = "Processing...";
-      submitBtn.classList.add("loading");
-      submitBtn.disabled = true;
-
-      setTimeout(() => {
-        const amount = document.getElementById("amount").value;
-        const carrier = document.getElementById("network").value;
-        successText.textContent = `$${amount} data has been sent to (${carrier}) +1-${phone}.`;
-        modal.classList.add("active");
-
-        // reset form
-        form.reset();
-        submitBtn.textContent = "Top Up Now";
-        submitBtn.classList.remove("loading");
-        submitBtn.disabled = false;
-      }, 1500);
-    });
-
-    function closeModal() {
-      modal.classList.remove("active");
-    }
-  </script>
-   <script src="../app/dropdown.js"></script>
+  
+    <script src="../app/main.js"></script>
   </body>
 </html>

@@ -1,22 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>card MSB</title>
+<head>
+    <title>Cards - MSB</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
     <link rel="stylesheet" href="../styles/style.css" />
-
-
-  </head> 
-  <body>
+    <link rel="stylesheet" href="../styles/layout.css">
+</head>
+<body>
     <div class="app">
       <header class="app-header">
         <div class="app-header-logo">
           <div class="logo">
             <span class="logo-icon">
-            
               <i class="fa-brands fa-maxcdn"></i>
             </span>
             <h1 class="logo-title">
@@ -28,12 +26,9 @@
             <h5></h5>
           </div>
         </div>
-        <div class="app-header-navigation" id="mobile-header-nav">
-  <div class="tabs" id="tabs">
-            <a href="#">
-              
-            </a>
-            <a href="index.html" >
+        <div class="app-header-navigation">
+          <div class="tabs">
+            <a href="dashboard.html">
               Dashboard
             </a>
             <a href="card.html" class="active">
@@ -45,18 +40,35 @@
             <a href="transfer.html">
               Transfers
             </a>
+            <a href="topup.html">
+              Top-up
+            </a>
             <a href="history.html">
               History
             </a>
           </div>
         </div>
         <div class="app-header-actions">
-          <button class="user-profile">
+          <button class="user-profile" id="userProfileBtn">
             <span>Client Name</span>
             <span>
               <i class="fa-solid fa-circle-user"></i>
             </span>
           </button>
+          <div class="user-dropdown" id="userDropdown">
+            <a href="userinfo.html">
+              <i class="fas fa-user"></i>
+              <span>Profile</span>
+            </a>
+            <a href="settings.html">
+              <i class="fas fa-cog"></i>
+              <span>Settings</span>
+            </a>
+            <a href="../index.html">
+              <i class="fas fa-sign-out-alt"></i>
+              <span>Logout</span>
+            </a>
+          </div>
           <div class="app-header-actions-buttons">
             <button class="icon-button large">
               <i class="ph-magnifying-glass"></i>
@@ -66,17 +78,75 @@
             </button>
           </div>
         </div>
-         <div class="app-header-mobile">
-          <button class="icon-button large" id="mobile-menu-toggle">
-            <i class="ph-list"></i>
+        <div class="app-header-mobile">
+          <button class="icon-button large" id="mobileMenuBtn">
+            <i class="fas fa-bars"></i>
           </button>
         </div>
-
       </header>
+
+      <!-- Mobile Menu -->
+      <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+      <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+          <h3>Menu</h3>
+          <button class="icon-button" id="closeMobileMenu">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        
+        <div class="mobile-user-info">
+          <i class="fa-solid fa-circle-user"></i>
+          <div>
+            <strong>Client Name</strong>
+            <div style="font-size: 0.875rem; color: #666;">Welcome back!</div>
+          </div>
+        </div>
+
+        <nav class="mobile-nav">
+          <a href="dashboard.html">
+            <i class="fas fa-home"></i>
+            <span>Dashboard</span>
+          </a>
+          <a href="card.html" class="active">
+            <i class="fas fa-credit-card"></i>
+            <span>Cards</span>
+          </a>
+          <a href="userinfo.html">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+          </a>
+          <a href="transfer.html">
+            <i class="fas fa-exchange-alt"></i>
+            <span>Transfers</span>
+          </a>
+          <a href="topup.html">
+            <i class="fas fa-wallet"></i>
+            <span>Top-up</span>
+          </a>
+          <a href="history.html">
+            <i class="fas fa-history"></i>
+            <span>History</span>
+          </a>
+          <a href="exchange.html">
+            <i class="fas fa-chart-line"></i>
+            <span>Exchange</span>
+          </a>
+          <a href="settings.html">
+            <i class="fas fa-cog"></i>
+            <span>Settings</span>
+          </a>
+          <a href="../index.html">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+          </a>
+        </nav>
+      </div>
+
       <div class="app-body">
         <div class="app-body-navigation">
           <nav class="navigation">
-            <a href="index.html">
+            <a href="dashboard.html">
               <i class="ph-browsers"></i>
               <span>Dashboard</span>
             </a>
@@ -88,9 +158,9 @@
               <i class="ph-swap"></i>
               <span>Transfers</span>
             </a>
-            <a href="card.html">
+            <a href="card.html" class="active">
               <i class="ph-file-text"></i>
-              <span>Card</span>
+              <span>Cards</span>
             </a>
             <a href="history.html">
               <i class="ph-globe"></i>
@@ -109,275 +179,733 @@
             </div>
           </footer>
         </div>
+        
+        <!-- Cards Page Content -->
         <div class="app-body-main-content">
-          <section class="service-section">
-       <div class="heading">
-         <div class="container">
-
-        <form action="#" class="formcard">
-
-            <div class="row">
-
-                <div class="col">
-                    <h3 class="title">
-                        Billing Address
-                    </h3>
-
-                    <div class="inputBox">
-                        <label for="name">
-                              Full Name:
-                          </label>
-                        <input type="text" id="name" 
-                               placeholder="Enter your full name" 
-                               required>
-                    </div>
-
-                    <div class="inputBox">
-                        <label for="email">
-                              Email:
-                          </label>
-                        <input type="text" id="email" 
-                               placeholder="Enter email address" 
-                               required>
-                    </div>
-
-                    <div class="inputBox">
-                        <label for="address">
-                              Address:
-                          </label>
-                        <input type="text" id="address" 
-                               placeholder="Enter address" 
-                               required>
-                    </div>
-
-                    <div class="inputBox">
-                        <label for="city">
-                              City:
-                          </label>
-                        <input type="text" id="city" 
-                               placeholder="Enter city" 
-                               required>
-                    </div>
-
-                    <div class="flex">
-
-                        <div class="inputBox">
-                            <label for="state">
-                                  State:
-                              </label>
-                            <input type="text" id="state" 
-                                   placeholder="Enter state" 
-                                   required>
-                        </div>
-
-                        <div class="inputBox">
-                            <label for="zip">
-                                  Zip Code:
-                              </label>
-                            <input type="number" id="zip" 
-                                   placeholder="123 456" 
-                                   required>
-                        </div>
-
-                    </div>
-
-                </div>
-                <div class="col">
-                    <h3 class="title">Payment</h3>
-
-                    <div class="inputBox">
-                        <label for="name">
-                              Card Accepted:
-                          </label>
-                        <img src=
-"https://media.geeksforgeeks.org/wp-content/uploads/20240715140014/Online-Payment-Project.webp" 
-                             alt="credit/debit card image">
-                    </div>
-
-                    <div class="inputBox">
-                        <label for="cardName">
-                              Name On Card:
-                          </label>
-                        <input type="text" id="cardName" 
-                               placeholder="Enter card name" 
-                               required>
-                    </div>
-
-                    <div class="inputBox">
-                        <label for="cardNum">
-                              Credit Card Number:
-                          </label>
-                        <input type="text" id="cardNum" 
-                               placeholder="1111-2222-3333-4444" 
-                               maxlength="19" required>
-                    </div>
-
-                    <div class="inputBox">
-                        <label for="">Exp Month:</label>
-                        <select name="" id="">
-                            <option value="">Choose month</option>
-                            <option value="January">January</option>
-                            <option value="February">February</option>
-                            <option value="March">March</option>
-                            <option value="April">April</option>
-                            <option value="May">May</option>
-                            <option value="June">June</option>
-                            <option value="July">July</option>
-                            <option value="August">August</option>
-                            <option value="September">September</option>
-                            <option value="October">October</option>
-                            <option value="November">November</option>
-                            <option value="December">December</option>
-                        </select>
-                    </div>
-
-
-                    <div class="flex">
-                        <div class="inputBox">
-                            <label for="">Exp Year:</label>
-                            <select name="" id="">
-                                <option value="">Choose Year</option>
-                                <option value="2023">2023</option>
-                                <option value="2024">2024</option>
-                                <option value="2025">2025</option>
-                                <option value="2026">2026</option>
-                                <option value="2027">2027</option>
-                            </select>
-                        </div>
-
-                        <div class="inputBox">
-                            <label for="cvv">CVV</label>
-                            <input type="number" id="cvv" 
-                                   placeholder="1234" required>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-
-            <input type="submit" value="Proceed to Checkout" 
-                   class="submit_btn">
-        </form>
-     </div>
-    </div>
-    </div>
-    </section>
-          <div class="app-body-sidebar">
-          <section class="payment-section">
-            <h2>New Payment</h2>
-            <div class="payment-section-header">
-              <p>Choose a card to transfer money</p>
-              <div>
-                <button class="card-button mastercard">
-                  <svg width="2001" height="1237" viewBox="0 0 2001 1237" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <g id="a624784f2834e21c94a1c0c9a58bbbaa">
-                      <path id="7869b07bea546aa59a5ee138adbcfd5a" d="M1270.57 1104.15H729.71V132.15H1270.58L1270.57 1104.15Z" fill="currentColor"></path>
-                      <path id="b54e3ab4d7044a9f288082bc6b864ae6" d="M764 618.17C764 421 856.32 245.36 1000.08 132.17C891.261 46.3647 756.669 -0.204758 618.09 9.6031e-07C276.72 9.6031e-07 0 276.76 0 618.17C0 959.58 276.72 1236.34 618.09 1236.34C756.672 1236.55 891.268 1189.98 1000.09 1104.17C856.34 991 764 815.35 764 618.17Z" fill="currentColor"></path>
-                      <path id="67f94b4d1b83252a6619ed6e0cc0a3a1" d="M2000.25 618.17C2000.25 959.58 1723.53 1236.34 1382.16 1236.34C1243.56 1236.54 1108.95 1189.97 1000.11 1104.17C1143.91 990.98 1236.23 815.35 1236.23 618.17C1236.23 420.99 1143.91 245.36 1000.11 132.17C1108.95 46.3673 1243.56 -0.201169 1382.15 -2.24915e-05C1723.52 -2.24915e-05 2000.24 276.76 2000.24 618.17" fill="currentColor"></path>
-                    </g>
-                  </svg>
+          <div class="cards-page">
+            <div class="cards-header">
+              <h1>My Cards</h1>
+              <div class="cards-actions">
+                <button class="btn btn-outline" id="orderCardBtn">
+                  <i class="fas fa-plus"></i> Order New Card
                 </button>
-                <button class="card-button visa active">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="2500" height="2500" viewBox="0 0 141.732 141.732">
-                    <g fill="currentColor">
-                      <path d="M62.935 89.571h-9.733l6.083-37.384h9.734zM45.014 52.187L35.735 77.9l-1.098-5.537.001.002-3.275-16.812s-.396-3.366-4.617-3.366h-15.34l-.18.633s4.691.976 10.181 4.273l8.456 32.479h10.141l15.485-37.385H45.014zM121.569 89.571h8.937l-7.792-37.385h-7.824c-3.613 0-4.493 2.786-4.493 2.786L95.881 89.571h10.146l2.029-5.553h12.373l1.14 5.553zm-10.71-13.224l5.114-13.99 2.877 13.99h-7.991zM96.642 61.177l1.389-8.028s-4.286-1.63-8.754-1.63c-4.83 0-16.3 2.111-16.3 12.376 0 9.658 13.462 9.778 13.462 14.851s-12.075 4.164-16.06.965l-1.447 8.394s4.346 2.111 10.986 2.111c6.642 0 16.662-3.439 16.662-12.799 0-9.72-13.583-10.625-13.583-14.851.001-4.227 9.48-3.684 13.645-1.389z" />
-                    </g>
-                    <path d="M34.638 72.364l-3.275-16.812s-.396-3.366-4.617-3.366h-15.34l-.18.633s7.373 1.528 14.445 7.253c6.762 5.472 8.967 12.292 8.967 12.292z" fill="currentColor" />
-                    <path fill="none" d="M0 0h141.732v141.732H0z" />
-                  </svg>
+                <button class="btn btn-outline" id="manageCardsBtn">
+                  <i class="fas fa-cog"></i> Manage Cards
                 </button>
               </div>
             </div>
-            <div class="payments">
-              <div class="payment">
-                <div class="card green">
-                  <span>01/22</span>
-                  <span>
-                    •••• 4012
-                  </span>
-                </div>
-                <div class="payment-details">
-                  <h3>Internet</h3>
-                  <div>
-                    <span>$ 2,110</span>
-                    <button class="icon-button">
-                      <i class="ph-caret-right-bold"></i>
+
+            <!-- Active Cards Section -->
+            <section class="cards-section">
+              <h2>Active Cards</h2>
+              <div class="cards-grid">
+                <!-- Visa Card -->
+                <div class="card-item visa">
+                  <div class="card-status">Active</div>
+                  <div class="card-header">
+                    <div class="card-type">Visa Debit</div>
+                    <div class="card-logo">VISA</div>
+                  </div>
+                  <div class="card-number">•••• 4012</div>
+                  <div class="card-details">
+                    <div class="card-holder">CLIENT NAME</div>
+                    <div class="card-expiry">01/25</div>
+                  </div>
+                  <div class="card-actions">
+                    <button class="card-action-btn" title="Freeze Card">
+                      <i class="fas fa-snowflake"></i>
+                    </button>
+                    <button class="card-action-btn view-details-btn" title="View Details">
+                      <i class="fas fa-eye"></i>
                     </button>
                   </div>
                 </div>
-              </div>
-              <div class="payment">
-                <div class="card olive">
-                  <span>12/23</span>
-                  <span>
-                    •••• 2228
-                  </span>
+                <!-- Visa Card Details Panel -->
+                <div class="card-details-panel" id="visa-details">
+                  <div class="card-details-grid">
+                    <div class="detail-item">
+                      <div class="detail-label">Card Number</div>
+                      <div class="detail-value">4012 3456 7890 1234</div>
+                    </div>
+                    <div class="detail-item">
+                      <div class="detail-label">Expiry Date</div>
+                      <div class="detail-value">01/25</div>
+                    </div>
+                    <div class="detail-item">
+                      <div class="detail-label">CVV</div>
+                      <div class="detail-value">123</div>
+                    </div>
+                    <div class="detail-item">
+                      <div class="detail-label">Card Type</div>
+                      <div class="detail-value">Visa Debit</div>
+                    </div>
+                  </div>
+                  <div class="card-pin-status">
+                    <span class="detail-label">PIN Status:</span>
+                    <span class="pin-status-badge pin-set">SET</span>
+                  </div>
+                  <div class="pin-actions">
+                    <button class="btn btn-sm btn-outline" id="changePinVisa">Change PIN</button>
+                    <button class="btn btn-sm btn-secondary">Show CVV</button>
+                  </div>
                 </div>
-                <div class="payment-details">
-                  <h3>Universal</h3>
-                  <div>
-                    <span>$ 5,621</span>
-                    <button class="icon-button">
-                      <i class="ph-caret-right-bold"></i>
+
+                <!-- MasterCard -->
+                <div class="card-item mastercard">
+                  <div class="card-status">Active</div>
+                  <div class="card-header">
+                    <div class="card-type">MasterCard</div>
+                    <div class="card-logo">MC</div>
+                  </div>
+                  <div class="card-number">•••• 5678</div>
+                  <div class="card-details">
+                    <div class="card-holder">CLIENT NAME</div>
+                    <div class="card-expiry">03/26</div>
+                  </div>
+                  <div class="card-actions">
+                    <button class="card-action-btn" title="Freeze Card">
+                      <i class="fas fa-snowflake"></i>
+                    </button>
+                    <button class="card-action-btn view-details-btn" title="View Details">
+                      <i class="fas fa-eye"></i>
                     </button>
                   </div>
                 </div>
-              </div>
-              <div class="payment">
-                <div class="card gray">
-                  <span>03/22</span>
-                  <span>
-                    •••• 5214
-                  </span>
+                <!-- MasterCard Details Panel -->
+                <div class="card-details-panel" id="mastercard-details">
+                  <div class="card-details-grid">
+                    <div class="detail-item">
+                      <div class="detail-label">Card Number</div>
+                      <div class="detail-value">5678 9012 3456 7890</div>
+                    </div>
+                    <div class="detail-item">
+                      <div class="detail-label">Expiry Date</div>
+                      <div class="detail-value">03/26</div>
+                    </div>
+                    <div class="detail-item">
+                      <div class="detail-label">CVV</div>
+                      <div class="detail-value">456</div>
+                    </div>
+                    <div class="detail-item">
+                      <div class="detail-label">Card Type</div>
+                      <div class="detail-value">MasterCard</div>
+                    </div>
+                  </div>
+                  <div class="card-pin-status">
+                    <span class="detail-label">PIN Status:</span>
+                    <span class="pin-status-badge pin-set">SET</span>
+                  </div>
+                  <div class="pin-actions">
+                    <button class="btn btn-sm btn-outline" id="changePinMastercard">Change PIN</button>
+                    <button class="btn btn-sm btn-secondary">Show CVV</button>
+                  </div>
                 </div>
-                <div class="payment-details">
-                  <h3>Gold</h3>
-                  <div>
-                    <span>$ 3,473</span>
-                    <button class="icon-button">
-                      <i class="ph-caret-right-bold"></i>
+
+                <!-- Virtual Card -->
+                <div class="card-item platinum">
+                  <div class="card-status">Virtual</div>
+                  <div class="card-header">
+                    <div class="card-type">Virtual Card</div>
+                    <div class="card-logo">MSB</div>
+                  </div>
+                  <div class="card-number">•••• 9012</div>
+                  <div class="card-details">
+                    <div class="card-holder">CLIENT NAME</div>
+                    <div class="card-expiry">12/24</div>
+                  </div>
+                  <div class="card-actions">
+                    <button class="card-action-btn" title="Show Details">
+                      <i class="fas fa-eye"></i>
+                    </button>
+                    <button class="card-action-btn" title="Copy Card Number">
+                      <i class="fas fa-copy"></i>
                     </button>
                   </div>
                 </div>
+                <!-- Virtual Card Details Panel -->
+                <div class="card-details-panel" id="virtual-details">
+                  <div class="card-details-grid">
+                    <div class="detail-item">
+                      <div class="detail-label">Card Number</div>
+                      <div class="detail-value">9012 3456 7890 1234</div>
+                    </div>
+                    <div class="detail-item">
+                      <div class="detail-label">Expiry Date</div>
+                      <div class="detail-value">12/24</div>
+                    </div>
+                    <div class="detail-item">
+                      <div class="detail-label">CVV</div>
+                      <div class="detail-value">789</div>
+                    </div>
+                    <div class="detail-item">
+                      <div class="detail-label">Card Type</div>
+                      <div class="detail-value">Virtual Card</div>
+                    </div>
+                  </div>
+                  <div class="card-pin-status">
+                    <span class="detail-label">PIN Status:</span>
+                    <span class="pin-status-badge pin-set">SET</span>
+                  </div>
+                  <div class="pin-actions">
+                    <button class="btn btn-sm btn-outline" id="changePinVirtual">Change PIN</button>
+                    <button class="btn btn-sm btn-secondary">Show CVV</button>
+                  </div>
+                </div>
+
+                <!-- American Express Card -->
+                <div class="card-item amex">
+                  <div class="card-status">Active</div>
+                  <div class="card-header">
+                    <div class="card-type">American Express</div>
+                    <div class="card-logo">AMEX</div>
+                  </div>
+                  <div class="card-number">•••• 3456</div>
+                  <div class="card-details">
+                    <div class="card-holder">CLIENT NAME</div>
+                    <div class="card-expiry">06/27</div>
+                  </div>
+                  <div class="card-actions">
+                    <button class="card-action-btn" title="Freeze Card">
+                      <i class="fas fa-snowflake"></i>
+                    </button>
+                    <button class="card-action-btn view-details-btn" title="View Details">
+                      <i class="fas fa-eye"></i>
+                    </button>
+                  </div>
+                </div>
+                <!-- American Express Details Panel -->
+                <div class="card-details-panel" id="amex-details">
+                  <div class="card-details-grid">
+                    <div class="detail-item">
+                      <div class="detail-label">Card Number</div>
+                      <div class="detail-value">3456 7890 1234 5678</div>
+                    </div>
+                    <div class="detail-item">
+                      <div class="detail-label">Expiry Date</div>
+                      <div class="detail-value">06/27</div>
+                    </div>
+                    <div class="detail-item">
+                      <div class="detail-label">CID</div>
+                      <div class="detail-value">1234</div>
+                    </div>
+                    <div class="detail-item">
+                      <div class="detail-label">Card Type</div>
+                      <div class="detail-value">American Express</div>
+                    </div>
+                  </div>
+                  <div class="card-pin-status">
+                    <span class="detail-label">PIN Status:</span>
+                    <span class="pin-status-badge pin-not-set">NOT SET</span>
+                  </div>
+                  <div class="pin-actions">
+                    <button class="btn btn-sm btn-primary" id="setPinAmex">Set PIN</button>
+                    <button class="btn btn-sm btn-secondary">Show CID</button>
+                  </div>
+                </div>
+
+                <!-- Discover Card -->
+                <div class="card-item discover">
+                  <div class="card-status">Active</div>
+                  <div class="card-header">
+                    <div class="card-type">Discover</div>
+                    <div class="card-logo">DISCOVER</div>
+                  </div>
+                  <div class="card-number">•••• 7890</div>
+                  <div class="card-details">
+                    <div class="card-holder">CLIENT NAME</div>
+                    <div class="card-expiry">09/26</div>
+                  </div>
+                  <div class="card-actions">
+                    <button class="card-action-btn" title="Freeze Card">
+                      <i class="fas fa-snowflake"></i>
+                    </button>
+                    <button class="card-action-btn view-details-btn" title="View Details">
+                      <i class="fas fa-eye"></i>
+                    </button>
+                  </div>
+                </div>
+                <!-- Discover Card Details Panel -->
+                <div class="card-details-panel" id="discover-details">
+                  <div class="card-details-grid">
+                    <div class="detail-item">
+                      <div class="detail-label">Card Number</div>
+                      <div class="detail-value">7890 1234 5678 9012</div>
+                    </div>
+                    <div class="detail-item">
+                      <div class="detail-label">Expiry Date</div>
+                      <div class="detail-value">09/26</div>
+                    </div>
+                    <div class="detail-item">
+                      <div class="detail-label">CVV</div>
+                      <div class="detail-value">567</div>
+                    </div>
+                    <div class="detail-item">
+                      <div class="detail-label">Card Type</div>
+                      <div class="detail-value">Discover</div>
+                    </div>
+                  </div>
+                  <div class="card-pin-status">
+                    <span class="detail-label">PIN Status:</span>
+                    <span class="pin-status-badge pin-not-set">NOT SET</span>
+                  </div>
+                  <div class="pin-actions">
+                    <button class="btn btn-sm btn-primary" id="setPinDiscover">Set PIN</button>
+                    <button class="btn btn-sm btn-secondary">Show CVV</button>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div class="faq">
-              <p>Most frequently asked questions</p>
-              <div>
-                <label>Question</label>
-                <input type="text" placeholder="Type here">
+            </section>
+
+            <!-- Card Management Section -->
+            <section class="cards-section">
+              <h2>Card Management</h2>
+              <div class="card-management">
+                <div class="management-item" id="freezeCardBtn">
+                  <div class="management-icon">
+                    <i class="fas fa-snowflake"></i>
+                  </div>
+                  <div class="management-title">Freeze Card</div>
+                  <div class="management-description">Temporarily block your card</div>
+                </div>
+
+                <div class="management-item" id="setLimitsBtn">
+                  <div class="management-icon">
+                    <i class="fas fa-chart-line"></i>
+                  </div>
+                  <div class="management-title">Set Limits</div>
+                  <div class="management-description">Manage spending limits</div>
+                </div>
+
+                <div class="management-item" id="replaceCardBtn">
+                  <div class="management-icon">
+                    <i class="fas fa-sync-alt"></i>
+                  </div>
+                  <div class="management-title">Replace Card</div>
+                  <div class="management-description">Order a replacement card</div>
+                </div>
+
+                <div class="management-item" id="pinManagementBtn">
+                  <div class="management-icon">
+                    <i class="fas fa-key"></i>
+                  </div>
+                  <div class="management-title">PIN Management</div>
+                  <div class="management-description">Change your PIN</div>
+                </div>
               </div>
-            </div>
-            <div class="payment-section-footer">
-              <button class="save-button">
-                Save
-              </button>
-              <button class="settings-button">
-                <i class="ph-gear"></i>
-                <span>More settings</span>
-              </button>
-            </div>
-          </section>
+            </section>
+
+            <!-- Spending Analytics Section -->
+            <section class="cards-section">
+              <h2>Spending Analytics</h2>
+              <div class="analytics-grid">
+                <div class="spending-chart">
+                  <div class="chart-placeholder">
+                    <i class="fas fa-chart-pie"></i>
+                    <p>Spending chart will appear here</p>
+                    <small>Visual breakdown of your expenses</small>
+                  </div>
+                </div>
+                <div class="spending-breakdown">
+                  <div class="spending-category">
+                    <div class="category-icon shopping">
+                      <i class="fas fa-shopping-bag"></i>
+                    </div>
+                    <div class="category-details">
+                      <div class="category-name">Shopping</div>
+                      <div class="category-amount">₦45,200 spent</div>
+                    </div>
+                    <div class="category-percentage">42%</div>
+                  </div>
+
+                  <div class="spending-category">
+                    <div class="category-icon food">
+                      <i class="fas fa-utensils"></i>
+                    </div>
+                    <div class="category-details">
+                      <div class="category-name">Food & Dining</div>
+                      <div class="category-amount">₦28,500 spent</div>
+                    </div>
+                    <div class="category-percentage">26%</div>
+                  </div>
+
+                  <div class="spending-category">
+                    <div class="category-icon transport">
+                      <i class="fas fa-car"></i>
+                    </div>
+                    <div class="category-details">
+                      <div class="category-name">Transportation</div>
+                      <div class="category-amount">₦15,800 spent</div>
+                    </div>
+                    <div class="category-percentage">15%</div>
+                  </div>
+
+                  <div class="spending-category">
+                    <div class="category-icon entertainment">
+                      <i class="fas fa-film"></i>
+                    </div>
+                    <div class="category-details">
+                      <div class="category-name">Entertainment</div>
+                      <div class="category-amount">₦18,300 spent</div>
+                    </div>
+                    <div class="category-percentage">17%</div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- Recent Transactions Section -->
+            <section class="cards-section">
+              <h2>Recent Card Transactions</h2>
+              <div class="transaction-list">
+                <div class="transaction-item">
+                  <div class="transaction-icon shopping">
+                    <i class="fas fa-shopping-bag"></i>
+                  </div>
+                  <div class="transaction-details">
+                    <div class="transaction-title">Amazon Online Store</div>
+                    <div class="transaction-meta">Online Shopping • Visa •••• 4012</div>
+                  </div>
+                  <div class="transaction-amount">
+                    <div class="amount">-₦25,400</div>
+                    <div class="transaction-date">Today, 14:30</div>
+                  </div>
+                </div>
+
+                <div class="transaction-item">
+                  <div class="transaction-icon food">
+                    <i class="fas fa-utensils"></i>
+                  </div>
+                  <div class="transaction-details">
+                    <div class="transaction-title">Restaurant La Piazza</div>
+                    <div class="transaction-meta">Dining • MasterCard •••• 5678</div>
+                  </div>
+                  <div class="transaction-amount">
+                    <div class="amount">-₦12,500</div>
+                    <div class="transaction-date">Yesterday, 19:15</div>
+                  </div>
+                </div>
+
+                <div class="transaction-item">
+                  <div class="transaction-icon transport">
+                    <i class="fas fa-gas-pump"></i>
+                  </div>
+                  <div class="transaction-details">
+                    <div class="transaction-title">Shell Fuel Station</div>
+                    <div class="transaction-meta">Fuel • Visa •••• 4012</div>
+                  </div>
+                  <div class="transaction-amount">
+                    <div class="amount">-₦8,700</div>
+                    <div class="transaction-date">Jan 12, 08:45</div>
+                  </div>
+                </div>
+
+                <div class="transaction-item">
+                  <div class="transaction-icon entertainment">
+                    <i class="fas fa-film"></i>
+                  </div>
+                  <div class="transaction-details">
+                    <div class="transaction-title">Netflix Subscription</div>
+                    <div class="transaction-meta">Entertainment • Virtual Card</div>
+                  </div>
+                  <div class="transaction-amount">
+                    <div class="amount">-₦3,600</div>
+                    <div class="transaction-date">Jan 10, 00:05</div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- Available Cards Section -->
+            <section class="cards-section">
+              <h2>Available Cards</h2>
+              <div class="available-cards">
+                <div class="available-card featured">
+                  <div class="card-badge">Most Popular</div>
+                  <div class="card-icon">
+                    <i class="fas fa-gem"></i>
+                  </div>
+                  <div class="card-name">Platinum Card</div>
+                  <ul class="card-features">
+                    <li><i class="fas fa-check"></i> Higher spending limits</li>
+                    <li><i class="fas fa-check"></i> Travel insurance</li>
+                    <li><i class="fas fa-check"></i> Airport lounge access</li>
+                    <li><i class="fas fa-check"></i> Priority customer support</li>
+                  </ul>
+                  <div class="card-annual-fee">
+                    ₦15,000 <span class="period">/year</span>
+                  </div>
+                  <button class="btn btn-primary btn-sm">Apply Now</button>
+                </div>
+
+                <div class="available-card">
+                  <div class="card-icon">
+                    <i class="fas fa-credit-card"></i>
+                  </div>
+                  <div class="card-name">Gold Card</div>
+                  <ul class="card-features">
+                    <li><i class="fas fa-check"></i> Medium spending limits</li>
+                    <li><i class="fas fa-check"></i> Purchase protection</li>
+                    <li><i class="fas fa-check"></i> Cashback rewards</li>
+                    <li><i class="fas fa-check"></i> Extended warranty</li>
+                  </ul>
+                  <div class="card-annual-fee">
+                    ₦8,000 <span class="period">/year</span>
+                  </div>
+                  <button class="btn btn-outline btn-sm">Apply Now</button>
+                </div>
+
+                <div class="available-card">
+                  <div class="card-icon">
+                    <i class="fas fa-credit-card"></i>
+                  </div>
+                  <div class="card-name">Standard Card</div>
+                  <ul class="card-features">
+                    <li><i class="fas fa-check"></i> Basic spending limits</li>
+                    <li><i class="fas fa-check"></i> Online shopping protection</li>
+                    <li><i class="fas fa-check"></i> Contactless payments</li>
+                    <li><i class="fas fa-check"></i> Mobile banking</li>
+                  </ul>
+                  <div class="card-annual-fee">
+                    Free <span class="period">/year</span>
+                  </div>
+                  <button class="btn btn-outline btn-sm">Apply Now</button>
+                </div>
+              </div>
+            </section>
+          </div>
         </div>
-   
-    <script>
-        let cardNumInput = 
-    document.querySelector('#cardNum')
+      </div>
+    </div>
 
-cardNumInput.addEventListener('keyup', () => {
-    let cNumber = cardNumInput.value
-    cNumber = cNumber.replace(/\s/g, "")
+    <!-- Order Card Modal -->
+    <div class="modal-overlay" id="orderCardModal">
+      <div class="modal">
+        <div class="modal-header">
+          <h3 class="modal-title">Order New Card</h3>
+          <button class="close-modal" id="closeOrderModal">&times;</button>
+        </div>
+        
+        <div class="form-group">
+          <label for="cardType">Card Type</label>
+          <select id="cardType">
+            <option value="visa">Visa Debit Card</option>
+            <option value="mastercard">MasterCard</option>
+            <option value="virtual">Virtual Card</option>
+            <option value="amex">American Express</option>
+            <option value="discover">Discover Card</option>
+            <option value="platinum">Platinum Card</option>
+            <option value="gold">Gold Card</option>
+          </select>
+        </div>
 
-    if (Number(cNumber)) {
-        cNumber = cNumber.match(/.{1,4}/g)
-        cNumber = cNumber.join(" ")
-        cardNumInput.value = cNumber
-    }
-})
+        <div class="form-group">
+          <label for="accountType">Linked Account</label>
+          <select id="accountType">
+            <option value="ngn">NGN Account - 00133867509</option>
+            <option value="usd">USD Account - 0017865309</option>
+          </select>
+        </div>
 
-    </script>
-     <script src="../app/dropdown.js"></script>
-</body>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="deliveryMethod">Delivery Method</label>
+            <select id="deliveryMethod">
+              <option value="standard">Standard Delivery (7-10 days)</option>
+              <option value="express">Express Delivery (2-3 days)</option>
+              <option value="pickup">Branch Pickup</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="deliveryFee">Delivery Fee</label>
+            <input type="text" id="deliveryFee" value="₦0" readonly>
+          </div>
+        </div>
 
-</html> 
+        <div class="form-group">
+          <label for="cardDesign">Card Design</label>
+          <select id="cardDesign">
+            <option value="standard">Standard Design</option>
+            <option value="premium">Premium Design</option>
+            <option value="custom">Custom Design (Additional ₦2,000)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <div class="card-order-summary">
+            <h4>Order Summary</h4>
+            <div class="summary-item">
+              <span>Card Fee:</span>
+              <span id="cardFee">₦1,000</span>
+            </div>
+            <div class="summary-item">
+              <span>Delivery Fee:</span>
+              <span id="summaryDeliveryFee">₦0</span>
+            </div>
+            <div class="summary-item">
+              <span>Design Fee:</span>
+              <span id="designFee">₦0</span>
+            </div>
+            <div class="summary-item total">
+              <span>Total:</span>
+              <span id="totalFee">₦1,000</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>
+            <input type="checkbox" id="agreeTerms">
+            I agree to the card terms and conditions
+          </label>
+        </div>
+
+        <div class="form-actions">
+          <button class="btn btn-secondary" id="cancelOrder">Cancel</button>
+          <button class="btn btn-primary" id="confirmOrder">Order Card</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Set/Create PIN Modal -->
+    <div class="modal-overlay" id="pinModal">
+      <div class="modal">
+        <div class="modal-header">
+          <h3 class="modal-title" id="pinModalTitle">Set PIN</h3>
+          <button class="close-modal" id="closePinModal">&times;</button>
+        </div>
+        
+        <div class="form-group">
+          <label id="pinCardName">American Express •••• 3456</label>
+          <div class="pin-input-container">
+            <input type="password" maxlength="1" class="pin-input" data-index="0">
+            <input type="password" maxlength="1" class="pin-input" data-index="1">
+            <input type="password" maxlength="1" class="pin-input" data-index="2">
+            <input type="password" maxlength="1" class="pin-input" data-index="3">
+          </div>
+          <p class="pin-instructions">Enter your 4-digit PIN</p>
+        </div>
+
+        <div class="form-group" id="confirmPinGroup" style="display: none;">
+          <label>Confirm PIN</label>
+          <div class="pin-input-container">
+            <input type="password" maxlength="1" class="pin-input confirm" data-index="0">
+            <input type="password" maxlength="1" class="pin-input confirm" data-index="1">
+            <input type="password" maxlength="1" class="pin-input confirm" data-index="2">
+            <input type="password" maxlength="1" class="pin-input confirm" data-index="3">
+          </div>
+          <p class="pin-instructions">Confirm your 4-digit PIN</p>
+        </div>
+
+        <div class="form-actions">
+          <button class="btn btn-secondary" id="cancelPin">Cancel</button>
+          <button class="btn btn-primary" id="confirmPin" disabled>Set PIN</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Freeze Card Modal -->
+    <div class="modal-overlay" id="freezeCardModal">
+      <div class="modal">
+        <div class="modal-header">
+          <h3 class="modal-title">Freeze Card</h3>
+          <button class="close-modal" id="closeFreezeModal">&times;</button>
+        </div>
+        
+        <div class="form-group">
+          <label for="selectCard">Select Card to Freeze</label>
+          <select id="selectCard">
+            <option value="visa">Visa Debit •••• 4012</option>
+            <option value="mastercard">MasterCard •••• 5678</option>
+            <option value="virtual">Virtual Card •••• 9012</option>
+            <option value="amex">American Express •••• 3456</option>
+            <option value="discover">Discover •••• 7890</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="freezeDuration">Freeze Duration</label>
+          <select id="freezeDuration">
+            <option value="24">24 Hours</option>
+            <option value="48">48 Hours</option>
+            <option value="168">1 Week</option>
+            <option value="indefinite">Until I unfreeze</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="freezeReason">Reason for Freezing</label>
+          <select id="freezeReason">
+            <option value="lost">Temporarily misplaced</option>
+            <option value="suspicious">Suspicious activity</option>
+            <option value="travel">Not using while traveling</option>
+            <option value="other">Other reason</option>
+          </select>
+        </div>
+
+        <div class="form-actions">
+          <button class="btn btn-secondary" id="cancelFreeze">Cancel</button>
+          <button class="btn btn-primary" id="confirmFreeze">Freeze Card</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Set Limits Modal -->
+    <div class="modal-overlay" id="setLimitsModal">
+      <div class="modal">
+        <div class="modal-header">
+          <h3 class="modal-title">Set Spending Limits</h3>
+          <button class="close-modal" id="closeLimitsModal">&times;</button>
+        </div>
+        
+        <div class="form-group">
+          <label for="limitCard">Select Card</label>
+          <select id="limitCard">
+            <option value="visa">Visa Debit •••• 4012</option>
+            <option value="mastercard">MasterCard •••• 5678</option>
+            <option value="virtual">Virtual Card •••• 9012</option>
+            <option value="amex">American Express •••• 3456</option>
+            <option value="discover">Discover •••• 7890</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="dailyLimit">Daily Limit (₦)</label>
+            <input type="number" id="dailyLimit" placeholder="e.g., 50000" value="50000">
+          </div>
+          
+          <div class="form-group">
+            <label for="weeklyLimit">Weekly Limit (₦)</label>
+            <input type="number" id="weeklyLimit" placeholder="e.g., 200000" value="200000">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="monthlyLimit">Monthly Limit (₦)</label>
+            <input type="number" id="monthlyLimit" placeholder="e.g., 500000" value="500000">
+          </div>
+          
+          <div class="form-group">
+            <label for="posLimit">POS Limit (₦)</label>
+            <input type="number" id="posLimit" placeholder="e.g., 100000" value="100000">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="onlineLimit">Online Transaction Limit (₦)</label>
+          <input type="number" id="onlineLimit" placeholder="e.g., 50000" value="50000">
+        </div>
+
+        <div class="form-actions">
+          <button class="btn btn-secondary" id="cancelLimits">Cancel</button>
+          <button class="btn btn-primary" id="confirmLimits">Save Limits</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="../app/app.js"></script>
+    <script src="https://unpkg.com/phosphor-icons"></script>
+  </body>
+</html>

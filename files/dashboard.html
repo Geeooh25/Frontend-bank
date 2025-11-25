@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <title>dashboard MSB</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
     <link rel="stylesheet" href="../styles/style.css" />
-
-  </head> 
-  <body>
+    
+</head> 
+<body>
     <div class="app">
       <header class="app-header">
         <div class="app-header-logo">
           <div class="logo">
             <span class="logo-icon">
-            
               <i class="fa-brands fa-maxcdn"></i>
             </span>
             <h1 class="logo-title">
@@ -29,10 +28,7 @@
         </div>
         <div class="app-header-navigation">
           <div class="tabs">
-            <a href="#">
-            
-            </a>
-            <a href="dashboard.html" class="active" >
+            <a href="dashboard.html" class="active">
              Dashboard
             </a>
             <a href="card.html">
@@ -50,12 +46,26 @@
           </div>
         </div>
         <div class="app-header-actions">
-          <button class="user-profile">
+          <button class="user-profile" id="userProfileBtn">
             <span>Client Name</span>
             <span>
               <i class="fa-solid fa-circle-user"></i>
             </span>
           </button>
+          <div class="user-dropdown" id="userDropdown">
+            <a href="userinfo.html">
+              <i class="fas fa-user"></i>
+              <span>Profile</span>
+            </a>
+            <a href="settings.html">
+              <i class="fas fa-cog"></i>
+              <span>Settings</span>
+            </a>
+            <a href="../index.html">
+              <i class="fas fa-sign-out-alt"></i>
+              <span>Logout</span>
+            </a>
+          </div>
           <div class="app-header-actions-buttons">
             <button class="icon-button large">
               <i class="ph-magnifying-glass"></i>
@@ -66,12 +76,70 @@
           </div>
         </div>
         <div class="app-header-mobile">
-          <button class="icon-button large">
-            <i class="ph-list"></i>
+          <button class="icon-button large" id="mobileMenuBtn">
+            <i class="fas fa-bars"></i>
           </button>
         </div>
-
       </header>
+
+      <!-- Mobile Menu -->
+      <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+      <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+          <h3>Menu</h3>
+          <button class="icon-button" id="closeMobileMenu">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        
+        <div class="mobile-user-info">
+          <i class="fa-solid fa-circle-user"></i>
+          <div>
+            <strong>Client Name</strong>
+            <div style="font-size: 0.875rem; color: #666;">Welcome back!</div>
+          </div>
+        </div>
+
+        <nav class="mobile-nav">
+          <a href="dashboard.html" class="active">
+            <i class="fas fa-home"></i>
+            <span>Dashboard</span>
+          </a>
+          <a href="card.html">
+            <i class="fas fa-credit-card"></i>
+            <span>Cards</span>
+          </a>
+          <a href="userinfo.html">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+          </a>
+          <a href="transfer.html">
+            <i class="fas fa-exchange-alt"></i>
+            <span>Transfers</span>
+          </a>
+          <a href="history.html">
+            <i class="fas fa-history"></i>
+            <span>History</span>
+          </a>
+          <a href="topup.html">
+            <i class="fas fa-wallet"></i>
+            <span>Top-up</span>
+          </a>
+          <a href="exchange.html">
+            <i class="fas fa-chart-line"></i>
+            <span>Exchange</span>
+          </a>
+          <a href="settings.html">
+            <i class="fas fa-cog"></i>
+            <span>Settings</span>
+          </a>
+          <a href="../index.html">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+          </a>
+        </nav>
+      </div>
+
       <div class="app-body">
         <div class="app-body-navigation">
           <nav class="navigation">
@@ -109,29 +177,43 @@
           </footer>
         </div>
         <div class="app-body-main-content">
+          <!-- Account Management Section -->
+          <div class="account-management">
+            <div class="account-selector">
+              <button class="account-type-btn active" id="ngnAccountBtn">NGN Account</button>
+              <button class="account-type-btn" id="usdAccountBtn">USD Account</button>
+            </div>
+            <button class="open-account-btn" id="openAccountBtn">Open USD Account</button>
+          </div>
+
           <section class="service-section">
-            <h2>Bills payment</h2>
             <div class="service-section-header">
-              <div class="search-field">
-                <i class="ph-magnifying-glass"></i>
-                <input type="text" placeholder="Account number">
+              <!-- Account Number on Left -->
+              <div class="account-number-section">
+                <div class="account-number-label">Your Account Number</div>
+                <div class="account-number-value">
+                  <span class="account-number" id="accountNumber">00133867509</span>
+                  <button class="copy-button" id="copyAccountNumber" title="Copy account number">
+                    <i class="fas fa-copy"></i>
+                  </button>
+                </div>
+                <div class="hide-toggle-container">
+                  <span class="hide-toggle-label">Hide account number</span>
+                  <div class="hide-toggle" id="hideAccountToggle"></div>
+                </div>
               </div>
-              <div class="dropdown-field">
-                <select>
-                  <option>Home</option>
-                  <option>Work</option>
-                </select>
-                <i class="ph-caret-down"></i>
+
+              <!-- Balance Display on Right -->
+              <div class="balance-display-service">
+                <div class="balance-amount" id="serviceBalanceAmount">₦0.00</div>
+                <button class="currency-toggle" id="transferBetweenAccounts">Transfer Between Accounts</button>
+                <div class="hide-toggle-container">
+                  <span class="hide-toggle-label">Hide balance</span>
+                  <div class="hide-toggle" id="hideBalanceToggle"></div>
+                </div>
               </div>
-              <button class="flat-button">
-                Search
-              </button>
             </div>
-            <div class="mobile-only">
-              <button class="flat-button">
-                Toggle search
-              </button>
-            </div>
+            <h2>Bills payment</h2>
             <div class="tiles">
               <article class="tile">
                 <div class="tile-header">
@@ -178,22 +260,7 @@
                   </span>
                 </a>
               </article>
-                    <article class="tile">
-                <div class="tile-header">
-                  <i class="fa-solid fa-user-graduate"></i>
-                  <h3>
-                    <span>Education</span>
-                    <span>Pay Fees Online</span>
-                  </h3>
-                </div>
-                <a href="edu.html">
-                  <span>Go to service</span>
-                  <span class="icon-button">
-                    <i class="ph-caret-right-bold"></i>
-                  </span>
-                </a>
-              </article>
-                    <article class="tile">
+              <article class="tile">
                 <div class="tile-header">
                   <i class="fa-solid fa-tv"></i>
                   <h3>
@@ -208,7 +275,7 @@
                   </span>
                 </a>
               </article>
-                     <article class="tile">
+              <article class="tile">
                 <div class="tile-header">
                    <i class="fa-regular fa-clone"></i>
                   <h3>
@@ -232,7 +299,7 @@
             <div class="transfer-section-header">
               <h2>Latest transfers</h2>
               <div class="filter-options">
-                <p>Filter selected: more than 100 $</p>
+                <p id="filterText">Filter selected: more than 100 ₦</p>
                 <button class="icon-button">
                   <i class="ph-funnel"></i>
                 </button>
@@ -260,8 +327,8 @@
                     <dd>Date payment</dd>
                   </div>
                 </dl>
-                <div class="transfer-number">
-                  - $ 550
+                <div class="transfer-number" id="transfer1">
+                  - ₦ 0
                 </div>
               </div>
               <div class="transfer">
@@ -282,8 +349,8 @@
                     <dd>Date payment</dd>
                   </div>
                 </dl>
-                <div class="transfer-number">
-                  - $ 120
+                <div class="transfer-number" id="transfer2">
+                  - ₦ 0
                 </div>
               </div>
               <div class="transfer">
@@ -304,8 +371,8 @@
                     <dd>Date payment</dd>
                   </div>
                 </dl>
-                <div class="transfer-number">
-                  - $ 70
+                <div class="transfer-number" id="transfer3">
+                  - ₦ 0
                 </div>
               </div>
             </div>
@@ -348,7 +415,7 @@
                 <div class="payment-details">
                   <h3>Internet</h3>
                   <div>
-                    <span>$ 2,110</span>
+                    <span id="payment1">₦0</span>
                     <button class="icon-button">
                       <i class="ph-caret-right-bold"></i>
                     </button>
@@ -365,7 +432,7 @@
                 <div class="payment-details">
                   <h3>Universal</h3>
                   <div>
-                    <span>$ 5,621</span>
+                    <span id="payment2">₦0</span>
                     <button class="icon-button">
                       <i class="ph-caret-right-bold"></i>
                     </button>
@@ -382,7 +449,7 @@
                 <div class="payment-details">
                   <h3>Gold</h3>
                   <div>
-                    <span>$ 3,473</span>
+                    <span id="payment3">₦0</span>
                     <button class="icon-button">
                       <i class="ph-caret-right-bold"></i>
                     </button>
@@ -410,6 +477,56 @@
         </div>
       </div>
     </div>
+
+    <!-- Transfer Modal -->
+    <div class="modal-overlay" id="transferModal">
+      <div class="modal">
+        <div class="modal-header">
+          <h3 class="modal-title">Transfer Between Accounts</h3>
+          <button class="close-modal" id="closeTransferModal">&times;</button>
+        </div>
+        <form id="transferForm">
+          <div class="form-group">
+            <label for="fromAccount">From Account</label>
+            <select id="fromAccount" required>
+              <option value="">Select account</option>
+              <option value="ngn">NGN Account</option>
+              <option value="usd">USD Account</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="toAccount">To Account</label>
+            <select id="toAccount" required>
+              <option value="">Select account</option>
+              <option value="ngn">NGN Account</option>
+              <option value="usd">USD Account</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="amount">Amount</label>
+              <input type="number" id="amount" min="0" step="0.01" required>
+            </div>
+            <div class="form-group">
+              <label for="currency">Currency</label>
+              <select id="currency" required>
+                <option value="ngn">NGN</option>
+                <option value="usd">USD</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="convertedAmount">Converted Amount</label>
+            <input type="text" id="convertedAmount" readonly>
+          </div>
+          <div class="modal-actions">
+            <button type="button" class="btn btn-secondary" id="cancelTransfer">Cancel</button>
+            <button type="submit" class="btn btn-primary">Transfer</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <script src="../app/main.js"></script>
     <script src="https://unpkg.com/phosphor-icons"></script>
   </body>
 </html>

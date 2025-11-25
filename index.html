@@ -3,376 +3,677 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login / Signup MSB</title>
-  <link rel="stylesheet" href="./styles/style.css">
+  <title>Login / Signup - Miles SmartBank</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
   
+  <link rel="stylesheet" href="./styles/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+  <link rel="stylesheet" href="./styles/login.css">
   <style>
-    /* auth.css */
-
-
-   .main-login {
-  min-height: max-content;
-  max-width: 1600px;
-  padding:2vw 4vw 6vw ;
-  align-items: center;
-  overflow: hidden;
- 
-}
-
-    .auth-container {
-      background: white;
-      width: 380px;
-      padding: 30px;
-      border-radius: 1px 1px 25px 25px;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
-      position: relative;
-      overflow: hidden;
-      
+    /* Additional styles for forgot password functionality */
+    .forgot-password-form {
+      display: none;
     }
-
-    .form-toggle {
+    
+    .forgot-password-form.show {
+      display: block;
+    }
+    
+    .reset-steps {
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    
+    .step-indicator {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+    
+    .step {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background-color: var(--gray-300);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 10px;
+      font-weight: bold;
+      color: white;
+    }
+    
+    .step.active {
+      background-color: var(--primary-color);
+    }
+    
+    .step.completed {
+      background-color: var(--success-color);
+    }
+    
+    .step-label {
+      font-size: 0.75rem;
+      text-align: center;
+      margin-top: 0.5rem;
+      color: var(--gray-500);
+    }
+    
+    .step-label.active {
+      color: var(--primary-color);
+      font-weight: bold;
+    }
+    
+    .verification-code-container {
       display: flex;
       justify-content: space-between;
-      margin-bottom: 25px;
+      margin-bottom: 1rem;
     }
-
-    .form-toggle button {
-      flex: 1;
-      padding: 10px 0;
-      border: none;
-      background-color: #e6e6e6;
-      color: #555;
-      font-size: 16px;
-      cursor: pointer;
+    
+    .verification-input {
+      width: 50px;
+      height: 60px;
+      text-align: center;
+      font-size: 1.5rem;
+      border: 2px solid var(--gray-300);
       border-radius: 8px;
-      transition: all 0.3s ease;
+      background-color: white;
     }
-
-    .form-toggle button.active {
-      background-color: #000080;
-      color: white;
+    
+    .verification-input:focus {
+      border-color: var(--primary-color);
+      outline: none;
     }
-
-    .auth-form {
-      display: none;
-      opacity: 0;
-      transition: opacity 0.4s ease;
-    }
-
-    .auth-form.show {
-      display: block;
-      opacity: 1;
-    }
-
-    .auth-form h2 {
+    
+    .resend-code {
       text-align: center;
-      margin-bottom: 25px;
-      color: #333;
+      margin-top: 1rem;
+      font-size: 0.875rem;
     }
-
-    .form-group {
-      margin-bottom: 18px;
-      position: relative;
-    }
-
-    .form-group label {
-      display: block;
-      font-weight: 500;
-      margin-bottom: 5px;
-      color: #444;
-    }
-
-    .form-group input {
-      width: 100%;
-      padding: 10px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      font-size: 15px;
-    }
-
-    input.error {
-      border-color: red;
-    }
-
-    input.valid {
-      border-color: #4caf50;
-    }
-
-    .error-message {
-      color: red;
-      font-size: 13px;
-      margin-top: 4px;
-    }
-
-    .toggle-password {
-      position: absolute;
-      right: 10px;
-      top: 36px;
-      cursor: pointer;
-      font-size: 14px;
-      color: #777;
-    }
-
-    .btn-submit {
-      width: 100%;
-      background-color: #45a;
-      color: white;
-      border: none;
-      padding: 12px;
-      font-size: 16px;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-
-    .btn-submit:hover {
-      background-color: #000080;
-    }
-
-    .alt-text {
-      text-align: center;
-      margin-top: 12px;
-      font-size: 14px;
-    }
-
-    .alt-text a {
-      color: #000080;
+    
+    .resend-code a {
+      color: var(--primary-color);
       text-decoration: none;
-      font-weight: 500;
     }
-
-    .alt-text a:hover {
-      text-decoration: underline;
-    }
-    .welcome-page{
-      background-image: linear-gradient(#000080, #0047ab);
-      color: #ccc;
-      padding: 8px;
-      border-radius: 25px 25px 1px 1px;
+    
+    .success-message {
+      background-color: #d4edda;
+      color: #155724;
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 1rem;
       text-align: center;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-      width: 380px;
+      display: none;
+    }
+    
+    .back-to-login {
+      text-align: center;
+      margin-top: 1rem;
+    }
+    
+    .back-to-login a {
+      color: var(--primary-color);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
     }
   </style>
 </head>
+
 <body>
-  <div class="main-login">
-    <div class="welcome-page">
-     <h4>Welcome to Miles Smart Bank! <br> Access your world of smart banking. <br> login or sign up now!</h4>
-    </div>
-  <div class="auth-container">
-    
-    <div class="form-toggle">
-      <button id="login-btn" class="active">Login</button>
-      <button id="signup-btn">Sign Up</button>
-    </div>
+  <div class="app">
+    <header class="app-headers">
+      <div class="app-header-logo">
+        <a href="#" class="logo">
+          <span class="logo-icon">
+            <i class="fa-brands fa-maxcdn"></i>
+          </span>
+          <h1 class="logo-title">
+            <span>Miles</span>
+            <span>SmartBank</span>
+          </h1>
+        </a>
+        <div class="header-actions">
+          <a href="#" class="support-btn" id="support-link">
+            <i class="fas fa-headset"></i>
+            Support
+          </a>
+        </div>
+      </div>
+    </header>
 
-    <!-- LOGIN FORM -->
-    <form id="login-form" class="auth-form show">
-      <h2>Welcome Back 👋</h2>
-      <div class="form-group">
-        <label for="login-email">Email</label>
-        <input type="email" id="login-email" placeholder="Enter your email" required />
-      </div>
-      <div class="form-group">
-        <label for="login-password">Password</label>
-        <input type="password" id="login-password" placeholder="Enter your password" required />
-        <span class="toggle-password" data-target="login-password">👁️</span>
-      </div>
-      <button type="submit" class="btn-submit">Login</button>
-      <p class="alt-text">
-        Don’t have an account? <a href="#" id="go-signup">Sign up here</a>
-      </p>
-    </form>
+    <main class="app-main">
+      <!-- Support Page -->
+      <div class="support-page" id="support-page">
+        <div class="support-header">
+          <h1>How Can We Help You?</h1>
+          <p>Get instant support for your banking needs</p>
+        </div>
 
-    <!-- SIGNUP FORM -->
-    <form id="signup-form" class="auth-form">
-      <h2>Create an Account </h2>
-      <div class="form-group">
-        <label for="signup-name">Full Name</label>
-        <input type="text" id="signup-name" placeholder="John Doe" required />
+        <div class="support-grid">
+          <div class="support-card">
+            <i class="fas fa-phone-alt"></i>
+            <h3>24/7 Customer Support</h3>
+            <p>Our dedicated support team is available round the clock to assist you with any issues or questions.</p>
+            <button class="contact-btn">
+              <i class="fas fa-phone"></i>
+              Call Now
+            </button>
+          </div>
+
+          <div class="support-card">
+            <i class="fas fa-comments"></i>
+            <h3>Live Chat</h3>
+            <p>Chat instantly with our support agents for quick resolutions to your banking queries.</p>
+            <button class="contact-btn">
+              <i class="fas fa-comment"></i>
+              Start Chat
+            </button>
+          </div>
+
+          <div class="support-card">
+            <i class="fas fa-envelope"></i>
+            <h3>Email Support</h3>
+            <p>Send us an email and we'll get back to you within 2 hours with detailed assistance.</p>
+            <button class="contact-btn">
+              <i class="fas fa-paper-plane"></i>
+              Send Email
+            </button>
+          </div>
+
+          <div class="support-card">
+            <i class="fas fa-question-circle"></i>
+            <h3>FAQ & Help Center</h3>
+            <p>Find instant answers to common questions in our comprehensive knowledge base.</p>
+            <button class="contact-btn">
+              <i class="fas fa-search"></i>
+              Browse FAQs
+            </button>
+          </div>
+        </div>
+
+        <div class="back-to-login">
+          <a href="#" class="back-btn" id="back-to-login">
+            <i class="fas fa-arrow-left"></i>
+            Back to Login
+          </a>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="signup-email">Email</label>
-        <input type="email" id="signup-email" placeholder="Enter your email" required />
-      </div>
-      <div class="form-group">
-        <label for="signup-password">Password</label>
-        <input type="password" id="signup-password" placeholder="At least 6 characters" required />
-        <span class="toggle-password" data-target="signup-password">👁️</span>
-      </div>
-      <div class="form-group">
-        <label for="signup-confirm">Confirm Password</label>
-        <input type="password" id="signup-confirm" placeholder="Re-enter password" required />
-        <span class="toggle-password" data-target="signup-confirm">👁️</span>
-      </div>
-      <button type="submit" class="btn-submit">Sign Up</button>
-      <p class="alt-text">
-        Already have an account? <a href="#" id="go-login">Login here</a>
-      </p>
-    </form>
+
+      <!-- Login/Signup Section -->
+      <section class="auth-section" id="auth-section">
+        <div class="auth-container-wrapper">
+          <div class="welcome-banner">
+            <h4>Welcome to Miles SmartBank<br>Secure, Smart Banking Experience</h4>
+          </div>
+
+          <div class="auth-form-container">
+            <div class="security-banner">
+              <i class="fas fa-shield-alt"></i>
+              <span>Bank-level security & encryption to protect your data</span>
+            </div>
+            
+            <div class="form-toggle">
+              <button id="login-btn" class="active">Sign In</button>
+              <button id="signup-btn">Create Account</button>
+            </div>
+
+            <!-- LOGIN FORM -->
+            <form id="login-form" class="auth-form show">
+              <h2>Welcome Back</h2>
+              
+              <div class="form-group">
+                <label for="login-email">Email Address</label>
+                <input type="email" id="login-email" placeholder="Enter your email" required />
+              </div>
+
+              <div class="form-group">
+                <label for="login-password">Password</label>
+                <input type="password" id="login-password" placeholder="Enter your password" required />
+                <button type="button" class="toggle-password" data-target="login-password">
+                  <i class="fas fa-eye"></i>
+                </button>
+              </div>
+
+              <!-- Biometric Login Option -->
+              <div class="biometric-options" id="biometric-login" style="display: none;">
+                <div class="biometric-toggle">
+                  <div class="biometric-info">
+                    <i class="fas fa-fingerprint biometric-icon"></i>
+                    <div class="biometric-text">
+                      <h4>Biometric Login</h4>
+                      <p>Use fingerprint or face recognition</p>
+                    </div>
+                  </div>
+                  <button type="button" class="btn-submit" style="margin: 0; padding: 0.5rem 1rem;" id="use-biometric">
+                    Use Biometric
+                  </button>
+                </div>
+              </div>
+
+              <div class="checkbox-group">
+                <input type="checkbox" id="remember-me" />
+                <label for="remember-me">Keep me signed in</label>
+              </div>
+
+              <button type="submit" class="btn-submit" id="login-submit">Sign In</button>
+
+              <div class="helper-links">
+                <a href="#" id="forgot-password">Forgot Password?</a>
+              </div>
+
+              <p class="alt-text">
+                New to Miles SmartBank? <a href="#" id="go-signup">Create account</a>
+              </p>
+            </form>
+
+            <!-- SIGNUP FORM -->
+            <form id="signup-form" class="auth-form">
+              <h2>Get Started</h2>
+
+              <div class="form-row">
+                <div class="form-col">
+                  <div class="form-group">
+                    <label for="first-name">First Name *</label>
+                    <input type="text" id="first-name" placeholder="John" required />
+                  </div>
+                </div>
+                <div class="form-col">
+                  <div class="form-group">
+                    <label for="last-name">Last Name *</label>
+                    <input type="text" id="last-name" placeholder="Doe" required />
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="signup-email">Email Address *</label>
+                <input type="email" id="signup-email" placeholder="Enter your email" required />
+              </div>
+
+              <div class="form-group">
+                <label for="gender">Gender *</label>
+                <select id="gender" class="gender-select" required>
+                  <option value="">Select Gender</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="other">Other</option>
+                  <option value="prefer-not-to-say">Prefer not to say</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="mobile">Mobile Number *</label>
+                <div class="mobile-input-container">
+                  <span class="country-code">+1</span>
+                  <input type="tel" id="mobile" class="mobile-input" placeholder="(555) 123-4567" required />
+                </div>
+                <div class="success-message" id="mobile-success" style="display: none;">
+                  <i class="fas fa-check-circle"></i> Mobile number verified
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="bvn">BVN (Bank Verification Number) <small style="color: var(--gray-500);">- Optional</small></label>
+                <input type="text" id="bvn" placeholder="Enter 11-digit BVN" maxlength="11" />
+                <div class="success-message" id="bvn-success" style="display: none;">
+                  <i class="fas fa-check-circle"></i> BVN verified successfully
+                </div>
+                <div style="font-size: 0.75rem; color: var(--gray-500); margin-top: 0.5rem;">
+                  Adding BVN enhances security and speeds up account verification
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="signup-password">Create Password *</label>
+                <input type="password" id="signup-password" placeholder="At least 8 characters" required />
+                <button type="button" class="toggle-password" data-target="signup-password">
+                  <i class="fas fa-eye"></i>
+                </button>
+                <div class="password-strength">
+                  <div class="strength-bar" id="password-strength-bar"></div>
+                </div>
+                <div id="password-rules" style="font-size: 0.75rem; color: var(--gray-500); margin-top: 0.5rem;">
+                  Use 8+ characters with mix of uppercase, lowercase, numbers & symbols
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="signup-confirm">Confirm Password *</label>
+                <input type="password" id="signup-confirm" placeholder="Re-enter password" required />
+                <button type="button" class="toggle-password" data-target="signup-confirm">
+                  <i class="fas fa-eye"></i>
+                </button>
+              </div>
+
+              <!-- Biometric Enrollment -->
+              <div class="biometric-options">
+                <div class="biometric-toggle">
+                  <div class="biometric-info">
+                    <i class="fas fa-fingerprint biometric-icon"></i>
+                    <div class="biometric-text">
+                      <h4>Enable Biometric Authentication</h4>
+                      <p>Use fingerprint or face recognition for faster login</p>
+                    </div>
+                  </div>
+                  <label class="toggle-switch">
+                    <input type="checkbox" id="enable-biometric">
+                    <span class="toggle-slider"></span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="checkbox-group">
+                <input type="checkbox" id="agree-terms" required />
+                <label for="agree-terms">
+                  I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a> *
+                </label>
+              </div>
+
+              <div class="checkbox-group">
+                <input type="checkbox" id="marketing-emails" />
+                <label for="marketing-emails">
+                  Send me marketing emails about new features and offers
+                </label>
+              </div>
+
+              <button type="submit" class="btn-submit" id="signup-submit">Create Account</button>
+
+              <p class="alt-text">
+                Already have an account? <a href="#" id="go-login">Sign in</a>
+              </p>
+            </form>
+
+            <!-- FORGOT PASSWORD FORM -->
+            <form id="forgot-password-form" class="auth-form forgot-password-form">
+              <h2>Reset Your Password</h2>
+              
+              <div class="reset-steps">
+                <div class="step-indicator">
+                  <div class="step active" id="step-1">1</div>
+                  <div class="step" id="step-2">2</div>
+                  <div class="step" id="step-3">3</div>
+                </div>
+                <div class="step-labels">
+                  <div class="step-label active" id="step-label-1">Enter Email</div>
+                  <div class="step-label" id="step-label-2">Verify Code</div>
+                  <div class="step-label" id="step-label-3">New Password</div>
+                </div>
+              </div>
+
+              <!-- Step 1: Email Entry -->
+              <div class="form-step" id="step-1-content">
+                <div class="form-group">
+                  <label for="reset-email">Email Address</label>
+                  <input type="email" id="reset-email" placeholder="Enter your email address" required />
+                </div>
+                <button type="button" class="btn-submit" id="send-reset-code">Send Reset Code</button>
+              </div>
+
+              <!-- Step 2: Verification Code -->
+              <div class="form-step" id="step-2-content" style="display: none;">
+                <div class="form-group">
+                  <p>We've sent a 6-digit verification code to your email. Please enter it below:</p>
+                  <div class="verification-code-container">
+                    <input type="text" class="verification-input" maxlength="1" data-index="0">
+                    <input type="text" class="verification-input" maxlength="1" data-index="1">
+                    <input type="text" class="verification-input" maxlength="1" data-index="2">
+                    <input type="text" class="verification-input" maxlength="1" data-index="3">
+                    <input type="text" class="verification-input" maxlength="1" data-index="4">
+                    <input type="text" class="verification-input" maxlength="1" data-index="5">
+                  </div>
+                </div>
+                <div class="resend-code">
+                  Didn't receive the code? <a href="#" id="resend-code">Resend Code</a>
+                </div>
+                <button type="button" class="btn-submit" id="verify-code">Verify Code</button>
+              </div>
+
+              <!-- Step 3: New Password -->
+              <div class="form-step" id="step-3-content" style="display: none;">
+                <div class="form-group">
+                  <label for="new-password">New Password</label>
+                  <input type="password" id="new-password" placeholder="Enter new password" required />
+                  <button type="button" class="toggle-password" data-target="new-password">
+                    <i class="fas fa-eye"></i>
+                  </button>
+                  <div class="password-strength">
+                    <div class="strength-bar" id="new-password-strength-bar"></div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="confirm-new-password">Confirm New Password</label>
+                  <input type="password" id="confirm-new-password" placeholder="Confirm new password" required />
+                  <button type="button" class="toggle-password" data-target="confirm-new-password">
+                    <i class="fas fa-eye"></i>
+                  </button>
+                </div>
+                <button type="submit" class="btn-submit" id="reset-password">Reset Password</button>
+              </div>
+
+              <!-- Success Message -->
+              <div class="success-message" id="reset-success">
+                <i class="fas fa-check-circle"></i> Your password has been reset successfully!
+              </div>
+
+              <div class="back-to-login">
+                <a href="#" id="back-to-login-from-reset">
+                  <i class="fas fa-arrow-left"></i>
+                  Back to Login
+                </a>
+              </div>
+            </form>
+          </div>
+
+          <!-- Trust Indicators -->
+          <div class="trust-indicators">
+            <div class="trust-item">
+              <i class="fas fa-lock"></i>
+              <span>256-bit SSL</span>
+            </div>
+            <div class="trust-item">
+              <i class="fas fa-shield-alt"></i>
+              <span>FDIC Insured</span>
+            </div>
+            <div class="trust-item">
+              <i class="fas fa-user-shield"></i>
+              <span>Privacy First</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
   </div>
-  </div>
+
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const loginForm = document.getElementById("login-form");
-      const signupForm = document.getElementById("signup-form");
-      const loginBtn = document.getElementById("login-btn");
-      const signupBtn = document.getElementById("signup-btn");
-
-      const goSignup = document.getElementById("go-signup");
-      const goLogin = document.getElementById("go-login");
-
-      // Toggle between Login and Signup
-      function showLogin() {
-        signupForm.classList.remove("show");
-        loginForm.classList.add("show");
-        loginBtn.classList.add("active");
-        signupBtn.classList.remove("active");
-      }
-
-      function showSignup() {
-        loginForm.classList.remove("show");
-        signupForm.classList.add("show");
-        signupBtn.classList.add("active");
-        loginBtn.classList.remove("active");
-      }
-
-      loginBtn.addEventListener("click", showLogin);
-      signupBtn.addEventListener("click", showSignup);
-      goSignup.addEventListener("click", (e) => {
+    // Forgot Password Functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const forgotPasswordLink = document.getElementById('forgot-password');
+      const loginForm = document.getElementById('login-form');
+      const forgotPasswordForm = document.getElementById('forgot-password-form');
+      const backToLoginFromReset = document.getElementById('back-to-login-from-reset');
+      const sendResetCodeBtn = document.getElementById('send-reset-code');
+      const verifyCodeBtn = document.getElementById('verify-code');
+      const resetPasswordBtn = document.getElementById('reset-password');
+      const resendCodeLink = document.getElementById('resend-code');
+      const resetSuccess = document.getElementById('reset-success');
+      
+      // Step elements
+      const step1Content = document.getElementById('step-1-content');
+      const step2Content = document.getElementById('step-2-content');
+      const step3Content = document.getElementById('step-3-content');
+      
+      const step1 = document.getElementById('step-1');
+      const step2 = document.getElementById('step-2');
+      const step3 = document.getElementById('step-3');
+      
+      const stepLabel1 = document.getElementById('step-label-1');
+      const stepLabel2 = document.getElementById('step-label-2');
+      const stepLabel3 = document.getElementById('step-label-3');
+      
+      // Verification code inputs
+      const verificationInputs = document.querySelectorAll('.verification-input');
+      
+      // Show forgot password form
+      forgotPasswordLink.addEventListener('click', function(e) {
         e.preventDefault();
-        showSignup();
+        loginForm.classList.remove('show');
+        forgotPasswordForm.classList.add('show');
+        resetForm();
       });
-      goLogin.addEventListener("click", (e) => {
+      
+      // Back to login from reset form
+      backToLoginFromReset.addEventListener('click', function(e) {
         e.preventDefault();
-        showLogin();
+        forgotPasswordForm.classList.remove('show');
+        loginForm.classList.add('show');
       });
-
-      // Password toggle
-      document.querySelectorAll(".toggle-password").forEach((toggle) => {
-        toggle.addEventListener("click", () => {
-          const targetId = toggle.getAttribute("data-target");
-          const input = document.getElementById(targetId);
-          if (input.type === "password") {
-            input.type = "text";
-            toggle.textContent = "🙈";
-          } else {
-            input.type = "password";
-            toggle.textContent = "👁️";
+      
+      // Send reset code
+      sendResetCodeBtn.addEventListener('click', function() {
+        const email = document.getElementById('reset-email').value;
+        
+        if (!email) {
+          alert('Please enter your email address');
+          return;
+        }
+        
+        // In a real application, you would send this to your backend
+        console.log('Sending reset code to:', email);
+        
+        // Move to step 2
+        step1Content.style.display = 'none';
+        step2Content.style.display = 'block';
+        
+        // Update step indicators
+        step1.classList.remove('active');
+        step1.classList.add('completed');
+        step2.classList.add('active');
+        
+        stepLabel1.classList.remove('active');
+        stepLabel2.classList.add('active');
+        
+        // Focus first verification input
+        verificationInputs[0].focus();
+      });
+      
+      // Handle verification code input
+      verificationInputs.forEach((input, index) => {
+        input.addEventListener('input', function() {
+          if (this.value.length === 1 && index < verificationInputs.length - 1) {
+            verificationInputs[index + 1].focus();
+          }
+        });
+        
+        input.addEventListener('keydown', function(e) {
+          if (e.key === 'Backspace' && this.value.length === 0 && index > 0) {
+            verificationInputs[index - 1].focus();
           }
         });
       });
-
-      // Helper functions
-      function showError(input, message) {
-        input.classList.add("error");
-        const msg = document.createElement("div");
-        msg.className = "error-message";
-        msg.textContent = message;
-        input.insertAdjacentElement("afterend", msg);
-      }
-
-      function clearErrors(form) {
-        form.querySelectorAll(".error-message").forEach((e) => e.remove());
-        form.querySelectorAll(".error").forEach((e) => e.classList.remove("error"));
-        form.querySelectorAll(".valid").forEach((e) => e.classList.remove("valid"));
-      }
-
-      // Login validation
-      loginForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const email = document.getElementById("login-email");
-        const password = document.getElementById("login-password");
-
-        clearErrors(loginForm);
-        let valid = true;
-
-        if (!email.value.trim()) {
-          showError(email, "Email is required.");
-          valid = false;
-        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
-          showError(email, "Enter a valid email address.");
-          valid = false;
-        } else {
-          email.classList.add("valid");
+      
+      // Verify code
+      verifyCodeBtn.addEventListener('click', function() {
+        let code = '';
+        verificationInputs.forEach(input => {
+          code += input.value;
+        });
+        
+        if (code.length !== 6) {
+          alert('Please enter the complete 6-digit code');
+          return;
         }
-
-        if (!password.value.trim()) {
-          showError(password, "Password is required.");
-          valid = false;
-        } else {
-          password.classList.add("valid");
-        }
-
-        if (valid) {
-          alert("✅ Logged in successfully!");
-          loginForm.reset();
-        }
+        
+        // In a real application, you would verify this code with your backend
+        console.log('Verifying code:', code);
+        
+        // Move to step 3
+        step2Content.style.display = 'none';
+        step3Content.style.display = 'block';
+        
+        // Update step indicators
+        step2.classList.remove('active');
+        step2.classList.add('completed');
+        step3.classList.add('active');
+        
+        stepLabel2.classList.remove('active');
+        stepLabel3.classList.add('active');
       });
-
-      // Signup validation
-      signupForm.addEventListener("submit", (e) => {
+      
+      // Resend code
+      resendCodeLink.addEventListener('click', function(e) {
         e.preventDefault();
-
-        const name = document.getElementById("signup-name");
-        const email = document.getElementById("signup-email");
-        const password = document.getElementById("signup-password");
-        const confirm = document.getElementById("signup-confirm");
-
-        clearErrors(signupForm);
-        let valid = true;
-
-        if (!name.value.trim()) {
-          showError(name, "Full name is required.");
-          valid = false;
-        } else {
-          name.classList.add("valid");
-        }
-
-        if (!email.value.trim()) {
-          showError(email, "Email is required.");
-          valid = false;
-        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
-          showError(email, "Enter a valid email address.");
-          valid = false;
-        } else {
-          email.classList.add("valid");
-        }
-
-        if (!password.value.trim()) {
-          showError(password, "Password is required.");
-          valid = false;
-        } else if (password.value.length < 6) {
-          showError(password, "Password must be at least 6 characters.");
-          valid = false;
-        } else {
-          password.classList.add("valid");
-        }
-
-        if (!confirm.value.trim()) {
-          showError(confirm, "Please confirm your password.");
-          valid = false;
-        } else if (confirm.value !== password.value) {
-          showError(confirm, "Passwords do not match.");
-          valid = false;
-        } else {
-          confirm.classList.add("valid");
-        }
-
-        if (valid) {
-          alert("🎉 Account created successfully!");
-          signupForm.reset();
-          showLogin();
-        }
+        const email = document.getElementById('reset-email').value;
+        
+        // In a real application, you would resend the code
+        console.log('Resending code to:', email);
+        
+        alert('A new verification code has been sent to your email');
+        
+        // Clear verification inputs
+        verificationInputs.forEach(input => {
+          input.value = '';
+        });
+        
+        // Focus first input
+        verificationInputs[0].focus();
       });
+      
+      // Reset password
+      resetPasswordBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        const newPassword = document.getElementById('new-password').value;
+        const confirmPassword = document.getElementById('confirm-new-password').value;
+        
+        if (!newPassword || !confirmPassword) {
+          alert('Please fill in all fields');
+          return;
+        }
+        
+        if (newPassword !== confirmPassword) {
+          alert('Passwords do not match');
+          return;
+        }
+        
+        // In a real application, you would send this to your backend
+        console.log('Resetting password to:', newPassword);
+        
+        // Show success message
+        step3Content.style.display = 'none';
+        resetSuccess.style.display = 'block';
+        
+        // Update step indicators
+        step3.classList.remove('active');
+        step3.classList.add('completed');
+        
+        stepLabel3.classList.remove('active');
+      });
+      
+      // Reset form to initial state
+      function resetForm() {
+        step1Content.style.display = 'block';
+        step2Content.style.display = 'none';
+        step3Content.style.display = 'none';
+        resetSuccess.style.display = 'none';
+        
+        step1.classList.add('active');
+        step1.classList.remove('completed');
+        step2.classList.remove('active', 'completed');
+        step3.classList.remove('active', 'completed');
+        
+        stepLabel1.classList.add('active');
+        stepLabel2.classList.remove('active');
+        stepLabel3.classList.remove('active');
+        
+        document.getElementById('reset-email').value = '';
+        verificationInputs.forEach(input => {
+          input.value = '';
+        });
+        document.getElementById('new-password').value = '';
+        document.getElementById('confirm-new-password').value = '';
+      }
     });
   </script>
+  <script src="./app/login.js"></script>
 </body>
 </html>
-
-
-
-
-
-

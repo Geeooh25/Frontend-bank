@@ -1,138 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>exchange MSB</title>
+    <title>Exchange MSB</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
     <link rel="stylesheet" href="../styles/style.css" />
-     <style>
-  
-    h1 {
-      color: #000080;
-      margin-bottom: 1rem;
-    }
-
-    .exchange-card {
-      background: #fff;
-      border-radius: 15px;
-      padding: 2rem;
-      max-width: 480px;
-      width: 100%;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-      text-align: center;
-      animation: fadeIn 0.4s ease;
-      justify-content: center;
-      min-width: 15vh;
-      
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(15px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .form-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.5rem;
-      margin-bottom: 1rem;
-    }
-
-    input, select {
-      flex: 1;
-      padding: 0.7rem;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 1rem;
-      text-align: center;
-      color: rgb(13, 8, 44);
-    }
-
-    input:focus, select:focus {
-      border-color: #004aad;
-      box-shadow: 0 0 0 3px rgba(0,74,173,0.1);
-      outline: none;
-    }
-
-    .swap-btn {
-      background: #004aad;
-      color: #fff;
-      border: none;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      cursor: pointer;
-      font-size: 1.2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.2s ease;
-    }
-
-    .swap-btn:hover { background: #0056c9; }
-
-    .convert-btn {
-      width: 100%;
-      background: #004aad;
-      color: #fff;
-      border: none;
-      padding: 0.9rem;
-      border-radius: 10px;
-      font-size: 1.1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    .convert-btn:hover { background: #0055d1; transform: scale(1.02); }
-
-    .result {
-      margin-top: 1.2rem;
-      background: #f7faff;
-      padding: 1rem;
-      border-radius: 10px;
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: #004aad;
-    }
-
-    .history {
-      margin-top: 2rem;
-      width: 90%;
-      max-width: 500px;
-    }
-
-    .history h2 {
-      color: #f6f2f2;
-      margin-bottom: 1rem;
-      text-align: center;
-    }
-
-    .history-item {
-      background: #fff;
-      border-radius: 10px;
-      padding: 1rem;
-      margin-bottom: 0.7rem;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .history-item span { font-size: 0.95rem; color: #333; }
-    .rate { color: #555; font-size: 0.85rem; }
-
-    @media (max-width: 600px) {
-      .form-row { flex-direction: column; }
-      .swap-btn { margin: 0.5rem auto; }
-    }
-  
-    
-    </style>
-    
+    <link rel="stylesheet" href="../styles/layout.css">
  </head> 
   <body>
     
@@ -141,7 +16,6 @@
         <div class="app-header-logo">
           <div class="logo">
             <span class="logo-icon">
-            
               <i class="fa-brands fa-maxcdn"></i>
             </span>
             <h1 class="logo-title">
@@ -154,11 +28,8 @@
           </div>
         </div>
         <div class="app-header-navigation" id="mobile-header-nav">
-  <div class="tabs" id="tabs">
-            <a href="#">
-              
-            </a>
-            <a href="index.html" >
+          <div class="tabs" id="tabs">
+            <a href="dashboard.html">
               Dashboard
             </a>
             <a href="card.html">
@@ -176,12 +47,26 @@
           </div>
         </div>
         <div class="app-header-actions">
-          <button class="user-profile">
+          <button class="user-profile" id="userProfileBtn">
             <span>Client Name</span>
             <span>
               <i class="fa-solid fa-circle-user"></i>
             </span>
           </button>
+          <div class="user-dropdown" id="userDropdown">
+            <a href="userinfo.html">
+              <i class="fas fa-user"></i>
+              <span>Profile</span>
+            </a>
+            <a href="settings.html">
+              <i class="fas fa-cog"></i>
+              <span>Settings</span>
+            </a>
+            <a href="../index.html">
+              <i class="fas fa-sign-out-alt"></i>
+              <span>Logout</span>
+            </a>
+          </div>
           <div class="app-header-actions-buttons">
             <button class="icon-button large">
               <i class="ph-magnifying-glass"></i>
@@ -191,16 +76,75 @@
             </button>
           </div>
         </div>
-         <div class="app-header-mobile">
-          <button class="icon-button large" id="mobile-menu-toggle">
-            <i class="ph-list"></i>
+        <div class="app-header-mobile">
+          <button class="icon-button large" id="mobileMenuBtn">
+            <i class="fas fa-bars"></i>
           </button>
         </div>
-     </header>
-    <div class="app-body">
+      </header>
+
+      <!-- Mobile Menu -->
+      <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+      <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+          <h3>Menu</h3>
+          <button class="icon-button" id="closeMobileMenu">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        
+        <div class="mobile-user-info">
+          <i class="fa-solid fa-circle-user"></i>
+          <div>
+            <strong>Client Name</strong>
+            <div>Welcome back!</div>
+          </div>
+        </div>
+
+        <nav class="mobile-nav">
+          <a href="dashboard.html">
+            <i class="fas fa-home"></i>
+            <span>Dashboard</span>
+          </a>
+          <a href="card.html">
+            <i class="fas fa-credit-card"></i>
+            <span>Cards</span>
+          </a>
+          <a href="userinfo.html">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+          </a>
+          <a href="transfer.html">
+            <i class="fas fa-exchange-alt"></i>
+            <span>Transfers</span>
+          </a>
+          <a href="history.html">
+            <i class="fas fa-history"></i>
+            <span>History</span>
+          </a>
+          <a href="topup.html">
+            <i class="fas fa-wallet"></i>
+            <span>Top-up</span>
+          </a>
+          <a href="exchange.html" class="active">
+            <i class="fas fa-chart-line"></i>
+            <span>Exchange</span>
+          </a>
+          <a href="settings.html">
+            <i class="fas fa-cog"></i>
+            <span>Settings</span>
+          </a>
+          <a href="../index.html">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+          </a>
+        </nav>
+      </div>
+
+      <div class="app-body">
         <div class="app-body-navigation">
           <nav class="navigation">
-            <a href="index.html">
+            <a href="dashboard.html">
               <i class="ph-browsers"></i>
               <span>Dashboard</span>
             </a>
@@ -220,7 +164,7 @@
               <i class="ph-globe"></i>
               <span>History</span>
             </a>
-            <a href="exchange.html">
+            <a href="exchange.html" class="active">
               <i class="ph-clipboard-text"></i>
               <span>Exchange</span>
             </a>
@@ -235,48 +179,81 @@
         </div>
          <div class="app-body-main-content">
           <section class="service-section">
-            
+            <div class="exchange-container">
+              <div class="exchange-header">
+                <h1>Currency Exchange</h1>
+                <p>Real-time exchange rates with zero hidden fees</p>
+              </div>
 
-  <div class="body">
-  <h1> Currency Exchange</h1>
+              <div class="exchange-card">
+                <div class="form-group">
+                  <label for="amount">Amount to Convert</label>
+                  <input type="number" id="amount" class="amount-input" placeholder="Enter amount" min="1" step="0.01" />
+                </div>
 
-  <div class="exchange-card">
-    <div class="form-row">
-      <input type="number" id="amount" placeholder="Enter amount" min="1" />
-    </div>
+                <!-- Quick Conversions -->
+                <div class="quick-conversions">
+                  <div class="quick-convert" onclick="setQuickConversion('USD', 'NGN')">
+                    <div class="pair">USD → NGN</div>
+                    <div class="rate">Rate: 1,550</div>
+                  </div>
+                  <div class="quick-convert" onclick="setQuickConversion('EUR', 'NGN')">
+                    <div class="pair">EUR → NGN</div>
+                    <div class="rate">Rate: 1,700</div>
+                  </div>
+                  <div class="quick-convert" onclick="setQuickConversion('NGN', 'USD')">
+                    <div class="pair">NGN → USD</div>
+                    <div class="rate">Rate: 0.00065</div>
+                  </div>
+                  <div class="quick-convert" onclick="setQuickConversion('GBP', 'USD')">
+                    <div class="pair">GBP → USD</div>
+                    <div class="rate">Rate: 1.28</div>
+                  </div>
+                </div>
 
-    <div class="form-row">
-      <select id="fromCurrency">
-        <option value="USD">USD - US Dollar</option>
-        <option value="EUR">EUR - Euro</option>
-        <option value="GBP">GBP - British Pound</option>
-        <option value="NGN" selected>NGN - Naira</option>
-      </select>
+                <div class="currency-row">
+                  <select id="fromCurrency" class="currency-select">
+                    <option value="USD">USD - US Dollar</option>
+                    <option value="EUR">EUR - Euro</option>
+                    <option value="GBP">GBP - British Pound</option>
+                    <option value="NGN">NGN - Nigerian Naira</option>
+                    <option value="JPY">JPY - Japanese Yen</option>
+                    <option value="CAD">CAD - Canadian Dollar</option>
+                  </select>
 
-      <button class="swap-btn" id="swapBtn">↔</button>
+                  <button class="swap-btn" id="swapBtn" title="Swap currencies">
+                    <i class="fas fa-exchange-alt"></i>
+                  </button>
 
-      <select id="toCurrency">
-        <option value="NGN">NGN - Naira</option>
-        <option value="USD" selected>USD - US Dollar</option>
-        <option value="EUR">EUR - Euro</option>
-        <option value="GBP">GBP - British Pound</option>
-      </select>
-    </div>
+                  <select id="toCurrency" class="currency-select">
+                    <option value="NGN">NGN - Nigerian Naira</option>
+                    <option value="USD">USD - US Dollar</option>
+                    <option value="EUR">EUR - Euro</option>
+                    <option value="GBP">GBP - British Pound</option>
+                    <option value="JPY">JPY - Japanese Yen</option>
+                    <option value="CAD">CAD - Canadian Dollar</option>
+                  </select>
+                </div>
 
-    <button class="convert-btn" id="convertBtn">Convert</button>
+                <button class="convert-btn" id="convertBtn">
+                  <i class="fas fa-sync-alt"></i>
+                  Convert Currency
+                </button>
 
-    <div class="result" id="resultDisplay">Enter amount to convert</div>
-  </div>
+                <div class="result" id="resultDisplay">
+                  Enter amount to convert
+                  <div class="exchange-rate" id="rateDisplay"></div>
+                </div>
+              </div>
 
-  <div class="history">
-    <h2>Recent Conversions</h2>
-    <div id="historyList"></div>
-  </div>
- </div>
- 
- </section>
- </div>
-   <div class="app-body-sidebar">
+              <div class="history-section">
+                <h2>Recent Conversions</h2>
+                <div id="historyList" class="no-history">No conversion history yet</div>
+              </div>
+            </div>
+          </section>
+         </div>
+         <div class="app-body-sidebar">
           <section class="payment-section">
             <h2>New Payment</h2>
             <div class="payment-section-header">
@@ -376,81 +353,7 @@
       </div>
     </div>
     
-  <script>
-    const rates = {
-      USD: { NGN: 1550, EUR: 0.92, GBP: 0.78 },
-      NGN: { USD: 0.00065, EUR: 0.00059, GBP: 0.00050 },
-      EUR: { USD: 1.08, NGN: 1700, GBP: 0.85 },
-      GBP: { USD: 1.28, NGN: 2000, EUR: 1.18 }
-    };
-
-    const amountEl = document.getElementById("amount");
-    const fromEl = document.getElementById("fromCurrency");
-    const toEl = document.getElementById("toCurrency");
-    const resultDisplay = document.getElementById("resultDisplay");
-    const historyList = document.getElementById("historyList");
-
-    let history = JSON.parse(localStorage.getItem("exchangeHistory") || "[]");
-
-    document.getElementById("swapBtn").addEventListener("click", () => {
-      const temp = fromEl.value;
-      fromEl.value = toEl.value;
-      toEl.value = temp;
-    });
-
-    document.getElementById("convertBtn").addEventListener("click", () => {
-      const amount = parseFloat(amountEl.value);
-      const from = fromEl.value;
-      const to = toEl.value;
-
-      if (!amount || amount <= 0) {
-        resultDisplay.textContent = "Please enter a valid amount.";
-        return;
-      }
-
-      if (from === to) {
-        resultDisplay.textContent = "Cannot convert the same currency.";
-        return;
-      }
-
-      const rate = rates[from]?.[to] || 1;
-      const converted = (amount * rate).toFixed(2);
-      resultDisplay.textContent = `${amount} ${from} = ${converted} ${to}`;
-
-      const now = new Date().toLocaleString();
-      const record = { from, to, amount, converted, rate, date: now };
-
-      history.unshift(record);
-      if (history.length > 5) history.pop();
-      localStorage.setItem("exchangeHistory", JSON.stringify(history));
-
-      renderHistory();
-    });
-
-    function renderHistory() {
-      if (history.length === 0) {
-        historyList.innerHTML = "<p style='text-align:center;color:#666;'>No recent conversions.</p>";
-        return;
-      }
-    historyList.innerHTML = history
-        .map(
-          (h) => `
-        <div class="history-item">
-          <span>${h.amount} ${h.from} → ${h.converted} ${h.to}</span>
-          <div>
-            <div class="rate">Rate: ${h.rate}</div>
-            <div class="rate">${h.date}</div>
-          </div>
-        </div>
-      `
-        )
-        .join("");
-    
-  }
-      
-   
-  </script>
-  <script src="../app/dropdown.js"></script>
-
+    <script src="https://unpkg.com/phosphor-icons"></script>
+    <script src="../app/login.js"></script>
   </body>
 </html>

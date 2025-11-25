@@ -1,302 +1,694 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OTP Verification MSB</title>
+  <head>
+    <title>OTP Verification - MSB</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <link rel="stylesheet" href="../styles/style.css" />
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #494242;
-            /* Red background */
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            height: 100vh;
-        }
+    /* Hamburger Menu Styles */
+    .app-header-mobile {
+      display: none;
+    }
 
-        #container {
-            text-align: center;
-            margin-top: auto;
-        }
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      right: -300px;
+      width: 280px;
+      height: 100vh;
+      background: white;
+      box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
+      z-index: 1001;
+      transition: right 0.3s ease-in-out;
+      padding: 2rem 1rem;
+      overflow-y: auto;
+    }
 
-        #otps {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 20px;
-        }
+    .mobile-menu.show {
+      right: 0;
+    }
 
-        .otp {
-            width: 40px;
-            height: 40px;
-            font-size: 20px;
-            text-align: center;
-            margin-right: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            outline: none;
-        }
+    .mobile-menu-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      display: none;
+    }
 
-        .otp::placeholder {
-            font-size: 16px;
-        }
+    .mobile-menu-overlay.show {
+      display: block;
+    }
 
-        .submit-btn {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
+    .mobile-menu-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #eee;
+    }
 
-        .submit-btn:hover {
-            background-color: #45a049;
-        }
+    .mobile-menu-header h3 {
+      margin: 0;
+      color: #333;
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
 
-        .submit-btn:disabled {
-            background-color: #cccccc;
-            cursor: not-allowed;
-        }
+    .mobile-user-info {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+      padding: 1rem;
+      background: #f8f9fa;
+      border-radius: 8px;
+    }
 
-        #ubs-logo {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            font-size: 24px;
-            font-weight: bold;
-            font-family: 'Comic Sans MS', cursive;
-            /* Change font to Comic Sans MS */
-            color: white;
-        }
+    .mobile-user-info i {
+      font-size: 1.5rem;
+      color: #004aad;
+    }
 
-        h3 {
-            font-family: 'Comic Sans MS', cursive;
-            /* Change font to Comic Sans MS */
-            color: white;
-        }
+    .mobile-user-info strong {
+      display: block;
+      color: #333;
+      margin-bottom: 0.25rem;
+    }
 
-        footer {
-            margin-top: auto;
-            text-align: center;
-            color: white;
-            padding: 20px;
-        }
+    .mobile-user-info div div {
+      font-size: 0.875rem;
+      color: #666;
+    }
 
-        .error-message {
-            color: yellow;
-            font-size: 14px;
-            margin-top: 10px;
-            font-weight: bold;
-        }
+    .mobile-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
 
-        .success-message {
-            color: #4CAF50;
-            font-size: 14px;
-            margin-top: 10px;
-            font-weight: bold;
-        }
+    .mobile-nav a {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      color: #333;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
 
-        .resend-link {
-            color: white;
-            margin-top: 15px;
-            cursor: pointer;
-            text-decoration: underline;
-        }
+    .mobile-nav a:hover {
+      background-color: #004aad;
+      color: white;
+      transform: translateX(5px);
+    }
 
-        .resend-link:hover {
-            color: #cccccc;
-        }
+    .mobile-nav a.active {
+      background-color: #004aad;
+      color: white;
+    }
 
-        .timer {
-            color: white;
-            margin-top: 10px;
-            font-size: 14px;
-        }
+    .mobile-nav i {
+      width: 20px;
+      text-align: center;
+      font-size: 1.1rem;
+    }
+
+    /* User Profile Dropdown Styles */
+    .app-header-actions {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .user-profile {
+      background: none;
+      border: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      color: inherit;
+      font-family: inherit;
+      font-size: inherit;
+    }
+
+    .user-profile:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .user-dropdown {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      min-width: 200px;
+      z-index: 1000;
+      margin-top: 0.5rem;
+      display: none;
+      overflow: hidden;
+    }
+
+    .user-dropdown.show {
+      display: block;
+      animation: fadeIn 0.2s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .user-dropdown a {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      color: #333;
+      text-decoration: none;
+      transition: background-color 0.3s;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .user-dropdown a:last-child {
+      border-bottom: none;
+    }
+
+    .user-dropdown a:hover {
+      background-color: #f8f9fa;
+      color: #004aad;
+    }
+
+    .user-dropdown i {
+      width: 16px;
+      text-align: center;
+      color: #666;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .app-header-mobile {
+        display: block;
+      }
+
+      .app-header-navigation {
+        display: none;
+      }
+
+      .user-profile {
+        display: none;
+      }
+
+      .app-header-actions-buttons {
+        display: none;
+      }
+    }
+
+    @media (min-width: 769px) {
+      .app-header-mobile {
+        display: none;
+      }
+      
+      .mobile-menu,
+      .mobile-menu-overlay {
+        display: none !important;
+      }
+    }
+
+    /* Body scroll lock when menu is open */
+    body.menu-open {
+      overflow: hidden;
+    }
+
+    /* OTP Verification Styles */
+    .otp-container {
+      padding: 1.5rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .otp-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .otp-header h1 {
+      color: #004aad;
+      margin-bottom: 0.5rem;
+      font-size: 2rem;
+    }
+
+    .otp-header p {
+      color: #666;
+      font-size: 1rem;
+    }
+
+    .otp-card {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+      text-align: center;
+    }
+
+    .otp-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #004aad, #0066ff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      color: white;
+      font-size: 2rem;
+    }
+
+    .otp-instructions {
+      margin-bottom: 2rem;
+      color: #666;
+      line-height: 1.6;
+
+    }.otp-instructions p{
+      font-size: .8rem;
+    }
+
+
+    .otp-inputs {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .otp-input {
+      width: 50px;
+      height: 50px;
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+      border: 2px solid #e5e7eb;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .otp-input:focus {
+      border-color: #004aad;
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(0, 74, 173, 0.1);
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 1rem;
+      background: linear-gradient(135deg, #004aad, #0066ff);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-bottom: 1.5rem;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 74, 173, 0.3);
+    }
+
+    .submit-btn:disabled {
+      background: #cccccc;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .resend-section {
+      text-align: center;
+      margin-top: 1.5rem;
+    }
+
+    .timer {
+      color: #666;
+      margin-bottom: 0.75rem;
+    }
+
+    .resend-link {
+      color: #004aad;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+    .resend-link:hover {
+      color: #0066ff;
+    }
+
+    .message {
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .error-message {
+      background: #ffeaea;
+      color: #d63031;
+      border: 1px solid #fab1a0;
+    }
+
+    .success-message {
+      background: #e8f8ef;
+      color: #27ae60;
+      border: 1px solid #82e0aa;
+    }
+
+    .copyright {
+      text-align: center;
+      margin-top: 2rem;
+      color: #666;
+      font-size: 0.75rem;
+      line-height: 1.5;
+    }
+
+    /* Enhanced OTP input styles for mobile */
+    @media (max-width: 768px) {
+      .otp-container {
+        padding: 1rem;
+      }
+      
+      .otp-card {
+        padding: 1.5rem;
+      }
+      
+      .otp-inputs {
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+      
+      .otp-input {
+        width: 50px;
+        height: 50px;
+        font-size: 1.25rem;
+        flex: 0 0 calc(16.66% - 0.5rem);
+        max-width: 50px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .otp-inputs {
+        gap: 0.5rem;
+        justify-content: space-between;
+      }
+      
+      .otp-input {
+        width: 45px;
+        height: 45px;
+        font-size: 1.25rem;
+        flex: 0 0 calc(16.66% - 0.5rem);
+        max-width: 45px;
+      }
+      
+      .otp-header h1 {
+        font-size: 1.75rem;
+      }
+      
+      .otp-instructions {
+        font-size: 0.4rem;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .otp-inputs {
+        gap: 0.9rem;
+      }
+      
+      .otp-input {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+        flex: 0 0 calc(16.66% - 0.4rem);
+        max-width: 40px;
+      }
+    }
+
+    /* Additional improvements for touch devices */
+    .otp-input {
+      /* Improve touch target size */
+      min-height: 44px; /* Minimum touch target size recommended by Apple */
+      min-width: 44px;
+    }
+
+    /* Ensure inputs are clearly visible on all devices */
+    .otp-input {
+      background-color: #fff;
+      color: #333;
+      border: 2px solid #e5e7eb;
+      box-sizing: border-box;
+    }
+
+    .otp-input:focus {
+      border-color: #004aad;
+      background-color: #f8fbff;
+    }
     </style>
-</head>
-<body>
-<div id="ubs-logo">MSB</div>
-<div id="container">
-    <h3>Please kindly input the Verification code sent to your email</h3>
-    <header>
-        <form id="otpForm" action="/VerifyOTP" method="post">
-            <div id="otps">
-                <input class="otp" type="text" name="digit_1" maxlength="1" required autofocus />
-                <input class="otp" type="text" name="digit_2" maxlength="1" required />
-                <input class="otp" type="text" name="digit_3" maxlength="1" required />
-                <input class="otp" type="text" name="digit_4" maxlength="1" required />
-                <input class="otp" type="text" name="digit_5" maxlength="1" required />
-                <input class="otp" type="text" name="digit_6" maxlength="1" required />
+  </head>
+  <body>
+    <div class="app">
+      <header class="app-header">
+        <div class="app-header-logo">
+          <div class="logo">
+            <span class="logo-icon">
+              <i class="fa-brands fa-maxcdn"></i>
+            </span>
+            <h1 class="logo-title">
+              <span>Miles</span>
+              <span>SmartBank</span>
+            </h1>
+          </div>
+          <div>
+            <h5></h5>
+          </div>
+        </div>
+        <div class="app-header-navigation" id="mobile-header-nav">
+          <div class="tabs" id="tabs">
+            <a href="dashboard.html">
+              Dashboard
+            </a>
+            <a href="card.html">
+              Cards
+            </a>
+            <a href="userinfo.html">
+              Profile
+            </a>
+            <a href="transfer.html">
+              Transfers
+            </a>
+            <a href="history.html">
+              History
+            </a>
+          </div>
+        </div>
+        <div class="app-header-actions">
+          <button class="user-profile" id="userProfileBtn">
+            <span>Client Name</span>
+            <span>
+              <i class="fa-solid fa-circle-user"></i>
+            </span>
+          </button>
+          <div class="user-dropdown" id="userDropdown">
+            <a href="userinfo.html">
+              <i class="fas fa-user"></i>
+              <span>Profile</span>
+            </a>
+            <a href="settings.html">
+              <i class="fas fa-cog"></i>
+              <span>Settings</span>
+            </a>
+            <a href="../index.html">
+              <i class="fas fa-sign-out-alt"></i>
+              <span>Logout</span>
+            </a>
+          </div>
+          <div class="app-header-actions-buttons">
+            <button class="icon-button large">
+              <i class="ph-magnifying-glass"></i>
+            </button>
+            <button class="icon-button large">
+              <i class="ph-bell"></i>
+            </button>
+          </div>
+        </div>
+        <div class="app-header-mobile">
+          <button class="icon-button large" id="mobileMenuBtn">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+      </header>
+
+      <!-- Mobile Menu -->
+      <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+      <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+          <h3>Menu</h3>
+          <button class="icon-button" id="closeMobileMenu">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        
+        <div class="mobile-user-info">
+          <i class="fa-solid fa-circle-user"></i>
+          <div>
+            <strong>Client Name</strong>
+            <div>Welcome back!</div>
+          </div>
+        </div>
+
+        <nav class="mobile-nav">
+          <a href="dashboard.html">
+            <i class="fas fa-home"></i>
+            <span>Dashboard</span>
+          </a>
+          <a href="card.html">
+            <i class="fas fa-credit-card"></i>
+            <span>Cards</span>
+          </a>
+          <a href="userinfo.html">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+          </a>
+          <a href="transfer.html">
+            <i class="fas fa-exchange-alt"></i>
+            <span>Transfers</span>
+          </a>
+          <a href="history.html">
+            <i class="fas fa-history"></i>
+            <span>History</span>
+          </a>
+          <a href="topup.html">
+            <i class="fas fa-wallet"></i>
+            <span>Top-up</span>
+          </a>
+          <a href="exchange.html">
+            <i class="fas fa-chart-line"></i>
+            <span>Exchange</span>
+          </a>
+          <a href="settings.html">
+            <i class="fas fa-cog"></i>
+            <span>Settings</span>
+          </a>
+          <a href="../index.html">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+          </a>
+        </nav>
+      </div>
+
+      <div class="app-body">
+        <div class="app-body-navigation">
+          <nav class="navigation">
+            <a href="dashboard.html">
+              <i class="ph-browsers"></i>
+              <span>Dashboard</span>
+            </a>
+            <a href="topup.html">
+              <i class="ph-check-square"></i>
+              <span>Top-up</span>
+            </a>
+            <a href="transfer.html">
+              <i class="ph-swap"></i>
+              <span>Transfers</span>
+            </a>
+            <a href="card.html">
+              <i class="ph-file-text"></i>
+              <span>Card</span>
+            </a>
+            <a href="history.html">
+              <i class="ph-globe"></i>
+              <span>History</span>
+            </a>
+            <a href="exchange.html">
+              <i class="ph-clipboard-text"></i>
+              <span>Exchange</span>
+            </a>
+          </nav>
+          <footer class="footer">
+            <h1>Miles<small>©</small></h1>
+            <div>
+              Miles ©<br />
+              All Rights Reserved 2021
             </div>
-            <button type="submit" class="submit-btn" id="submitBtn">Submit</button>
-        </form>
+          </footer>
+        </div>
+        <div class="app-body-main-content">
+          <section class="service-section">
+            <div class="otp-container">
+              <div class="otp-header">
+                <h1>OTP Verification</h1>
+                <p>Please verify your identity with the code sent to your email</p>
+              </div>
 
-        <!-- Error/Success message container -->
-        <div id="message-container"></div>
-
-        <!-- Resend OTP section -->
-        <div class="timer" id="timer">Resend OTP in: <span id="countdown">60</span> seconds</div>
-        <div class="resend-link" id="resendLink" style="display: none;" onclick="resendOTP()">Resend OTP</div>
-    </header>
-</div>
-<footer>
-    <h6>The products, services, information and/or materials contained within these web pages may not be available for residents of certain jurisdictions. Please consult the sales restrictions relating to the products or services in question for further</br>
-        information. Copying, editing, modifying, distributing, sharing, linking or any other use (whether for commercial purposes or otherwise) of this material, other than personal viewing, without MSB 's prior written permission is strictly prohibited.</br>
-        © MSB 1998 - 2024. All rights reserved.
-    </h6>
-</footer>
-
-<script>
-    // OTP input navigation
-    const otpInputs = document.querySelectorAll('.otp');
-    
-    otpInputs.forEach((input, index) => {
-        // Auto-tab to next input
-        input.addEventListener('input', (e) => {
-            if (e.target.value.length === 1 && index < otpInputs.length - 1) {
-                otpInputs[index + 1].focus();
-            }
-            validateOTP();
-        });
-
-        // Handle backspace
-        input.addEventListener('keydown', (e) => {
-            if (e.key === 'Backspace' && !e.target.value && index > 0) {
-                otpInputs[index - 1].focus();
-            }
-        });
-
-        // Handle paste
-        input.addEventListener('paste', (e) => {
-            e.preventDefault();
-            const pasteData = e.clipboardData.getData('text').slice(0, 6);
-            pasteData.split('').forEach((char, i) => {
-                if (otpInputs[i]) {
-                    otpInputs[i].value = char;
-                }
-            });
-            validateOTP();
-            if (otpInputs[5]) {
-                otpInputs[5].focus();
-            }
-        });
-    });
-
-    // Validate OTP function
-    function validateOTP() {
-        const submitBtn = document.getElementById('submitBtn');
-        const otp = getOTP();
-        submitBtn.disabled = otp.length !== 6;
-    }
-
-    // Get complete OTP
-    function getOTP() {
-        return Array.from(otpInputs).map(input => input.value).join('');
-    }
-
-    // Display message function
-    function displayMessage(message, type = 'error') {
-        const messageContainer = document.getElementById('message-container');
-        messageContainer.innerHTML = <div class="${type}-message">${message}</div>;
-        
-        // Auto-hide success messages after 3 seconds
-        if (type === 'success') {
-            setTimeout(() => {
-                messageContainer.innerHTML = '';
-            }, 3000);
-        }
-    }
-
-    // Form submission handler
-    document.getElementById('otpForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const otp = getOTP();
-        const submitBtn = document.getElementById('submitBtn');
-        
-        if (otp.length !== 6) {
-            displayMessage('Please enter all 6 digits of the OTP.');
-            return;
-        }
-
-        // Disable button and show loading state
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Verifying...';
-
-        // Simulate OTP verification (replace with actual API call)
-        setTimeout(() => {
-            // This is a simulation - replace with actual verification logic
-            if (otp === '123456') { // Default test OTP
-                displayMessage('OTP verified successfully! Redirecting...', 'success');
-                setTimeout(() => {
-                    window.location.href = '/dashboard.html';
-                }, 2000);
-            } else {
-                displayMessage('Invalid OTP. Please try again.');
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'Submit';
+              <div class="otp-card">
+                <div class="otp-icon">
+                  <i class="fas fa-shield-alt"></i>
+                </div>
                 
-                // Clear OTP fields
-                otpInputs.forEach(input => input.value = '');
-                otpInputs[0].focus();
-            }
-        }, 1500);
-    });
+                <div class="otp-instructions">
+                  <p>For your security, we've sent a 6-digit verification code to your registered email address. Please enter it below to continue.</p>
+                </div>
 
-    // Resend OTP functionality
-    let countdown = 60;
-    let countdownInterval;
+                <!-- Error/Success message container -->
+                <div id="message-container"></div>
 
-    function startTimer() {
-        const timerElement = document.getElementById('countdown');
-        const resendLink = document.getElementById('resendLink');
-        const timerContainer = document.getElementById('timer');
-        
-        countdown = 60;
-        timerContainer.style.display = 'block';
-        resendLink.style.display = 'none';
-        
-        countdownInterval = setInterval(() => {
-            countdown--;
-            timerElement.textContent = countdown;
-            
-            if (countdown <= 0) {
-                clearInterval(countdownInterval);
-                timerContainer.style.display = 'none';
-                resendLink.style.display = 'block';
-            }
-        }, 1000);
-    }
+                <form id="otpForm">
+                  <div class="otp-inputs">
+                    <input type="text" class="otp-input" maxlength="1" required autofocus>
+                    <input type="text" class="otp-input" maxlength="1" required>
+                    <input type="text" class="otp-input" maxlength="1" required>
+                    <input type="text" class="otp-input" maxlength="1" required>
+                    <input type="text" class="otp-input" maxlength="1" required>
+                    <input type="text" class="otp-input" maxlength="1" required>
+                  </div>
+                  
+                  <button type="submit" class="submit-btn" id="submitBtn">Verify OTP</button>
+                </form>
 
-    function resendOTP() {
-        // Simulate resending OTP (replace with actual API call)
-        displayMessage('New OTP has been sent to your email.', 'success');
-        startTimer();
-        
-        // Clear existing OTP
-        otpInputs.forEach(input => input.value = '');
-        otpInputs[0].focus();
-        document.getElementById('submitBtn').disabled = true;
-    }
+                <!-- Resend OTP section -->
+                <div class="resend-section">
+                  <div class="timer" id="timer">Resend OTP in: <span id="countdown">60</span> seconds</div>
+                  <div class="resend-link" id="resendLink" style="display: none;" onclick="resendOTP()">Resend OTP</div>
+                </div>
+              </div>
 
-    // Initialize when page loads
-    document.addEventListener('DOMContentLoaded', function() {
-        startTimer();
-        validateOTP();
-        
-        // Check for URL parameters for error messages
-        const urlParams = new URLSearchParams(window.location.search);
-        const error = urlParams.get('error');
-        if (error) {
-            displayMessage(decodeURIComponent(error));
-        }
-    });
-</script>
-</body>
+              <div class="copyright">
+                <p>The products, services, information and/or materials contained within these web pages may not be available for residents of certain jurisdictions. Please consult the sales restrictions relating to the products or services in question for further information.</p>
+                <p>© MSB 2021 - 2025. All rights reserved.</p>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/phosphor-icons"></script>
+   <script src="../app/app.js"></script>
+  </body>
 </html>

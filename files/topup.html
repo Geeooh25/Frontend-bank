@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>topup MSB</title>
+<head>
+    <title>top up  - MSB</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
     <link rel="stylesheet" href="../styles/style.css" />
-
-  </head> 
-  <body>
+    <link rel="stylesheet" href="../styles/site.css">
+</head>
+<body>
     <div class="app">
       <header class="app-header">
         <div class="app-header-logo">
           <div class="logo">
             <span class="logo-icon">
-            
               <i class="fa-brands fa-maxcdn"></i>
             </span>
             <h1 class="logo-title">
@@ -27,12 +26,9 @@
             <h5></h5>
           </div>
         </div>
-        <div class="app-header-navigation" id="mobile-header-nav">
-  <div class="tabs" id="tabs">
-            <a href="#">
-              
-            </a>
-            <a href="index.html" >
+        <div class="app-header-navigation">
+          <div class="tabs">
+            <a href="dashboard.html">
               Dashboard
             </a>
             <a href="card.html">
@@ -44,18 +40,35 @@
             <a href="transfer.html">
               Transfers
             </a>
+            <a href="topup.html" class="active">
+              Top-up
+            </a>
             <a href="history.html">
               History
             </a>
           </div>
         </div>
         <div class="app-header-actions">
-          <button class="user-profile">
+          <button class="user-profile" id="userProfileBtn">
             <span>Client Name</span>
             <span>
               <i class="fa-solid fa-circle-user"></i>
             </span>
           </button>
+          <div class="user-dropdown" id="userDropdown">
+            <a href="userinfo.html">
+              <i class="fas fa-user"></i>
+              <span>Profile</span>
+            </a>
+            <a href="settings.html">
+              <i class="fas fa-cog"></i>
+              <span>Settings</span>
+            </a>
+            <a href="../index.html">
+              <i class="fas fa-sign-out-alt"></i>
+              <span>Logout</span>
+            </a>
+          </div>
           <div class="app-header-actions-buttons">
             <button class="icon-button large">
               <i class="ph-magnifying-glass"></i>
@@ -65,21 +78,79 @@
             </button>
           </div>
         </div>
-         <div class="app-header-mobile">
-          <button class="icon-button large" id="mobile-menu-toggle">
-            <i class="ph-list"></i>
+        <div class="app-header-mobile">
+          <button class="icon-button large" id="mobileMenuBtn">
+            <i class="fas fa-bars"></i>
           </button>
         </div>
-
       </header>
+
+      <!-- Mobile Menu -->
+      <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+      <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+          <h3>Menu</h3>
+          <button class="icon-button" id="closeMobileMenu">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        
+        <div class="mobile-user-info">
+          <i class="fa-solid fa-circle-user"></i>
+          <div>
+            <strong>Client Name</strong>
+            <div style="font-size: 0.875rem; color: #666;">Welcome back!</div>
+          </div>
+        </div>
+
+        <nav class="mobile-nav">
+          <a href="dashboard.html">
+            <i class="fas fa-home"></i>
+            <span>Dashboard</span>
+          </a>
+          <a href="card.html">
+            <i class="fas fa-credit-card"></i>
+            <span>Cards</span>
+          </a>
+          <a href="userinfo.html">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+          </a>
+          <a href="transfer.html">
+            <i class="fas fa-exchange-alt"></i>
+            <span>Transfers</span>
+          </a>
+          <a href="topup.html" class="active">
+            <i class="fas fa-wallet"></i>
+            <span>Top-up</span>
+          </a>
+          <a href="history.html">
+            <i class="fas fa-history"></i>
+            <span>History</span>
+          </a>
+          <a href="exchange.html">
+            <i class="fas fa-chart-line"></i>
+            <span>Exchange</span>
+          </a>
+          <a href="settings.html">
+            <i class="fas fa-cog"></i>
+            <span>Settings</span>
+          </a>
+          <a href="../index.html">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+          </a>
+        </nav>
+      </div>
+
       <div class="app-body">
         <div class="app-body-navigation">
           <nav class="navigation">
-            <a href="index.html">
+            <a href="dashboard.html">
               <i class="ph-browsers"></i>
               <span>Dashboard</span>
             </a>
-            <a href="topup.html">
+            <a href="topup.html" class="active">
               <i class="ph-check-square"></i>
               <span>Top-up</span>
             </a>
@@ -108,286 +179,322 @@
             </div>
           </footer>
         </div>
+        
+        <!-- Add Money Page Content -->
         <div class="app-body-main-content">
-          <section class="service-section">
-  <div class="heading">
-    <div class="logo">Add Money</div>
-    <div>
-      <button class="muted-btn" onclick="toggleHistory()">View History</button>
-    </div>
-  </div>
-
-  <div class="wrapper">
-    <div class="carding">
-      <h4>Available Balance</h4>
-      <h2><strong id="balance">$1,250.00</strong></h2>
-      <button class="btn" onclick="scrollToTopUp()">Top Up Now</button>
-    </div>
-
-    <div id="topupSection" class="carding">
-      <h2>Top-Up </h2>
-      <div class="form-row">
-        <label></label>
-        <div class="sources" id="sources">
-          <div class="source active" data-source="card">Card</div>
-          <div class="source" data-source="bank">Bank Transfer</div>
-          <div class="source" data-source="openbank">Open Banking</div>
-          <div class="source" data-source="wallet">e-Wallet</div>
-        </div>
-      </div>
-
-      <div class="form-row">
-        <label>Amount (USD)</label>
-        <input type="number" id="amount" min="1" step="0.01" placeholder="Enter amount" />
-      </div>
-
-      <div class="form-row">
-        <label>Currency</label>
-        <select id="currency">
-          <option value="EUR">EUR</option>
-          <option value="USD">USD</option>
-        </select>
-      </div>
-
-      <div class="status" id="feeDisplay">Fee: —</div>
-
-      <button class="btn" onclick="processTopUp()">Confirm Top-Up</button>
-    </div>
-
-    <div id="historySection" class="card" style="display:none;">
-      <h2>Transaction History</h2>
-      <div id="historyList"></div>
-    </div>
-  </div>
-
-  <div id="notification" class="notification"></div>
-
-  <div id="detailModal">
-    <div class="modal-content">
-      <button class="close-btn" onclick="closeModal()">✕</button>
-      <h3>Transaction Details</h3>
-      <div id="modalBody"></div>
-    </div>
-  </div>
- </div>
- </section>
-
-        <div class="app-body-sidebar">
-          <section class="payment-section">
-            <h2>New Payment</h2>
-            <div class="payment-section-header">
-              <p>Choose a card to transfer money</p>
-              <div>
-                <button class="card-button mastercard">
-                  <svg width="2001" height="1237" viewBox="0 0 2001 1237" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <g id="a624784f2834e21c94a1c0c9a58bbbaa">
-                      <path id="7869b07bea546aa59a5ee138adbcfd5a" d="M1270.57 1104.15H729.71V132.15H1270.58L1270.57 1104.15Z" fill="currentColor"></path>
-                      <path id="b54e3ab4d7044a9f288082bc6b864ae6" d="M764 618.17C764 421 856.32 245.36 1000.08 132.17C891.261 46.3647 756.669 -0.204758 618.09 9.6031e-07C276.72 9.6031e-07 0 276.76 0 618.17C0 959.58 276.72 1236.34 618.09 1236.34C756.672 1236.55 891.268 1189.98 1000.09 1104.17C856.34 991 764 815.35 764 618.17Z" fill="currentColor"></path>
-                      <path id="67f94b4d1b83252a6619ed6e0cc0a3a1" d="M2000.25 618.17C2000.25 959.58 1723.53 1236.34 1382.16 1236.34C1243.56 1236.54 1108.95 1189.97 1000.11 1104.17C1143.91 990.98 1236.23 815.35 1236.23 618.17C1236.23 420.99 1143.91 245.36 1000.11 132.17C1108.95 46.3673 1243.56 -0.201169 1382.15 -2.24915e-05C1723.52 -2.24915e-05 2000.24 276.76 2000.24 618.17" fill="currentColor"></path>
-                    </g>
-                  </svg>
-                </button>
-                <button class="card-button visa active">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="2500" height="2500" viewBox="0 0 141.732 141.732">
-                    <g fill="currentColor">
-                      <path d="M62.935 89.571h-9.733l6.083-37.384h9.734zM45.014 52.187L35.735 77.9l-1.098-5.537.001.002-3.275-16.812s-.396-3.366-4.617-3.366h-15.34l-.18.633s4.691.976 10.181 4.273l8.456 32.479h10.141l15.485-37.385H45.014zM121.569 89.571h8.937l-7.792-37.385h-7.824c-3.613 0-4.493 2.786-4.493 2.786L95.881 89.571h10.146l2.029-5.553h12.373l1.14 5.553zm-10.71-13.224l5.114-13.99 2.877 13.99h-7.991zM96.642 61.177l1.389-8.028s-4.286-1.63-8.754-1.63c-4.83 0-16.3 2.111-16.3 12.376 0 9.658 13.462 9.778 13.462 14.851s-12.075 4.164-16.06.965l-1.447 8.394s4.346 2.111 10.986 2.111c6.642 0 16.662-3.439 16.662-12.799 0-9.72-13.583-10.625-13.583-14.851.001-4.227 9.48-3.684 13.645-1.389z" />
-                    </g>
-                    <path d="M34.638 72.364l-3.275-16.812s-.396-3.366-4.617-3.366h-15.34l-.18.633s7.373 1.528 14.445 7.253c6.762 5.472 8.967 12.292 8.967 12.292z" fill="currentColor" />
-                    <path fill="none" d="M0 0h141.732v141.732H0z" />
-                  </svg>
+          <div class="add-money-page">
+            <div class="add-money-header">
+              <h1>Add Money</h1>
+              <div class="add-money-actions">
+                <button class="btn btn-outline" id="viewHistoryBtn">
+                  <i class="fas fa-history"></i> Funding History
                 </button>
               </div>
             </div>
-            <div class="payments">
-              <div class="payment">
-                <div class="card green">
-                  <span>01/22</span>
-                  <span>
-                    •••• 4012
-                  </span>
+
+            <!-- Account Selection -->
+            <section class="add-money-section">
+              <h2>Select Account to Fund</h2>
+              <div class="add-money-form">
+                <div class="form-group">
+                  <label for="toAccount">Destination Account</label>
+                  <select id="toAccount" required>
+                    <option value="">Select account</option>
+                    <option value="ngn">NGN Account - 00133867509</option>
+                    <option value="usd">USD Account - 0017865309</option>
+                  </select>
+                  <div class="account-balance" id="toAccountBalance">
+                    Current Balance: ₦125,000.75
+                  </div>
                 </div>
-                <div class="payment-details">
-                  <h3>Internet</h3>
-                  <div>
-                    <span>$ 2,110</span>
-                    <button class="icon-button">
-                      <i class="ph-caret-right-bold"></i>
-                    </button>
+
+                <div class="form-group">
+                  <label for="amount">Amount to Add</label>
+                  <input type="number" id="amount" min="0" step="0.01" placeholder="0.00" required>
+                  <div class="account-balance" id="amountCurrency">NGN</div>
+                </div>
+              </div>
+            </section>
+
+            <!-- Payment Method Selection -->
+            <section class="add-money-section">
+              <h2>Select Payment Method</h2>
+              <div class="payment-methods">
+                <div class="payment-method active" data-method="card">
+                  <i class="fas fa-credit-card"></i>
+                  <h3>Debit/Credit Card</h3>
+                  <p>Instant funding with your card</p>
+                </div>
+                <div class="payment-method" data-method="bank">
+                  <i class="fas fa-university"></i>
+                  <h3>Bank Transfer</h3>
+                  <p>Transfer from any bank</p>
+                </div>
+                <div class="payment-method" data-method="mobile">
+                  <i class="fas fa-mobile-alt"></i>
+                  <h3>Mobile Money</h3>
+                  <p>Fund with mobile wallet</p>
+                </div>
+                <div class="payment-method" data-method="ussd">
+                  <i class="fas fa-code"></i>
+                  <h3>USSD</h3>
+                  <p>Dial *XYZ# to fund</p>
+                </div>
+              </div>
+
+              <!-- Card Payment Details -->
+              <div class="card-details" id="cardDetails">
+                <h3>Card Details</h3>
+                
+                <!-- Saved Cards -->
+                <div class="saved-cards">
+                  <div class="saved-card active">
+                    <i class="fab fa-cc-visa"></i>
+                    <div class="saved-card-info">
+                      <div class="saved-card-name">Visa Card</div>
+                      <div class="saved-card-details">•••• 4012 (Exp: 01/25)</div>
+                    </div>
+                  </div>
+                  <div class="saved-card">
+                    <i class="fab fa-cc-mastercard"></i>
+                    <div class="saved-card-info">
+                      <div class="saved-card-name">MasterCard</div>
+                      <div class="saved-card-details">•••• 5678 (Exp: 03/26)</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div style="text-align: center; margin: 1rem 0; color: #666;">OR</div>
+
+                <!-- New Card Form -->
+                <div class="add-money-form">
+                  <div class="form-group full-width">
+                    <label for="cardNumber">Card Number</label>
+                    <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19">
+                  </div>
+                  
+                  <div class="card-row">
+                    <div class="form-group">
+                      <label for="expiryDate">Expiry Date</label>
+                      <input type="text" id="expiryDate" placeholder="MM/YY" maxlength="5">
+                    </div>
+                    
+                    <div class="form-group">
+                      <label for="cvv">CVV</label>
+                      <input type="text" id="cvv" placeholder="123" maxlength="3">
+                    </div>
+                  </div>
+                  
+                  <div class="form-group full-width">
+                    <label for="cardName">Name on Card</label>
+                    <input type="text" id="cardName" placeholder="John Doe">
                   </div>
                 </div>
               </div>
-              <div class="payment">
-                <div class="card olive">
-                  <span>12/23</span>
-                  <span>
-                    •••• 2228
-                  </span>
+
+              <!-- Bank Transfer Details -->
+              <div class="bank-transfer-info" id="bankTransferInfo" style="display: none;">
+                <h3>Bank Transfer Instructions</h3>
+                <p>Transfer funds to the account details below and the money will reflect in your Miles SmartBank account within 1-2 hours.</p>
+                
+                <div class="bank-details">
+                  <div class="bank-detail-item">
+                    <span class="bank-detail-label">Bank Name</span>
+                    <span class="bank-detail-value">Miles SmartBank</span>
+                  </div>
+                  <div class="bank-detail-item">
+                    <span class="bank-detail-label">Account Number</span>
+                    <div style="display: flex; align-items: center;">
+                      <span class="bank-detail-value" id="bankAccountNumber">00133867509</span>
+                      <button class="copy-button" data-text="00133867509">
+                        <i class="fas fa-copy"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="bank-detail-item">
+                    <span class="bank-detail-label">Account Name</span>
+                    <span class="bank-detail-value">Client Name</span>
+                  </div>
+                  <div class="bank-detail-item">
+                    <span class="bank-detail-label">Reference</span>
+                    <div style="display: flex; align-items: center;">
+                      <span class="bank-detail-value" id="bankReference">MSBTOPUP</span>
+                      <button class="copy-button" data-text="MSBTOPUP">
+                        <i class="fas fa-copy"></i>
+                      </button>
+                    </div>
+                  </div>
                 </div>
-                <div class="payment-details">
-                  <h3>Universal</h3>
-                  <div>
-                    <span>$ 5,621</span>
-                    <button class="icon-button">
-                      <i class="ph-caret-right-bold"></i>
-                    </button>
+                
+                <div style="margin-top: 1rem; padding: 1rem; background: #e7f3ff; border-radius: 6px;">
+                  <p style="margin: 0; font-size: 0.875rem; color: #0066cc;">
+                    <strong>Important:</strong> Always use <strong>MSBTOPUP</strong> as transfer reference for quick processing.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Mobile Money Details -->
+              <div class="card-details" id="mobileMoneyDetails" style="display: none;">
+                <h3>Select Mobile Money Provider</h3>
+                
+                <div class="mobile-money-providers">
+                  <div class="mobile-money-provider active">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>MTN Mobile Money</span>
+                  </div>
+                  <div class="mobile-money-provider">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>Airtel Money</span>
+                  </div>
+                  <div class="mobile-money-provider">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>9Mobile Cash</span>
+                  </div>
+                  <div class="mobile-money-provider">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>Glo Money</span>
+                  </div>
+                </div>
+
+                <div class="add-money-form" style="margin-top: 1.5rem;">
+                  <div class="form-group">
+                    <label for="mobileNumber">Mobile Number</label>
+                    <input type="text" id="mobileNumber" placeholder="0800 123 4567">
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="mobileProvider">Provider</label>
+                    <select id="mobileProvider">
+                      <option value="mtn">MTN Mobile Money</option>
+                      <option value="airtel">Airtel Money</option>
+                      <option value="9mobile">9Mobile Cash</option>
+                      <option value="glo">Glo Money</option>
+                    </select>
                   </div>
                 </div>
               </div>
-              <div class="payment">
-                <div class="card gray">
-                  <span>03/22</span>
-                  <span>
-                    •••• 5214
-                  </span>
-                </div>
-                <div class="payment-details">
-                  <h3>Gold</h3>
-                  <div>
-                    <span>$ 3,473</span>
-                    <button class="icon-button">
-                      <i class="ph-caret-right-bold"></i>
-                    </button>
+
+              <!-- USSD Details -->
+              <div class="bank-transfer-info" id="ussdDetails" style="display: none;">
+                <h3>USSD Banking</h3>
+                <p>Dial the USSD code below from your registered phone number to fund your account instantly.</p>
+                
+                <div class="bank-details">
+                  <div class="bank-detail-item">
+                    <span class="bank-detail-label">USSD Code</span>
+                    <div style="display: flex; align-items: center;">
+                      <span class="bank-detail-value">*723*001#</span>
+                      <button class="copy-button" data-text="*723*001#">
+                        <i class="fas fa-copy"></i>
+                      </button>
+                    </div>
                   </div>
                 </div>
+                
+                <div style="margin-top: 1rem; padding: 1rem; background: #f0f8ff; border-radius: 6px;">
+                  <p style="margin: 0; font-size: 0.875rem; color: #000080;">
+                    <strong>Instructions:</strong> Dial the code, select "Add Money", enter amount, and follow the prompts.
+                  </p>
+                </div>
               </div>
-            </div>
-            <div class="faq">
-              <p>Most frequently asked questions</p>
-              <div>
-                <label>Question</label>
-                <input type="text" placeholder="Type here">
+            </section>
+
+            <!-- Transaction Summary -->
+            <section class="add-money-section">
+              <h2>Transaction Summary</h2>
+              <div class="transfer-summary">
+                <div class="summary-item">
+                  <span>Amount to Add:</span>
+                  <span id="summaryAmount">₦0.00</span>
+                </div>
+                <div class="summary-item">
+                  <span>Processing Fee:</span>
+                  <span id="summaryFee">₦0.00</span>
+                </div>
+                <div class="summary-item">
+                  <span>Total to Pay:</span>
+                  <span id="summaryTotal">₦0.00</span>
+                </div>
               </div>
-            </div>
-            <div class="payment-section-footer">
-              <button class="save-button">
-                Save
-              </button>
-              <button class="settings-button">
-                <i class="ph-gear"></i>
-                <span>More settings</span>
-              </button>
-            </div>
-          </section>
+
+              <div class="form-actions">
+                <button type="button" class="btn btn-secondary" id="cancelBtn">Cancel</button>
+                <button type="button" class="btn btn-primary" id="addMoneyBtn">Add Money Now</button>
+              </div>
+            </section>
+          </div>
         </div>
-  <script>
-    const balanceEl = document.getElementById('balance');
-    const feeDisplay = document.getElementById('feeDisplay');
-    const notification = document.getElementById('notification');
-    const historyList = document.getElementById('historyList');
-    const modal = document.getElementById('detailModal');
-    const modalBody = document.getElementById('modalBody');
+      </div>
+    </div>
 
-    let balance = parseFloat(localStorage.getItem('balance') || '1250.00');
-    let txs = JSON.parse(localStorage.getItem('txs') || '[]');
-    let selectedSource = 'card';
-
-    document.querySelectorAll('.source').forEach(el => {
-      el.addEventListener('click', () => {
-        document.querySelectorAll('.source').forEach(s => s.classList.remove('active'));
-        el.classList.add('active');
-        selectedSource = el.dataset.source;
-        updateFee();
-      });
-    });
-
-    function formatCurrency(v) { return '€' + v.toFixed(2); }
-
-    function updateFee() {
-      const amt = parseFloat(document.getElementById('amount').value || 0);
-      let fee = 0;
-      if (!amt) { feeDisplay.textContent = 'Fee: —'; return; }
-      if (selectedSource === 'card') fee = Math.max(0.5, amt * 0.015);
-      if (selectedSource === 'bank') fee = 0;
-      if (selectedSource === 'openbank') fee = Math.max(0.2, amt * 0.008);
-      if (selectedSource === 'wallet') fee = Math.max(0.2, amt * 0.01);
-      feeDisplay.textContent = `Fee: $${fee.toFixed(2)} (${selectedSource})`;
-      return fee;
-    }
-
-    document.getElementById('amount').addEventListener('input', updateFee);
-
-    function processTopUp() {
-      const amt = parseFloat(document.getElementById('amount').value || 0);
-      if (!amt || amt <= 0) return showNotification('Enter a valid amount', 'danger');
-      const fee = updateFee();
-      const tx = { id: Date.now(), source: selectedSource, amount: amt, fee, status: 'pending', date: new Date().toLocaleString() };
-      txs.push(tx);
-      saveState();
-      showNotification('Processing top-up...', 'warning');
-
-      setTimeout(() => {
-        const success = Math.random() > 0.1;
-        const idx = txs.findIndex(t => t.id === tx.id);
-        if (success) {
-          txs[idx].status = 'success';
-          balance += (amt - fee);
-          showNotification('Top-up successful!', 'success');
-        } else {
-          txs[idx].status = 'failed';
-          showNotification('Top-up failed. Please try again.', 'danger');
-        }
-        saveState();
-        renderBalance();
-        renderHistory();
-      }, 1500);
-    }
-
-    function renderBalance() {
-      balanceEl.textContent = formatCurrency(balance);
-    }
-
-    function renderHistory() {
-      historyList.innerHTML = txs.length ? '' : '<p>No transactions yet.</p>';
-      txs.slice().reverse().forEach(tx => {
-        const div = document.createElement('div');
-        div.className = 'status';
-        div.style.borderLeft = `4px solid ${tx.status === 'success' ? 'var(--success)' : tx.status === 'failed' ? 'var(--danger)' : 'var(--warning)'}`;
-        div.innerHTML = `<strong>${tx.source.toUpperCase()}</strong> - ${formatCurrency(tx.amount)} <br><small>${tx.date} | ${tx.status.toUpperCase()}</small>`;
-        div.onclick = () => showDetail(tx);
-        historyList.appendChild(div);
-      });
-    }
-
-    function showDetail(tx) {
-      modal.style.display = 'flex';
-      modalBody.innerHTML = `
-        <p><strong>Source:</strong> ${tx.source}</p>
-        <p><strong>Amount:</strong> ${formatCurrency(tx.amount)}</p>
-        <p><strong>Fee:</strong> ${formatCurrency(tx.fee)}</p>
-        <p><strong>Status:</strong> ${tx.status.toUpperCase()}</p>
-        <p><strong>Date:</strong> ${tx.date}</p>
-      `;
-    }
-
-    function closeModal() {
-      modal.style.display = 'none';
-    }
-
-    function showNotification(msg, type = 'accent') {
-      notification.textContent = msg;
-      notification.style.background = type === 'success' ? 'var(--success)' : type === 'danger' ? 'var(--danger)' : type === 'warning' ? 'var(--warning)' : 'var(--accent)';
-      notification.classList.add('show');
-      setTimeout(() => notification.classList.remove('show'), 2500);
-    }
-
-    function scrollToTopUp() {
-      document.getElementById('topupSection').scrollIntoView({ behavior: 'smooth' });
-    }
-
-    function toggleHistory() {
-      const section = document.getElementById('historySection');
-      section.style.display = section.style.display === 'none' ? 'block' : 'none';
-      renderHistory();
-    }
-
-    function saveState() {
-      localStorage.setItem('balance', balance.toFixed(2));
-      localStorage.setItem('txs', JSON.stringify(txs));
-    }
-
-    renderBalance();
-   
-  </script>
-  <script src="../app/dropdown.js"></script>
-</body>
+    <!-- Success Modal -->
+    <div class="modal-overlay" id="successModal">
+      <div class="modal">
+        <div class="success-message">
+          <div class="success-icon">
+            <i class="fas fa-check-circle"></i>
+          </div>
+          <h3>Money Added Successfully!</h3>
+          <p>Your account has been funded successfully.</p>
+          
+          <!-- Receipt -->
+          <div class="receipt">
+            <div class="receipt-header">
+              <h3>Miles SmartBank</h3>
+              <p>Funding Receipt</p>
+            </div>
+            <div class="receipt-details">
+              <div class="receipt-item">
+                <span>Transaction ID:</span>
+                <span id="receiptReference">MSB202400001</span>
+              </div>
+              <div class="receipt-item">
+                <span>Date & Time:</span>
+                <span id="receiptDate">Just now</span>
+              </div>
+              <div class="receipt-item">
+                <span>To Account:</span>
+                <span id="receiptToAccount">NGN Account - 00133867509</span>
+              </div>
+              <div class="receipt-item">
+                <span>Payment Method:</span>
+                <span id="receiptMethod">Debit Card</span>
+              </div>
+              <div class="receipt-item">
+                <span>Amount Added:</span>
+                <span id="receiptAmount">₦0.00</span>
+              </div>
+              <div class="receipt-item">
+                <span>Processing Fee:</span>
+                <span id="receiptFee">₦0.00</span>
+              </div>
+              <div class="receipt-item total">
+                <span>Total Paid:</span>
+                <span id="receiptTotal">₦0.00</span>
+              </div>
+              <div class="receipt-item">
+                <span>New Balance:</span>
+                <span id="receiptNewBalance">₦0.00</span>
+              </div>
+            </div>
+            <div class="receipt-footer">
+              <p>Thank you for banking with us</p>
+              <p>Miles SmartBank © 2024</p>
+            </div>
+          </div>
+          
+          <div class="form-actions" style="margin-top: 2rem;">
+            <button class="btn btn-outline" id="printReceiptBtn">
+              <i class="fas fa-print"></i> Print Receipt
+            </button>
+            <button class="btn btn-primary" id="closeSuccessModal">
+              Done
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+     <script src="../app/app.js"></script>
+    <script src="https://unpkg.com/phosphor-icons"></script>
+  </body>
 </html>

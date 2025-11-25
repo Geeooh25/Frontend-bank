@@ -1,83 +1,447 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ADMIN MSB</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #505081;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        .container {
-            background-color: #fff;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 300px;
-        }
-
-        h2 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        input[type="email"],
-        input[type="password"],
-        button {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-            font-size: 16px;
-        }
-
-        button {
-            background-color: #0047ab;
-            color: #fff;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-
-        .submit {
-            text-align: center;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>admin - Miles SmartBank</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  
+  <link rel="stylesheet" href="../styles/login.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+  <link rel="stylesheet" href="../styles/style.css">
+  
 </head>
 
 <body>
-<div class="container">
-    <h2>Welcome Back</h2>
-    <form action="/Admin" method="post">
-        <label>Admin Email</label>
-        <input class="email" name="email" type="email" placeholder="Email" required>
-        <label>Password</label>
-        <input class="password" name="password" type="password" placeholder="Password" required>
-        <div class="submit">
-            <button type="submit">Login As Admin</button>
+  <div class="app">
+    <header class="app-headers">
+      <div class="app-header-logo">
+        <a href="#" class="logo">
+          <span class="logo-icon">
+            <i class="fa-brands fa-maxcdn"></i>
+          </span>
+          <h1 class="logo-title">
+            <span>Miles</span>
+            <span>SmartBank</span>
+          </h1>
+        </a>
+        <div class="header-actions">
+          <a href="#" class="support-btn" id="support-link">
+            <i class="fas fa-headset"></i>
+            Support
+          </a>
         </div>
-    </form>
-</div>
-</body>
+      </div>
+    </header>
 
+    <main class="app-main">
+      <!-- Support Page -->
+      <div class="support-page" id="support-page">
+        <div class="support-header">
+          <h1>How Can We Help You?</h1>
+          <p>Get instant support for your banking needs</p>
+        </div>
+
+        <div class="support-grid">
+          <div class="support-card">
+            <i class="fas fa-phone-alt"></i>
+            <h3>24/7 Customer Support</h3>
+            <p>Our dedicated support team is available round the clock to assist you with any issues or questions.</p>
+            <button class="contact-btn">
+              <i class="fas fa-phone"></i>
+              Call Now
+            </button>
+          </div>
+
+          <div class="support-card">
+            <i class="fas fa-comments"></i>
+            <h3>Live Chat</h3>
+            <p>Chat instantly with our support agents for quick resolutions to your banking queries.</p>
+            <button class="contact-btn">
+              <i class="fas fa-comment"></i>
+              Start Chat
+            </button>
+          </div>
+
+          <div class="support-card">
+            <i class="fas fa-envelope"></i>
+            <h3>Email Support</h3>
+            <p>Send us an email and we'll get back to you within 2 hours with detailed assistance.</p>
+            <button class="contact-btn">
+              <i class="fas fa-paper-plane"></i>
+              Send Email
+            </button>
+          </div>
+
+          <div class="support-card">
+            <i class="fas fa-question-circle"></i>
+            <h3>FAQ & Help Center</h3>
+            <p>Find instant answers to common questions in our comprehensive knowledge base.</p>
+            <button class="contact-btn">
+              <i class="fas fa-search"></i>
+              Browse FAQs
+            </button>
+          </div>
+        </div>
+
+        <div class="back-to-login">
+          <a href="#" class="back-btn" id="back-to-login">
+            <i class="fas fa-arrow-left"></i>
+            Back to Login
+          </a>
+        </div>
+      </div>
+
+      <!-- Login/Signup Section -->
+      <section class="auth-section" id="auth-section">
+        <div class="auth-container-wrapper">
+          <div class="welcome-banner">
+            <h4>Welcome to Miles SmartBank<br>Secure, Smart Banking Experience</h4>
+          </div>
+
+          <!-- Admin Login Toggle Button -->
+          <div class="admin-login-toggle">
+            <button class="admin-login-btn" id="show-admin-login">
+              <i class="fas fa-user-shield"></i>
+              Admin Login
+            </button>
+          </div>
+
+          <div class="auth-form-container">
+            <div class="security-banner">
+              <i class="fas fa-shield-alt"></i>
+              <span>Bank-level security & encryption to protect your data</span>
+            </div>
+            
+            <div class="form-toggle">
+              <button id="login-btn" class="active">Sign In</button>
+              <button id="signup-btn">Create Account</button>
+            </div>
+
+            <!-- Admin Login Section -->
+            <div class="admin-login-section" id="admin-login-section">
+              <button class="admin-back-btn" id="admin-back-btn">
+                <i class="fas fa-arrow-left"></i>
+                Back to User Login
+              </button>
+
+              <div class="admin-header">
+                <h2>
+                  <i class="fas fa-user-shield"></i>
+                  Admin Login
+                </h2>
+                <p>Secure access for authorized personnel</p>
+              </div>
+
+              <div class="admin-security-notice">
+                <i class="fas fa-exclamation-triangle"></i>
+                <strong>Security Notice:</strong> Restricted to authorized personnel only. All activities are monitored.
+              </div>
+
+              <div id="admin-message-container"></div>
+
+              <form id="admin-login-form">
+                <div class="admin-form-group">
+                  <label for="admin-username">Admin ID</label>
+                  <input type="text" id="admin-username" class="admin-form-input" placeholder="Enter admin ID" required>
+                </div>
+
+                <div class="admin-form-group">
+                  <label for="admin-password">Password</label>
+                  <div class="admin-password-container">
+                    <input type="password" id="admin-password" class="admin-form-input" placeholder="Enter password" required>
+                    <button type="button" class="admin-toggle-password" id="admin-toggle-password">
+                      <i class="fas fa-eye"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="admin-form-group">
+                  <label for="admin-2fa">Two-Factor Authentication</label>
+                  <input type="text" id="admin-2fa" class="admin-form-input" placeholder="Enter 6-digit code" maxlength="6">
+                </div>
+
+                <button type="submit" class="admin-login-submit" id="admin-login-submit">
+                  Login as Administrator
+                </button>
+
+                <div class="admin-attempts" id="admin-attempts">
+                  Attempts remaining: <span id="admin-attempts-count">3</span>
+                </div>
+              </form>
+            </div>
+
+            <!-- LOGIN FORM -->
+            <form id="login-form" class="auth-form show">
+              <h2>Welcome Back</h2>
+              
+              <div class="form-group">
+                <label for="login-email">Email Address</label>
+                <input type="email" id="login-email" placeholder="Enter your email" required />
+              </div>
+
+              <div class="form-group">
+                <label for="login-password">Password</label>
+                <input type="password" id="login-password" placeholder="Enter your password" required />
+                <button type="button" class="toggle-password" data-target="login-password">
+                  <i class="fas fa-eye"></i>
+                </button>
+              </div>
+
+              <!-- Biometric Login Option -->
+              <div class="biometric-options" id="biometric-login" style="display: none;">
+                <div class="biometric-toggle">
+                  <div class="biometric-info">
+                    <i class="fas fa-fingerprint biometric-icon"></i>
+                    <div class="biometric-text">
+                      <h4>Biometric Login</h4>
+                      <p>Use fingerprint or face recognition</p>
+                    </div>
+                  </div>
+                  <button type="button" class="btn-submit" style="margin: 0; padding: 0.5rem 1rem;" id="use-biometric">
+                    Use Biometric
+                  </button>
+                </div>
+              </div>
+
+              <div class="checkbox-group">
+                <input type="checkbox" id="remember-me" />
+                <label for="remember-me">Keep me signed in</label>
+              </div>
+
+              <button type="submit" class="btn-submit" id="login-submit">Sign In</button>
+
+              <div class="helper-links">
+                <a href="#" id="forgot-password">Forgot Password?</a>
+              </div>
+
+              <p class="alt-text">
+                New to Miles SmartBank? <a href="#" id="go-signup">Create account</a>
+              </p>
+            </form>
+
+            <!-- SIGNUP FORM -->
+            <form id="signup-form" class="auth-form">
+              <h2>Get Started</h2>
+
+              <div class="form-row">
+                <div class="form-col">
+                  <div class="form-group">
+                    <label for="first-name">First Name *</label>
+                    <input type="text" id="first-name" placeholder="John" required />
+                  </div>
+                </div>
+                <div class="form-col">
+                  <div class="form-group">
+                    <label for="last-name">Last Name *</label>
+                    <input type="text" id="last-name" placeholder="Doe" required />
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="signup-email">Email Address *</label>
+                <input type="email" id="signup-email" placeholder="Enter your email" required />
+              </div>
+
+              <div class="form-group">
+                <label for="gender">Gender *</label>
+                <select id="gender" class="gender-select" required>
+                  <option value="">Select Gender</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="other">Other</option>
+                  <option value="prefer-not-to-say">Prefer not to say</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="mobile">Mobile Number *</label>
+                <div class="mobile-input-container">
+                  <span class="country-code">+1</span>
+                  <input type="tel" id="mobile" class="mobile-input" placeholder="(555) 123-4567" required />
+                </div>
+                <div class="success-message" id="mobile-success" style="display: none;">
+                  <i class="fas fa-check-circle"></i> Mobile number verified
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="bvn">BVN (Bank Verification Number) <small style="color: var(--gray-500);">- Optional</small></label>
+                <input type="text" id="bvn" placeholder="Enter 11-digit BVN" maxlength="11" />
+                <div class="success-message" id="bvn-success" style="display: none;">
+                  <i class="fas fa-check-circle"></i> BVN verified successfully
+                </div>
+                <div style="font-size: 0.75rem; color: var(--gray-500); margin-top: 0.5rem;">
+                  Adding BVN enhances security and speeds up account verification
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="signup-password">Create Password *</label>
+                <input type="password" id="signup-password" placeholder="At least 8 characters" required />
+                <button type="button" class="toggle-password" data-target="signup-password">
+                  <i class="fas fa-eye"></i>
+                </button>
+                <div class="password-strength">
+                  <div class="strength-bar" id="password-strength-bar"></div>
+                </div>
+                <div id="password-rules" style="font-size: 0.75rem; color: var(--gray-500); margin-top: 0.5rem;">
+                  Use 8+ characters with mix of uppercase, lowercase, numbers & symbols
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="signup-confirm">Confirm Password *</label>
+                <input type="password" id="signup-confirm" placeholder="Re-enter password" required />
+                <button type="button" class="toggle-password" data-target="signup-confirm">
+                  <i class="fas fa-eye"></i>
+                </button>
+              </div>
+
+              <!-- Biometric Enrollment -->
+              <div class="biometric-options">
+                <div class="biometric-toggle">
+                  <div class="biometric-info">
+                    <i class="fas fa-fingerprint biometric-icon"></i>
+                    <div class="biometric-text">
+                      <h4>Enable Biometric Authentication</h4>
+                      <p>Use fingerprint or face recognition for faster login</p>
+                    </div>
+                  </div>
+                  <label class="toggle-switch">
+                    <input type="checkbox" id="enable-biometric">
+                    <span class="toggle-slider"></span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="checkbox-group">
+                <input type="checkbox" id="agree-terms" required />
+                <label for="agree-terms">
+                  I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a> *
+                </label>
+              </div>
+
+              <div class="checkbox-group">
+                <input type="checkbox" id="marketing-emails" />
+                <label for="marketing-emails">
+                  Send me marketing emails about new features and offers
+                </label>
+              </div>
+
+              <button type="submit" class="btn-submit" id="signup-submit">Create Account</button>
+
+              <p class="alt-text">
+                Already have an account? <a href="#" id="go-login">Sign in</a>
+              </p>
+            </form>
+
+            <!-- FORGOT PASSWORD FORM -->
+            <form id="forgot-password-form" class="auth-form forgot-password-form">
+              <h2>Reset Your Password</h2>
+              
+              <div class="reset-steps">
+                <div class="step-indicator">
+                  <div class="step active" id="step-1">1</div>
+                  <div class="step" id="step-2">2</div>
+                  <div class="step" id="step-3">3</div>
+                </div>
+                <div class="step-labels">
+                  <div class="step-label active" id="step-label-1">Enter Email</div>
+                  <div class="step-label" id="step-label-2">Verify Code</div>
+                  <div class="step-label" id="step-label-3">New Password</div>
+                </div>
+              </div>
+
+              <!-- Step 1: Email Entry -->
+              <div class="form-step" id="step-1-content">
+                <div class="form-group">
+                  <label for="reset-email">Email Address</label>
+                  <input type="email" id="reset-email" placeholder="Enter your email address" required />
+                </div>
+                <button type="button" class="btn-submit" id="send-reset-code">Send Reset Code</button>
+              </div>
+
+              <!-- Step 2: Verification Code -->
+              <div class="form-step hidden" id="step-2-content">
+                <div class="form-group">
+                  <p>We've sent a 6-digit verification code to your email. Please enter it below:</p>
+                  <div class="verification-code-container">
+                    <input type="text" class="verification-input" maxlength="1" data-index="0">
+                    <input type="text" class="verification-input" maxlength="1" data-index="1">
+                    <input type="text" class="verification-input" maxlength="1" data-index="2">
+                    <input type="text" class="verification-input" maxlength="1" data-index="3">
+                    <input type="text" class="verification-input" maxlength="1" data-index="4">
+                    <input type="text" class="verification-input" maxlength="1" data-index="5">
+                  </div>
+                </div>
+                <div class="resend-code">
+                  Didn't receive the code? <a href="#" id="resend-code">Resend Code</a>
+                </div>
+                <button type="button" class="btn-submit" id="verify-code">Verify Code</button>
+              </div>
+
+              <!-- Step 3: New Password -->
+              <div class="form-step hidden" id="step-3-content">
+                <div class="form-group">
+                  <label for="new-password">New Password</label>
+                  <input type="password" id="new-password" placeholder="Enter new password" required />
+                  <button type="button" class="toggle-password" data-target="new-password">
+                    <i class="fas fa-eye"></i>
+                  </button>
+                  <div class="password-strength">
+                    <div class="strength-bar" id="new-password-strength-bar"></div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="confirm-new-password">Confirm New Password</label>
+                  <input type="password" id="confirm-new-password" placeholder="Confirm new password" required />
+                  <button type="button" class="toggle-password" data-target="confirm-new-password">
+                    <i class="fas fa-eye"></i>
+                  </button>
+                </div>
+                <button type="submit" class="btn-submit" id="reset-password">Reset Password</button>
+              </div>
+
+              <!-- Success Message -->
+              <div class="reset-success" id="reset-success">
+                <i class="fas fa-check-circle"></i> Your password has been reset successfully!
+              </div>
+
+              <div class="back-to-login-from-reset">
+                <a href="#" id="back-to-login-from-reset">
+                  <i class="fas fa-arrow-left"></i>
+                  Back to Login
+                </a>
+              </div>
+            </form>
+          </div>
+
+          <!-- Trust Indicators -->
+          <div class="trust-indicators">
+            <div class="trust-item">
+              <i class="fas fa-lock"></i>
+              <span>256-bit SSL</span>
+            </div>
+            <div class="trust-item">
+              <i class="fas fa-shield-alt"></i>
+              <span>FDIC Insured</span>
+            </div>
+            <div class="trust-item">
+              <i class="fas fa-user-shield"></i>
+              <span>Privacy First</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="../app/login.js"></script>
+  <script src="../app/app.js"></script>
+ 
+  <script src="../app/admin.js"></script>
+</body>
 </html>
+
