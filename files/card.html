@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Cards - MSB</title>
+    <title>Cards - Milesbank</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
     <link rel="stylesheet" href="../styles/style.css" />
-    <link rel="stylesheet" href="../styles/layout.css">
+    <link rel="stylesheet" href="../styles/card.css">
 </head>
 <body>
     <div class="app">
@@ -18,8 +18,7 @@
               <i class="fa-brands fa-maxcdn"></i>
             </span>
             <h1 class="logo-title">
-              <span>Miles</span>
-              <span>SmartBank</span>
+              <span>Milesbank</span>
             </h1>
           </div>
           <div>
@@ -41,7 +40,7 @@
               Transfers
             </a>
             <a href="topup.html">
-              Top-up
+              Add Money
             </a>
             <a href="history.html">
               History
@@ -122,7 +121,7 @@
           </a>
           <a href="topup.html">
             <i class="fas fa-wallet"></i>
-            <span>Top-up</span>
+            <span>Add Money</span>
           </a>
           <a href="history.html">
             <i class="fas fa-history"></i>
@@ -152,7 +151,7 @@
             </a>
             <a href="topup.html">
               <i class="ph-check-square"></i>
-              <span>Top-up</span>
+              <span>Add Money</span>
             </a>
             <a href="transfer.html">
               <i class="ph-swap"></i>
@@ -172,9 +171,9 @@
             </a>
           </nav>
           <footer class="footer">
-            <h1>Miles<small>©</small></h1>
+            <h1>Milesbank<small>©</small></h1>
             <div>
-              Miles ©<br />
+              Milesbank ©<br />
               All Rights Reserved 2021
             </div>
           </footer>
@@ -197,13 +196,13 @@
 
             <!-- Active Cards Section -->
             <section class="cards-section">
-              <h2>Active Cards</h2>
+              <h2>My Cards</h2>
               <div class="cards-grid">
                 <!-- Visa Card -->
-                <div class="card-item visa">
-                  <div class="card-status">Active</div>
+                <div class="card-item visa" data-card="visa">
+                  <div class="card-status"></div>
                   <div class="card-header">
-                    <div class="card-type">Visa Debit</div>
+                    <div class="card-type">MilesBank</div>
                     <div class="card-logo">VISA</div>
                   </div>
                   <div class="card-number">•••• 4012</div>
@@ -211,17 +210,120 @@
                     <div class="card-holder">CLIENT NAME</div>
                     <div class="card-expiry">01/25</div>
                   </div>
-                  <div class="card-actions">
-                    <button class="card-action-btn" title="Freeze Card">
-                      <i class="fas fa-snowflake"></i>
-                    </button>
-                    <button class="card-action-btn view-details-btn" title="View Details">
-                      <i class="fas fa-eye"></i>
-                    </button>
+                </div>
+                <!-- Visa Card Controls -->
+                <div class="card-controls" data-card="visa">
+                  <button class="card-control-btn view" data-card="visa">
+                    <i class="fas fa-eye"></i> View Details
+                  </button>
+                  <button class="card-control-btn freeze" data-card="visa">
+                    <i class="fas fa-snowflake"></i> Freeze Card
+                  </button>
+                </div>
+
+                <!-- MasterCard -->
+                <div class="card-item mastercard" data-card="mastercard">
+                  <div class="card-status"></div>
+                  <div class="card-header">
+                    <div class="card-type">MilesBank</div>
+                    <div class="card-logo">MC</div>
+                  </div>
+                  <div class="card-number">•••• 5678</div>
+                  <div class="card-details">
+                    <div class="card-holder">CLIENT NAME</div>
+                    <div class="card-expiry">03/26</div>
                   </div>
                 </div>
+                <!-- MasterCard Controls -->
+                <div class="card-controls" data-card="mastercard">
+                  <button class="card-control-btn view" data-card="mastercard">
+                    <i class="fas fa-eye"></i> View Details
+                  </button>
+                  <button class="card-control-btn freeze" data-card="mastercard">
+                    <i class="fas fa-snowflake"></i> Freeze Card
+                  </button>
+                </div>
+
+                <!-- Virtual Card -->
+                <div class="card-item platinum" data-card="virtual">
+                  <div class="card-status"></div>
+                  <div class="card-header">
+                    <div class="card-type">MilesBank</div>
+                    <div class="card-logo">VERVE</div>
+                  </div>
+                  <div class="card-number">•••• 9012</div>
+                  <div class="card-details">
+                    <div class="card-holder">CLIENT NAME</div>
+                    <div class="card-expiry">12/24</div>
+                  </div>
+                </div>
+                <!-- Virtual Card Controls -->
+                <div class="card-controls" data-card="virtual">
+                  <button class="card-control-btn view" data-card="virtual">
+                    <i class="fas fa-eye"></i> View Details
+                  </button>
+                  <button class="card-control-btn freeze" data-card="virtual">
+                    <i class="fas fa-snowflake"></i> Freeze Card
+                  </button>
+                </div>
+
+                <!-- American Express Card -->
+                <div class="card-item amex" data-card="amex">
+                  <div class="card-status"></div>
+                  <div class="card-header">
+                    <div class="card-type">MilesBank</div>
+                    <div class="card-logo">AMEX</div>
+                  </div>
+                  <div class="card-number">•••• 3456</div>
+                  <div class="card-details">
+                    <div class="card-holder">CLIENT NAME</div>
+                    <div class="card-expiry">06/27</div>
+                  </div>
+                </div>
+                <!-- American Express Controls -->
+                <div class="card-controls" data-card="amex">
+                  <button class="card-control-btn view" data-card="amex">
+                    <i class="fas fa-eye"></i> View Details
+                  </button>
+                  <button class="card-control-btn freeze" data-card="amex">
+                    <i class="fas fa-snowflake"></i> Freeze Card
+                  </button>
+                </div>
+
+                <!-- Discover Card -->
+                <div class="card-item discover" data-card="discover">
+                  <div class="card-status"></div>
+                  <div class="card-header">
+                    <div class="card-type">MilesBank</div>
+                    <div class="card-logo">DISCOVER</div>
+                  </div>
+                  <div class="card-number">•••• 7890</div>
+                  <div class="card-details">
+                    <div class="card-holder">CLIENT NAME</div>
+                    <div class="card-expiry">09/26</div>
+                  </div>
+                </div>
+                <!-- Discover Card Controls -->
+                <div class="card-controls" data-card="discover">
+                  <button class="card-control-btn view" data-card="discover">
+                    <i class="fas fa-eye"></i> View Details
+                  </button>
+                  <button class="card-control-btn freeze" data-card="discover">
+                    <i class="fas fa-snowflake"></i> Freeze Card
+                  </button>
+                </div>
+              </div>
+
+              <!-- Card Details Container - External to cards -->
+              <div class="card-details-container">
                 <!-- Visa Card Details Panel -->
                 <div class="card-details-panel" id="visa-details">
+                  <div class="card-details-header">
+                    <h3 class="card-details-title">Visa Debit Card Details</h3>
+                    <button class="close-details" data-card="visa">
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
                   <div class="card-details-grid">
                     <div class="detail-item">
                       <div class="detail-label">Card Number</div>
@@ -233,7 +335,12 @@
                     </div>
                     <div class="detail-item">
                       <div class="detail-label">CVV</div>
-                      <div class="detail-value">123</div>
+                      <div class="sensitive-info">
+                        <span class="sensitive-value cvv-value">•••</span>
+                        <button class="toggle-sensitive" data-sensitive="cvv" data-card="visa">
+                          <i class="fas fa-eye"></i> Show
+                        </button>
+                      </div>
                     </div>
                     <div class="detail-item">
                       <div class="detail-label">Card Type</div>
@@ -246,33 +353,17 @@
                   </div>
                   <div class="pin-actions">
                     <button class="btn btn-sm btn-outline" id="changePinVisa">Change PIN</button>
-                    <button class="btn btn-sm btn-secondary">Show CVV</button>
                   </div>
                 </div>
 
-                <!-- MasterCard -->
-                <div class="card-item mastercard">
-                  <div class="card-status">Active</div>
-                  <div class="card-header">
-                    <div class="card-type">MasterCard</div>
-                    <div class="card-logo">MC</div>
-                  </div>
-                  <div class="card-number">•••• 5678</div>
-                  <div class="card-details">
-                    <div class="card-holder">CLIENT NAME</div>
-                    <div class="card-expiry">03/26</div>
-                  </div>
-                  <div class="card-actions">
-                    <button class="card-action-btn" title="Freeze Card">
-                      <i class="fas fa-snowflake"></i>
-                    </button>
-                    <button class="card-action-btn view-details-btn" title="View Details">
-                      <i class="fas fa-eye"></i>
-                    </button>
-                  </div>
-                </div>
                 <!-- MasterCard Details Panel -->
                 <div class="card-details-panel" id="mastercard-details">
+                  <div class="card-details-header">
+                    <h3 class="card-details-title">MasterCard Details</h3>
+                    <button class="close-details" data-card="mastercard">
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
                   <div class="card-details-grid">
                     <div class="detail-item">
                       <div class="detail-label">Card Number</div>
@@ -284,7 +375,12 @@
                     </div>
                     <div class="detail-item">
                       <div class="detail-label">CVV</div>
-                      <div class="detail-value">456</div>
+                      <div class="sensitive-info">
+                        <span class="sensitive-value cvv-value">•••</span>
+                        <button class="toggle-sensitive" data-sensitive="cvv" data-card="mastercard">
+                          <i class="fas fa-eye"></i> Show
+                        </button>
+                      </div>
                     </div>
                     <div class="detail-item">
                       <div class="detail-label">Card Type</div>
@@ -297,33 +393,17 @@
                   </div>
                   <div class="pin-actions">
                     <button class="btn btn-sm btn-outline" id="changePinMastercard">Change PIN</button>
-                    <button class="btn btn-sm btn-secondary">Show CVV</button>
                   </div>
                 </div>
 
-                <!-- Virtual Card -->
-                <div class="card-item platinum">
-                  <div class="card-status">Virtual</div>
-                  <div class="card-header">
-                    <div class="card-type">Virtual Card</div>
-                    <div class="card-logo">MSB</div>
-                  </div>
-                  <div class="card-number">•••• 9012</div>
-                  <div class="card-details">
-                    <div class="card-holder">CLIENT NAME</div>
-                    <div class="card-expiry">12/24</div>
-                  </div>
-                  <div class="card-actions">
-                    <button class="card-action-btn" title="Show Details">
-                      <i class="fas fa-eye"></i>
-                    </button>
-                    <button class="card-action-btn" title="Copy Card Number">
-                      <i class="fas fa-copy"></i>
-                    </button>
-                  </div>
-                </div>
                 <!-- Virtual Card Details Panel -->
                 <div class="card-details-panel" id="virtual-details">
+                  <div class="card-details-header">
+                    <h3 class="card-details-title">Virtual Card Details</h3>
+                    <button class="close-details" data-card="virtual">
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
                   <div class="card-details-grid">
                     <div class="detail-item">
                       <div class="detail-label">Card Number</div>
@@ -335,7 +415,12 @@
                     </div>
                     <div class="detail-item">
                       <div class="detail-label">CVV</div>
-                      <div class="detail-value">789</div>
+                      <div class="sensitive-info">
+                        <span class="sensitive-value cvv-value">•••</span>
+                        <button class="toggle-sensitive" data-sensitive="cvv" data-card="virtual">
+                          <i class="fas fa-eye"></i> Show
+                        </button>
+                      </div>
                     </div>
                     <div class="detail-item">
                       <div class="detail-label">Card Type</div>
@@ -348,33 +433,17 @@
                   </div>
                   <div class="pin-actions">
                     <button class="btn btn-sm btn-outline" id="changePinVirtual">Change PIN</button>
-                    <button class="btn btn-sm btn-secondary">Show CVV</button>
                   </div>
                 </div>
 
-                <!-- American Express Card -->
-                <div class="card-item amex">
-                  <div class="card-status">Active</div>
-                  <div class="card-header">
-                    <div class="card-type">American Express</div>
-                    <div class="card-logo">AMEX</div>
-                  </div>
-                  <div class="card-number">•••• 3456</div>
-                  <div class="card-details">
-                    <div class="card-holder">CLIENT NAME</div>
-                    <div class="card-expiry">06/27</div>
-                  </div>
-                  <div class="card-actions">
-                    <button class="card-action-btn" title="Freeze Card">
-                      <i class="fas fa-snowflake"></i>
-                    </button>
-                    <button class="card-action-btn view-details-btn" title="View Details">
-                      <i class="fas fa-eye"></i>
-                    </button>
-                  </div>
-                </div>
                 <!-- American Express Details Panel -->
                 <div class="card-details-panel" id="amex-details">
+                  <div class="card-details-header">
+                    <h3 class="card-details-title">American Express Card Details</h3>
+                    <button class="close-details" data-card="amex">
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
                   <div class="card-details-grid">
                     <div class="detail-item">
                       <div class="detail-label">Card Number</div>
@@ -386,7 +455,12 @@
                     </div>
                     <div class="detail-item">
                       <div class="detail-label">CID</div>
-                      <div class="detail-value">1234</div>
+                      <div class="sensitive-info">
+                        <span class="sensitive-value cid-value">••••</span>
+                        <button class="toggle-sensitive" data-sensitive="cid" data-card="amex">
+                          <i class="fas fa-eye"></i> Show
+                        </button>
+                      </div>
                     </div>
                     <div class="detail-item">
                       <div class="detail-label">Card Type</div>
@@ -399,33 +473,17 @@
                   </div>
                   <div class="pin-actions">
                     <button class="btn btn-sm btn-primary" id="setPinAmex">Set PIN</button>
-                    <button class="btn btn-sm btn-secondary">Show CID</button>
                   </div>
                 </div>
 
-                <!-- Discover Card -->
-                <div class="card-item discover">
-                  <div class="card-status">Active</div>
-                  <div class="card-header">
-                    <div class="card-type">Discover</div>
-                    <div class="card-logo">DISCOVER</div>
-                  </div>
-                  <div class="card-number">•••• 7890</div>
-                  <div class="card-details">
-                    <div class="card-holder">CLIENT NAME</div>
-                    <div class="card-expiry">09/26</div>
-                  </div>
-                  <div class="card-actions">
-                    <button class="card-action-btn" title="Freeze Card">
-                      <i class="fas fa-snowflake"></i>
-                    </button>
-                    <button class="card-action-btn view-details-btn" title="View Details">
-                      <i class="fas fa-eye"></i>
-                    </button>
-                  </div>
-                </div>
                 <!-- Discover Card Details Panel -->
                 <div class="card-details-panel" id="discover-details">
+                  <div class="card-details-header">
+                    <h3 class="card-details-title">Discover Card Details</h3>
+                    <button class="close-details" data-card="discover">
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
                   <div class="card-details-grid">
                     <div class="detail-item">
                       <div class="detail-label">Card Number</div>
@@ -437,7 +495,12 @@
                     </div>
                     <div class="detail-item">
                       <div class="detail-label">CVV</div>
-                      <div class="detail-value">567</div>
+                      <div class="sensitive-info">
+                        <span class="sensitive-value cvv-value">•••</span>
+                        <button class="toggle-sensitive" data-sensitive="cvv" data-card="discover">
+                          <i class="fas fa-eye"></i> Show
+                        </button>
+                      </div>
                     </div>
                     <div class="detail-item">
                       <div class="detail-label">Card Type</div>
@@ -450,7 +513,6 @@
                   </div>
                   <div class="pin-actions">
                     <button class="btn btn-sm btn-primary" id="setPinDiscover">Set PIN</button>
-                    <button class="btn btn-sm btn-secondary">Show CVV</button>
                   </div>
                 </div>
               </div>
@@ -767,6 +829,32 @@
       </div>
     </div>
 
+    <!-- PIN Verification Modal -->
+    <div class="modal-overlay" id="pinVerifyModal">
+      <div class="modal">
+        <div class="modal-header">
+          <h3 class="modal-title" id="pinVerifyTitle">Verify PIN</h3>
+          <button class="close-modal" id="closePinVerifyModal">&times;</button>
+        </div>
+        
+        <div class="form-group">
+          <label id="pinVerifyCardName">American Express •••• 3456</label>
+          <div class="pin-input-container">
+            <input type="password" maxlength="1" class="pin-input verify" data-index="0">
+            <input type="password" maxlength="1" class="pin-input verify" data-index="1">
+            <input type="password" maxlength="1" class="pin-input verify" data-index="2">
+            <input type="password" maxlength="1" class="pin-input verify" data-index="3">
+          </div>
+          <p class="pin-instructions">Enter your 4-digit PIN to view card details</p>
+        </div>
+
+        <div class="form-actions">
+          <button class="btn btn-secondary" id="cancelPinVerify">Cancel</button>
+          <button class="btn btn-primary" id="confirmPinVerify" disabled>Verify PIN</button>
+        </div>
+      </div>
+    </div>
+
     <!-- Set/Create PIN Modal -->
     <div class="modal-overlay" id="pinModal">
       <div class="modal">
@@ -786,7 +874,7 @@
           <p class="pin-instructions">Enter your 4-digit PIN</p>
         </div>
 
-        <div class="form-group" id="confirmPinGroup" style="display: none;">
+        <div class="form-group" id="confirmPinGroup">
           <label>Confirm PIN</label>
           <div class="pin-input-container">
             <input type="password" maxlength="1" class="pin-input confirm" data-index="0">
@@ -905,7 +993,7 @@
       </div>
     </div>
 
-    <script src="../app/app.js"></script>
+    <script src="../app/card.js"></script>
     <script src="https://unpkg.com/phosphor-icons"></script>
   </body>
-</html>
+</html>             

@@ -1,0 +1,1074 @@
+
+
+  /* Cards Page Specific Styles */
+      .cards-page {
+        padding: 1.5rem;
+      }
+
+      .cards-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+      }
+
+      .cards-header h1 {
+        color: #000080;
+        font-size: 1.75rem;
+        font-weight: 700;
+      }
+
+      .cards-actions {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .cards-section {
+        background: white;
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        margin-bottom: 2rem;
+      }
+
+      .cards-section h2 {
+        color: #000080;
+        margin-bottom: 1.5rem;
+        font-size: 1.25rem;
+        font-weight: 600;
+      }
+
+      /* Cards Grid */
+      .cards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+      }
+
+      .card-item {
+        background: linear-gradient(135deg, #000080, #4f46e5);
+        border-radius: 16px;
+        padding: 1.5rem;
+        color: white;
+        position: relative;
+        min-height: 200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        box-shadow: 0 8px 25px rgba(0, 0, 128, 0.15);
+        transition: transform 0.3s, box-shadow 0.3s;
+        overflow: hidden;
+      }
+
+      .card-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 35px rgba(0, 0, 128, 0.25);
+      }
+
+      .card-item.visa {
+        background: linear-gradient(135deg, #0c1e3c, #2bb6a8);
+      }
+
+      .card-item.mastercard {
+        background: linear-gradient(135deg, #eb001b 0%, #f79e1b 100%);
+      }
+
+      .card-item.platinum {
+        background: linear-gradient(135deg, #36375b, #60efff);
+      }
+
+      .card-item.gold {
+        background: linear-gradient(135deg, #d97706, #f59e0b);
+      }
+
+      .card-item.amex {
+        background: linear-gradient(135deg, #003a70, #d9d9d9);
+      }
+
+      .card-item.discover {
+        background: linear-gradient(135deg, #ff6000, #ff8c00);
+      }
+
+      .card-item.frozen {
+        opacity: 0.7;
+        filter: grayscale(0.5);
+      }
+
+      .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 2rem;
+      }
+
+      .card-type {
+        font-size: 0.875rem;
+        opacity: 0.9;
+      }
+
+      .card-logo {
+        font-size: 1.5rem;
+        font-weight: 700;
+      }
+
+      .card-number {
+        font-size: 1.25rem;
+        letter-spacing: 0.1em;
+        margin-bottom: 1.5rem;
+        font-family: monospace;
+      }
+
+      .card-details {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+      }
+
+      .card-holder {
+        font-size: 0.875rem;
+        opacity: 0.9;
+      }
+
+      .card-expiry {
+        font-size: 0.875rem;
+        opacity: 0.9;
+      }
+
+      .card-status {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: rgba(255, 255, 255, 0.2);
+        padding: 0.25rem 0.75rem;
+        border-radius: 12px;
+        font-size: 0.75rem;
+        font-weight: 500;
+      }
+
+      .card-status.frozen {
+        background: rgba(220, 38, 38, 0.2);
+        color: #fecaca;
+      }
+
+      /* Card Controls - External */
+      .card-controls {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1rem;
+        justify-content: center;
+      }
+
+      .card-control-btn {
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 500;
+        font-size: 0.875rem;
+        transition: all 0.3s;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .card-control-btn.view {
+        background: #000080;
+        color: white;
+      }
+
+      .card-control-btn.view:hover {
+        background: #0000a0;
+      }
+
+      .card-control-btn.freeze {
+        background: #f8f9fa;
+        color: #333;
+        border: 1px solid #ddd;
+      }
+
+      .card-control-btn.freeze:hover {
+        background: #e9ecef;
+      }
+
+      .card-control-btn.freeze.frozen {
+        background: #dc2626;
+        color: white;
+        border-color: #dc2626;
+      }
+
+      .card-control-btn.freeze.frozen:hover {
+        background: #b91c1c;
+      }
+
+      .card-control-btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+
+      /* Card Details Panel - External */
+      .card-details-container {
+        margin-top: 2rem;
+      }
+
+      .card-details-panel {
+        background: #f8f9fa;
+        border-radius: 12px;
+        padding: 1.5rem;
+        border: 1px solid #eee;
+        display: none;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      }
+
+      .card-details-panel.active {
+        display: block;
+        animation: fadeIn 0.3s ease-in-out;
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      .card-details-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid #eee;
+      }
+
+      .card-details-title {
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: #000080;
+      }
+
+      .close-details {
+        background: none;
+        border: none;
+        font-size: 1.25rem;
+        cursor: pointer;
+        color: #666;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.3s;
+      }
+
+      .close-details:hover {
+        background: #e9ecef;
+      }
+
+      .card-details-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .detail-item {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .detail-label {
+        font-size: 0.75rem;
+        color: #666;
+        margin-bottom: 0.5rem;
+        text-transform: uppercase;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+      }
+
+      .detail-value {
+        font-weight: 600;
+        color: #333;
+        font-size: 1rem;
+      }
+
+      .sensitive-info {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .sensitive-value {
+        font-family: monospace;
+        letter-spacing: 0.1em;
+      }
+
+      .toggle-sensitive {
+        background: none;
+        border: none;
+        color: #000080;
+        cursor: pointer;
+        font-size: 0.875rem;
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        transition: background 0.3s;
+      }
+
+      .toggle-sensitive:hover {
+        background: #e9ecef;
+      }
+
+      .card-pin-status {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 1.5rem;
+        padding: 1rem;
+        background: white;
+        border-radius: 8px;
+        border: 1px solid #eee;
+      }
+
+      .pin-status-badge {
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 600;
+      }
+
+      .pin-set {
+        background: #e7f6ec;
+        color: #0a9c4a;
+      }
+
+      .pin-not-set {
+        background: #fff4e6;
+        color: #ed8936;
+      }
+
+      .pin-actions {
+        display: flex;
+        gap: 1rem;
+        justify-content: flex-start;
+      }
+
+      /* Card Management */
+      .card-management {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .management-item {
+        background: #f8f9fa;
+        border-radius: 8px;
+        padding: 1.5rem;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s;
+        border: 1px solid #eee;
+      }
+
+      .management-item:hover {
+        border-color: #000080;
+        background: #f0f8ff;
+        transform: translateY(-2px);
+      }
+
+      .management-icon {
+        font-size: 2rem;
+        color: #000080;
+        margin-bottom: 1rem;
+      }
+
+      .management-title {
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: #333;
+      }
+
+      .management-description {
+        font-size: 0.875rem;
+        color: #666;
+      }
+
+      /* Available Cards */
+      .available-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+      }
+
+      .available-card {
+        background: white;
+        border: 1px solid #eee;
+        border-radius: 12px;
+        padding: 1.5rem;
+        text-align: center;
+        transition: all 0.3s;
+      }
+
+      .available-card:hover {
+        border-color: #000080;
+        box-shadow: 0 4px 15px rgba(0, 0, 128, 0.1);
+      }
+
+      .available-card.featured {
+        border: 2px solid #000080;
+        background: #f0f8ff;
+      }
+
+      .card-badge {
+        background: #000080;
+        color: white;
+        padding: 0.25rem 0.75rem;
+        border-radius: 12px;
+        font-size: 0.75rem;
+        font-weight: 500;
+        margin-bottom: 1rem;
+        display: inline-block;
+      }
+
+      .card-icon {
+        font-size: 3rem;
+        color: #000080;
+        margin-bottom: 1rem;
+      }
+
+      .card-name {
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: #333;
+      }
+
+      .card-features {
+        list-style: none;
+        margin: 1rem 0;
+        text-align: left;
+      }
+
+      .card-features li {
+        padding: 0.5rem 0;
+        font-size: 0.875rem;
+        color: #666;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .card-features li i {
+        color: #0a9c4a;
+      }
+
+      .card-annual-fee {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #000080;
+        margin: 1rem 0;
+      }
+
+      .card-annual-fee .period {
+        font-size: 0.875rem;
+        color: #666;
+        font-weight: normal;
+      }
+
+      /* Transaction History */
+      .transaction-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+
+      .transaction-item {
+        display: flex;
+        align-items: center;
+        padding: 1rem;
+        background: white;
+        border: 1px solid #eee;
+        border-radius: 8px;
+        transition: all 0.3s;
+      }
+
+      .transaction-item:hover {
+        border-color: #000080;
+        background: #f8f9fa;
+      }
+
+      .transaction-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 1rem;
+        flex-shrink: 0;
+      }
+
+      .transaction-icon.shopping {
+        background: #e7f6ec;
+        color: #0a9c4a;
+      }
+
+      .transaction-icon.food {
+        background: #fff4e6;
+        color: #ed8936;
+      }
+
+      .transaction-icon.transport {
+        background: #eef2ff;
+        color: #000080;
+      }
+
+      .transaction-icon.entertainment {
+        background: #fce7f3;
+        color: #db2777;
+      }
+
+      .transaction-details {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .transaction-title {
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+        color: #333;
+      }
+
+      .transaction-meta {
+        font-size: 0.875rem;
+        color: #666;
+      }
+
+      .transaction-amount {
+        text-align: right;
+        flex-shrink: 0;
+        margin-left: 1rem;
+      }
+
+      .amount {
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+        color: #e53e3e;
+      }
+
+      .transaction-date {
+        font-size: 0.875rem;
+        color: #666;
+      }
+
+      /* Spending Analytics */
+      .analytics-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 1.5rem;
+      }
+
+      .spending-chart {
+        background: #f8f9fa;
+        border-radius: 8px;
+        padding: 1.5rem;
+        min-height: 300px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .chart-placeholder {
+        text-align: center;
+        color: #666;
+      }
+
+      .chart-placeholder i {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        color: #ddd;
+      }
+
+      .spending-breakdown {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .spending-category {
+        display: flex;
+        align-items: center;
+        padding: 1rem;
+        background: white;
+        border: 1px solid #eee;
+        border-radius: 8px;
+      }
+
+      .category-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 1rem;
+        flex-shrink: 0;
+      }
+
+      .category-details {
+        flex: 1;
+      }
+
+      .category-name {
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+        color: #333;
+      }
+
+      .category-amount {
+        font-size: 0.875rem;
+        color: #666;
+      }
+
+      .category-percentage {
+        font-weight: 600;
+        color: #000080;
+      }
+
+      /* Buttons */
+      .btn {
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 500;
+        transition: background-color 0.3s;
+      }
+
+      .btn-primary {
+        background: #000080;
+        color: white;
+      }
+
+      .btn-primary:hover {
+        background: #0000a0;
+      }
+
+      .btn-secondary {
+        background: #f8f9fa;
+        color: #333;
+        border: 1px solid #ddd;
+      }
+
+      .btn-secondary:hover {
+        background: #e9ecef;
+      }
+
+      .btn-outline {
+        background: transparent;
+        color: #000080;
+        border: 1px solid #000080;
+      }
+
+      .btn-outline:hover {
+        background: #000080;
+        color: white;
+      }
+
+      .btn-sm {
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem;
+      }
+
+      /* Modal Styles */
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 2000;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s;
+      }
+
+      .modal-overlay.active {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .modal {
+        background: white;
+        border-radius: 12px;
+        padding: 2rem;
+        width: 90%;
+        max-width: 500px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        transform: translateY(-20px);
+        transition: transform 0.3s;
+        max-height: 90vh;
+        overflow-y: auto;
+      }
+
+      .modal-overlay.active .modal {
+        transform: translateY(0);
+      }
+
+      .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid #eee;
+      }
+
+      .modal-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #000080;
+      }
+
+      .close-modal {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: #666;
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        color: #333;
+      }
+
+      .form-group input,
+      .form-group select,
+      .form-group textarea {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 1rem;
+        transition: border-color 0.3s;
+      }
+
+      .form-group input:focus,
+      .form-group select:focus,
+      .form-group textarea:focus {
+        outline: none;
+        border-color: #000080;
+      }
+
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+      }
+
+      .form-actions {
+        display: flex;
+        gap: 1rem;
+        justify-content: flex-end;
+        margin-top: 2rem;
+      }
+
+      /* PIN Input Styles */
+      .pin-input-container {
+        display: flex;
+        gap: 0.5rem;
+        justify-content: center;
+        margin: 1rem 0;
+      }
+
+      .pin-input {
+        width: 50px;
+        height: 50px;
+        text-align: center;
+        font-size: 1.5rem;
+        border: 2px solid #ddd;
+        border-radius: 8px;
+        background: white;
+        transition: border-color 0.3s;
+      }
+
+      .pin-input:focus {
+        border-color: #000080;
+        outline: none;
+      }
+
+      .pin-input.filled {
+        border-color: #000080;
+        background: #f0f8ff;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .cards-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .card-management {
+          grid-template-columns: 1fr;
+        }
+
+        .available-cards {
+          grid-template-columns: 1fr;
+        }
+
+        .analytics-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .cards-header {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 1rem;
+        }
+
+        .cards-actions {
+          width: 100%;
+          justify-content: space-between;
+        }
+
+        .form-row {
+          grid-template-columns: 1fr;
+        }
+
+        .form-actions {
+          flex-direction: column;
+        }
+
+        .btn {
+          width: 100%;
+        }
+
+        .pin-input-container {
+          gap: 0.25rem;
+        }
+
+        .pin-input {
+          width: 40px;
+          height: 40px;
+          font-size: 1.25rem;
+        }
+
+        .card-details-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .pin-actions {
+          flex-direction: column;
+        }
+
+        .card-controls {
+          flex-direction: column;
+        }
+      }
+
+      /* Existing Header Styles */
+      .app-header-actions {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .user-profile {
+        background: none;
+        border: none;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        color: inherit;
+        font-family: inherit;
+        font-size: inherit;
+      }
+
+      .user-profile:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+
+      .user-dropdown {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        min-width: 200px;
+        z-index: 1000;
+        margin-top: 0.5rem;
+        display: none;
+        overflow: hidden;
+      }
+
+      .user-dropdown.show {
+        display: block;
+        animation: fadeIn 0.2s ease-in-out;
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      .user-dropdown a {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.75rem 1rem;
+        color: #333;
+        text-decoration: none;
+        transition: background-color 0.3s;
+        border-bottom: 1px solid #f0f0f0;
+      }
+
+      .user-dropdown a:last-child {
+        border-bottom: none;
+      }
+
+      .user-dropdown a:hover {
+        background-color: #f8f9fa;
+        color: #000080;
+      }
+
+      .user-dropdown i {
+        width: 16px;
+        text-align: center;
+        color: #666;
+      }
+
+      /* Mobile Styles */
+      .app-header-mobile {
+        display: none;
+      }
+
+      .mobile-menu {
+        position: fixed;
+        top: 0;
+        right: -300px;
+        width: 280px;
+        height: 100vh;
+        background: white;
+        box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
+        z-index: 1001;
+        transition: right 0.3s ease-in-out;
+        padding: 2rem 1rem;
+        overflow-y: auto;
+      }
+
+      .mobile-menu.show {
+        right: 0;
+      }
+
+      .mobile-menu-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        display: none;
+      }
+
+      .mobile-menu-overlay.show {
+        display: block;
+      }
+
+      .mobile-menu-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid #eee;
+      }
+
+      .mobile-user-info {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+        padding: 1rem;
+        background: #f8f9fa;
+        border-radius: 8px;
+      }
+
+      .mobile-user-info i {
+        font-size: 1.5rem;
+        color: #000080;
+      }
+
+      .mobile-nav {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .mobile-nav a {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.75rem 1rem;
+        color: #333;
+        text-decoration: none;
+        border-radius: 6px;
+        transition: background-color 0.3s;
+      }
+
+      .mobile-nav a:hover,
+      .mobile-nav a.active {
+        background-color: #000080;
+        color: white;
+      }
+
+      .mobile-nav i {
+        width: 20px;
+        text-align: center;
+      }
+
+      @media (max-width: 768px) {
+        .user-profile {
+          display: none;
+        }
+
+        .app-header-mobile {
+          display: block;
+        }
+
+        .app-header-navigation {
+          display: none;
+        }
+
+        .app-header-actions-buttons {
+          display: none;
+        }
+      }
+
+      @media (min-width: 769px) {
+        .app-header-mobile {
+          display: none;
+        }
+
+        .mobile-menu,
+        .mobile-menu-overlay {
+          display: none !important;
+        }
+      }
+    /*end of cards*/
