@@ -9,113 +9,120 @@
   <link rel="stylesheet" href="./styles/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
   <link rel="stylesheet" href="./styles/login.css">
+  <link rel="stylesheet" href="./styles/forgot-password.css">
+  
   <style>
-    /* Additional styles for forgot password functionality */
-    .forgot-password-form {
-      display: none;
+    /* Toast Notification Styles */
+    .toast-notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 10000;
+      animation: slideInRight 0.3s ease;
     }
     
-    .forgot-password-form.show {
-      display: block;
-    }
-    
-    .reset-steps {
-      margin-bottom: 1.5rem;
-      text-align: center;
-    }
-    
-    .step-indicator {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 1rem;
-    }
-    
-    .step {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      background-color: var(--gray-300);
+    .toast {
+      background: white;
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 12px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
       display: flex;
       align-items: center;
-      justify-content: center;
-      margin: 0 10px;
-      font-weight: bold;
-      color: white;
+      gap: 12px;
+      min-width: 300px;
+      max-width: 400px;
+      border-left: 4px solid;
+      animation: fadeInOut 0.3s ease;
     }
     
-    .step.active {
-      background-color: var(--primary-color);
+    .toast.success {
+      border-left-color: #28a745;
     }
     
-    .step.completed {
-      background-color: var(--success-color);
+    .toast.success i {
+      color: #28a745;
     }
     
-    .step-label {
-      font-size: 0.75rem;
-      text-align: center;
-      margin-top: 0.5rem;
-      color: var(--gray-500);
+    .toast.error {
+      border-left-color: #dc3545;
     }
     
-    .step-label.active {
-      color: var(--primary-color);
-      font-weight: bold;
+    .toast.error i {
+      color: #dc3545;
     }
     
-    .verification-code-container {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 1rem;
+    .toast.warning {
+      border-left-color: #ffc107;
     }
     
-    .verification-input {
-      width: 50px;
-      height: 60px;
-      text-align: center;
-      font-size: 1.5rem;
-      border: 2px solid var(--gray-300);
-      border-radius: 8px;
-      background-color: white;
+    .toast.warning i {
+      color: #ffc107;
     }
     
-    .verification-input:focus {
-      border-color: var(--primary-color);
-      outline: none;
+    .toast.info {
+      border-left-color: #17a2b8;
     }
     
-    .resend-code {
-      text-align: center;
-      margin-top: 1rem;
-      font-size: 0.875rem;
+    .toast.info i {
+      color: #17a2b8;
     }
     
-    .resend-code a {
-      color: var(--primary-color);
-      text-decoration: none;
+    .toast-content {
+      flex: 1;
+      font-size: 14px;
+      color: #333;
     }
     
-    .success-message {
-      background-color: #d4edda;
-      color: #155724;
-      padding: 12px;
-      border-radius: 8px;
-      margin-bottom: 1rem;
-      text-align: center;
-      display: none;
+    .toast-close {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #999;
+      font-size: 16px;
+      padding: 0;
+      margin-left: 8px;
     }
     
-    .back-to-login {
-      text-align: center;
-      margin-top: 1rem;
+    .toast-close:hover {
+      color: #333;
     }
     
-    .back-to-login a {
-      color: var(--primary-color);
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
+    @keyframes slideInRight {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+    
+    @keyframes fadeInOut {
+      0% { opacity: 0; transform: translateX(100%); }
+      10% { opacity: 1; transform: translateX(0); }
+      90% { opacity: 1; transform: translateX(0); }
+      100% { opacity: 0; transform: translateX(100%); }
+    }
+    
+    /* Demo credentials hint */
+    .demo-hint {
+      background: #f0f7ff;
+      border-radius: 12px;
+      padding: 12px 16px;
+      margin-top: 16px;
+      font-size: 12px;
+      border: 1px solid #d4e4f5;
+      color: #1e5f7a;
+    }
+    
+    .demo-hint i {
+      margin-right: 8px;
+    }
+    
+    .demo-hint strong {
+      color: #0a2540;
     }
   </style>
 </head>
@@ -230,25 +237,9 @@
               <div class="form-group">
                 <label for="login-password">Password</label>
                 <input type="password" id="login-password" placeholder="Enter your password" required />
-                <button type="button" class="toggle-password" data-target="login-password">
-                  <i class="fas fa-eye"></i>
+                <button type="button" class="toggle-password" data-target="login-password" title="Toggle password visibility">
+                  <i class="fas fa-eye" aria-hidden="true"></i>
                 </button>
-              </div>
-
-              <!-- Biometric Login Option -->
-              <div class="biometric-options" id="biometric-login" style="display: none;">
-                <div class="biometric-toggle">
-                  <div class="biometric-info">
-                    <i class="fas fa-fingerprint biometric-icon"></i>
-                    <div class="biometric-text">
-                      <h4>Biometric Login</h4>
-                      <p>Use fingerprint or face recognition</p>
-                    </div>
-                  </div>
-                  <button type="button" class="btn-submit" style="margin: 0; padding: 0.5rem 1rem;" id="use-biometric">
-                    Use Biometric
-                  </button>
-                </div>
               </div>
 
               <div class="checkbox-group">
@@ -265,6 +256,12 @@
               <p class="alt-text">
                 New to Miles SmartBank? <a href="#" id="go-signup">Create account</a>
               </p>
+              
+              <!-- Demo Credentials Hint -->
+              <div class="demo-hint">
+                <i class="fas fa-info-circle"></i>
+                <strong>Demo Mode:</strong> Use any email + password (min 1 char) or try <strong>demo@milessmartbank.com</strong> / <strong>demo123</strong>
+              </div>
             </form>
 
             <!-- SIGNUP FORM -->
@@ -308,18 +305,18 @@
                   <span class="country-code">+1</span>
                   <input type="tel" id="mobile" class="mobile-input" placeholder="(555) 123-4567" required />
                 </div>
-                <div class="success-message" id="mobile-success" style="display: none;">
+                <div class="success-message hidden-display" id="mobile-success">
                   <i class="fas fa-check-circle"></i> Mobile number verified
                 </div>
               </div>
 
               <div class="form-group">
-                <label for="bvn">BVN (Bank Verification Number) <small style="color: var(--gray-500);">- Optional</small></label>
+                <label for="bvn">BVN (Bank Verification Number) <small class="optional-label">- Optional</small></label>
                 <input type="text" id="bvn" placeholder="Enter 11-digit BVN" maxlength="11" />
-                <div class="success-message" id="bvn-success" style="display: none;">
+                <div class="success-message hidden-display" id="bvn-success">
                   <i class="fas fa-check-circle"></i> BVN verified successfully
                 </div>
-                <div style="font-size: 0.75rem; color: var(--gray-500); margin-top: 0.5rem;">
+                <div class="helper-text">
                   Adding BVN enhances security and speeds up account verification
                 </div>
               </div>
@@ -327,13 +324,13 @@
               <div class="form-group">
                 <label for="signup-password">Create Password *</label>
                 <input type="password" id="signup-password" placeholder="At least 8 characters" required />
-                <button type="button" class="toggle-password" data-target="signup-password">
-                  <i class="fas fa-eye"></i>
+                <button type="button" class="toggle-password" data-target="signup-password" title="Toggle password visibility">
+                  <i class="fas fa-eye" aria-hidden="true"></i>
                 </button>
                 <div class="password-strength">
                   <div class="strength-bar" id="password-strength-bar"></div>
                 </div>
-                <div id="password-rules" style="font-size: 0.75rem; color: var(--gray-500); margin-top: 0.5rem;">
+                <div id="password-rules" class="password-rules">
                   Use 8+ characters with mix of uppercase, lowercase, numbers & symbols
                 </div>
               </div>
@@ -341,26 +338,9 @@
               <div class="form-group">
                 <label for="signup-confirm">Confirm Password *</label>
                 <input type="password" id="signup-confirm" placeholder="Re-enter password" required />
-                <button type="button" class="toggle-password" data-target="signup-confirm">
-                  <i class="fas fa-eye"></i>
+                <button type="button" class="toggle-password" data-target="signup-confirm" title="Toggle password visibility" aria-label="Toggle password visibility">
+                  <i class="fas fa-eye" aria-hidden="true"></i>
                 </button>
-              </div>
-
-              <!-- Biometric Enrollment -->
-              <div class="biometric-options">
-                <div class="biometric-toggle">
-                  <div class="biometric-info">
-                    <i class="fas fa-fingerprint biometric-icon"></i>
-                    <div class="biometric-text">
-                      <h4>Enable Biometric Authentication</h4>
-                      <p>Use fingerprint or face recognition for faster login</p>
-                    </div>
-                  </div>
-                  <label class="toggle-switch">
-                    <input type="checkbox" id="enable-biometric">
-                    <span class="toggle-slider"></span>
-                  </label>
-                </div>
               </div>
 
               <div class="checkbox-group">
@@ -411,16 +391,16 @@
               </div>
 
               <!-- Step 2: Verification Code -->
-              <div class="form-step" id="step-2-content" style="display: none;">
+              <div class="form-step hidden-display" id="step-2-content">
                 <div class="form-group">
                   <p>We've sent a 6-digit verification code to your email. Please enter it below:</p>
                   <div class="verification-code-container">
-                    <input type="text" class="verification-input" maxlength="1" data-index="0">
-                    <input type="text" class="verification-input" maxlength="1" data-index="1">
-                    <input type="text" class="verification-input" maxlength="1" data-index="2">
-                    <input type="text" class="verification-input" maxlength="1" data-index="3">
-                    <input type="text" class="verification-input" maxlength="1" data-index="4">
-                    <input type="text" class="verification-input" maxlength="1" data-index="5">
+                    <input type="text" class="verification-input" maxlength="1" data-index="0" aria-label="Verification code digit 1" placeholder="0">
+                    <input type="text" class="verification-input" maxlength="1" data-index="1" aria-label="Verification code digit 2" placeholder="0">
+                    <input type="text" class="verification-input" maxlength="1" data-index="2" aria-label="Verification code digit 3" placeholder="0">
+                    <input type="text" class="verification-input" maxlength="1" data-index="3" aria-label="Verification code digit 4" placeholder="0">
+                    <input type="text" class="verification-input" maxlength="1" data-index="4" aria-label="Verification code digit 5" placeholder="0">
+                    <input type="text" class="verification-input" maxlength="1" data-index="5" aria-label="Verification code digit 6" placeholder="0">
                   </div>
                 </div>
                 <div class="resend-code">
@@ -430,12 +410,12 @@
               </div>
 
               <!-- Step 3: New Password -->
-              <div class="form-step" id="step-3-content" style="display: none;">
+              <div class="form-step hidden-display" id="step-3-content">
                 <div class="form-group">
                   <label for="new-password">New Password</label>
                   <input type="password" id="new-password" placeholder="Enter new password" required />
-                  <button type="button" class="toggle-password" data-target="new-password">
-                    <i class="fas fa-eye"></i>
+                  <button type="button" class="toggle-password" data-target="new-password" title="Toggle password visibility">
+                    <i class="fas fa-eye" aria-hidden="true"></i>
                   </button>
                   <div class="password-strength">
                     <div class="strength-bar" id="new-password-strength-bar"></div>
@@ -444,8 +424,8 @@
                 <div class="form-group">
                   <label for="confirm-new-password">Confirm New Password</label>
                   <input type="password" id="confirm-new-password" placeholder="Confirm new password" required />
-                  <button type="button" class="toggle-password" data-target="confirm-new-password">
-                    <i class="fas fa-eye"></i>
+                  <button type="button" class="toggle-password" data-target="confirm-new-password" title="Toggle password visibility">
+                    <i class="fas fa-eye" aria-hidden="true"></i>
                   </button>
                 </div>
                 <button type="submit" class="btn-submit" id="reset-password">Reset Password</button>
@@ -486,85 +466,220 @@
   </div>
 
   <script>
-    // Forgot Password Functionality
+    // ======================== TOAST NOTIFICATION SYSTEM ========================
+    function showToast(message, type = 'info', duration = 3000) {
+      const toastContainer = document.getElementById('toast-container') || (() => {
+        const container = document.createElement('div');
+        container.id = 'toast-container';
+        container.className = 'toast-notification';
+        document.body.appendChild(container);
+        return container;
+      })();
+      
+      const toast = document.createElement('div');
+      toast.className = `toast ${type}`;
+      
+      let icon = 'fa-info-circle';
+      if (type === 'success') icon = 'fa-check-circle';
+      if (type === 'error') icon = 'fa-exclamation-circle';
+      if (type === 'warning') icon = 'fa-exclamation-triangle';
+      
+      toast.innerHTML = `
+        <i class="fas ${icon}"></i>
+        <div class="toast-content">${message}</div>
+        <button class="toast-close">&times;</button>
+      `;
+      
+      toastContainer.appendChild(toast);
+      
+      const closeBtn = toast.querySelector('.toast-close');
+      closeBtn.addEventListener('click', () => {
+        toast.remove();
+      });
+      
+      setTimeout(() => {
+        toast.remove();
+      }, duration);
+    }
+    
+    // ======================== CORE FUNCTIONALITY ========================
     document.addEventListener('DOMContentLoaded', function() {
-      const forgotPasswordLink = document.getElementById('forgot-password');
+      
+      // ---------- TOGGLE BETWEEN LOGIN & SIGNUP ----------
+      const loginBtn = document.getElementById('login-btn');
+      const signupBtn = document.getElementById('signup-btn');
       const loginForm = document.getElementById('login-form');
+      const signupForm = document.getElementById('signup-form');
+      const goSignupLink = document.getElementById('go-signup');
+      const goLoginLink = document.getElementById('go-login');
+      
+      function showLoginForm() {
+        loginForm.classList.add('show');
+        signupForm.classList.remove('show');
+        loginBtn.classList.add('active');
+        signupBtn.classList.remove('active');
+      }
+      
+      function showSignupForm() {
+        signupForm.classList.add('show');
+        loginForm.classList.remove('show');
+        signupBtn.classList.add('active');
+        loginBtn.classList.remove('active');
+      }
+      
+      loginBtn.addEventListener('click', showLoginForm);
+      signupBtn.addEventListener('click', showSignupForm);
+      if (goSignupLink) goSignupLink.addEventListener('click', (e) => { e.preventDefault(); showSignupForm(); });
+      if (goLoginLink) goLoginLink.addEventListener('click', (e) => { e.preventDefault(); showLoginForm(); });
+      
+      // ---------- PASSWORD TOGGLE VISIBILITY (all forms) ----------
+      document.querySelectorAll('.toggle-password').forEach(button => {
+        button.addEventListener('click', function() {
+          const targetId = this.getAttribute('data-target');
+          const input = document.getElementById(targetId);
+          if (input) {
+            const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+            input.setAttribute('type', type);
+            this.querySelector('i').classList.toggle('fa-eye');
+            this.querySelector('i').classList.toggle('fa-eye-slash');
+          }
+        });
+      });
+      
+      // ---------- PASSWORD STRENGTH METER (signup) ----------
+      const signupPassword = document.getElementById('signup-password');
+      const strengthBar = document.getElementById('password-strength-bar');
+      
+      function evaluateStrength(password) {
+        let score = 0;
+        if (password.length >= 8) score++;
+        if (password.match(/[A-Z]/)) score++;
+        if (password.match(/[a-z]/)) score++;
+        if (password.match(/[0-9]/)) score++;
+        if (password.match(/[^A-Za-z0-9]/)) score++;
+        let width = (score / 5) * 100;
+        let color = '#dc3545';
+        if (score >= 4) color = '#28a745';
+        else if (score >= 3) color = '#ffc107';
+        else if (score >= 2) color = '#fd7e14';
+        return { width, color };
+      }
+      
+      if (signupPassword && strengthBar) {
+        signupPassword.addEventListener('input', function() {
+          const { width, color } = evaluateStrength(this.value);
+          strengthBar.style.width = width + '%';
+          strengthBar.style.backgroundColor = color;
+        });
+      }
+      
+      // ---------- SUPPORT PAGE TOGGLE ----------
+      const supportLink = document.getElementById('support-link');
+      const supportPage = document.getElementById('support-page');
+      const authSection = document.getElementById('auth-section');
+      const backToLoginBtn = document.getElementById('back-to-login');
+      
+      if (supportLink && supportPage && authSection) {
+        supportLink.addEventListener('click', (e) => {
+          e.preventDefault();
+          authSection.style.display = 'none';
+          supportPage.style.display = 'block';
+        });
+        
+        if (backToLoginBtn) {
+          backToLoginBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            supportPage.style.display = 'none';
+            authSection.style.display = 'flex';
+          });
+        }
+      }
+      
+      // ---------- FORGOT PASSWORD FUNCTIONALITY (complete) ----------
+      const forgotPasswordLink = document.getElementById('forgot-password');
       const forgotPasswordForm = document.getElementById('forgot-password-form');
       const backToLoginFromReset = document.getElementById('back-to-login-from-reset');
       const sendResetCodeBtn = document.getElementById('send-reset-code');
       const verifyCodeBtn = document.getElementById('verify-code');
       const resetPasswordBtn = document.getElementById('reset-password');
       const resendCodeLink = document.getElementById('resend-code');
-      const resetSuccess = document.getElementById('reset-success');
+      const resetSuccessDiv = document.getElementById('reset-success');
       
-      // Step elements
       const step1Content = document.getElementById('step-1-content');
       const step2Content = document.getElementById('step-2-content');
       const step3Content = document.getElementById('step-3-content');
-      
       const step1 = document.getElementById('step-1');
       const step2 = document.getElementById('step-2');
       const step3 = document.getElementById('step-3');
-      
       const stepLabel1 = document.getElementById('step-label-1');
       const stepLabel2 = document.getElementById('step-label-2');
       const stepLabel3 = document.getElementById('step-label-3');
-      
-      // Verification code inputs
       const verificationInputs = document.querySelectorAll('.verification-input');
       
-      // Show forgot password form
-      forgotPasswordLink.addEventListener('click', function(e) {
-        e.preventDefault();
-        loginForm.classList.remove('show');
-        forgotPasswordForm.classList.add('show');
-        resetForm();
-      });
+      // show forgot form
+      if (forgotPasswordLink) {
+        forgotPasswordLink.addEventListener('click', function(e) {
+          e.preventDefault();
+          loginForm.classList.remove('show');
+          forgotPasswordForm.classList.add('show');
+          resetForm();
+        });
+      }
       
-      // Back to login from reset form
-      backToLoginFromReset.addEventListener('click', function(e) {
-        e.preventDefault();
-        forgotPasswordForm.classList.remove('show');
-        loginForm.classList.add('show');
-      });
+      if (backToLoginFromReset) {
+        backToLoginFromReset.addEventListener('click', function(e) {
+          e.preventDefault();
+          forgotPasswordForm.classList.remove('show');
+          loginForm.classList.add('show');
+        });
+      }
       
-      // Send reset code
-      sendResetCodeBtn.addEventListener('click', function() {
-        const email = document.getElementById('reset-email').value;
+      function resetForm() {
+        if (step1Content) step1Content.style.display = 'block';
+        if (step2Content) step2Content.style.display = 'none';
+        if (step3Content) step3Content.style.display = 'none';
+        if (resetSuccessDiv) resetSuccessDiv.style.display = 'none';
         
-        if (!email) {
-          alert('Please enter your email address');
-          return;
-        }
+        if (step1) { step1.classList.add('active'); step1.classList.remove('completed'); }
+        if (step2) { step2.classList.remove('active', 'completed'); }
+        if (step3) { step3.classList.remove('active', 'completed'); }
+        if (stepLabel1) stepLabel1.classList.add('active');
+        if (stepLabel2) stepLabel2.classList.remove('active');
+        if (stepLabel3) stepLabel3.classList.remove('active');
         
-        // In a real application, you would send this to your backend
-        console.log('Sending reset code to:', email);
-        
-        // Move to step 2
-        step1Content.style.display = 'none';
-        step2Content.style.display = 'block';
-        
-        // Update step indicators
-        step1.classList.remove('active');
-        step1.classList.add('completed');
-        step2.classList.add('active');
-        
-        stepLabel1.classList.remove('active');
-        stepLabel2.classList.add('active');
-        
-        // Focus first verification input
-        verificationInputs[0].focus();
-      });
+        const resetEmail = document.getElementById('reset-email');
+        if (resetEmail) resetEmail.value = '';
+        verificationInputs.forEach(input => { input.value = ''; });
+        const newPw = document.getElementById('new-password');
+        const confirmPw = document.getElementById('confirm-new-password');
+        if (newPw) newPw.value = '';
+        if (confirmPw) confirmPw.value = '';
+      }
       
-      // Handle verification code input
+      if (sendResetCodeBtn) {
+        sendResetCodeBtn.addEventListener('click', function() {
+          const email = document.getElementById('reset-email').value;
+          if (!email) { 
+            showToast('Please enter your email address', 'error');
+            return; 
+          }
+          showToast(`Reset code sent to ${email}`, 'success');
+          if (step1Content) step1Content.style.display = 'none';
+          if (step2Content) step2Content.style.display = 'block';
+          if (step1) { step1.classList.remove('active'); step1.classList.add('completed'); }
+          if (step2) step2.classList.add('active');
+          if (stepLabel1) stepLabel1.classList.remove('active');
+          if (stepLabel2) stepLabel2.classList.add('active');
+          if (verificationInputs[0]) verificationInputs[0].focus();
+        });
+      }
+      
       verificationInputs.forEach((input, index) => {
         input.addEventListener('input', function() {
           if (this.value.length === 1 && index < verificationInputs.length - 1) {
             verificationInputs[index + 1].focus();
           }
         });
-        
         input.addEventListener('keydown', function(e) {
           if (e.key === 'Backspace' && this.value.length === 0 && index > 0) {
             verificationInputs[index - 1].focus();
@@ -572,105 +687,200 @@
         });
       });
       
-      // Verify code
-      verifyCodeBtn.addEventListener('click', function() {
-        let code = '';
-        verificationInputs.forEach(input => {
-          code += input.value;
+      if (verifyCodeBtn) {
+        verifyCodeBtn.addEventListener('click', function() {
+          let code = '';
+          verificationInputs.forEach(input => { code += input.value; });
+          if (code.length !== 6) { 
+            showToast('Please enter the complete 6-digit code', 'error');
+            return; 
+          }
+          showToast('Code verified successfully!', 'success');
+          if (step2Content) step2Content.style.display = 'none';
+          if (step3Content) step3Content.style.display = 'block';
+          if (step2) { step2.classList.remove('active'); step2.classList.add('completed'); }
+          if (step3) step3.classList.add('active');
+          if (stepLabel2) stepLabel2.classList.remove('active');
+          if (stepLabel3) stepLabel3.classList.add('active');
         });
+      }
+      
+      if (resendCodeLink) {
+        resendCodeLink.addEventListener('click', function(e) {
+          e.preventDefault();
+          showToast('A new verification code has been sent to your email', 'info');
+          verificationInputs.forEach(input => { input.value = ''; });
+          if (verificationInputs[0]) verificationInputs[0].focus();
+        });
+      }
+      
+      if (resetPasswordBtn) {
+        resetPasswordBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          const newPassword = document.getElementById('new-password').value;
+          const confirmPassword = document.getElementById('confirm-new-password').value;
+          if (!newPassword || !confirmPassword) { 
+            showToast('Please fill in all fields', 'error');
+            return; 
+          }
+          if (newPassword !== confirmPassword) { 
+            showToast('Passwords do not match', 'error');
+            return; 
+          }
+          showToast('Password reset successfully!', 'success');
+          if (step3Content) step3Content.style.display = 'none';
+          if (resetSuccessDiv) resetSuccessDiv.style.display = 'block';
+          if (step3) { step3.classList.remove('active'); step3.classList.add('completed'); }
+          if (stepLabel3) stepLabel3.classList.remove('active');
+          
+          setTimeout(() => {
+            forgotPasswordForm.classList.remove('show');
+            loginForm.classList.add('show');
+          }, 2000);
+        });
+      }
+      
+      // ---------- SIGNUP VALIDATION & REDIRECT ----------
+      const signupSubmitBtn = document.getElementById('signup-submit');
+      
+      function validateSignup() {
+        const firstName = document.getElementById('first-name')?.value.trim();
+        const lastName = document.getElementById('last-name')?.value.trim();
+        const email = document.getElementById('signup-email')?.value.trim();
+        const gender = document.getElementById('gender')?.value;
+        const mobile = document.getElementById('mobile')?.value.trim();
+        const password = document.getElementById('signup-password')?.value;
+        const confirm = document.getElementById('signup-confirm')?.value;
+        const agreeTerms = document.getElementById('agree-terms')?.checked;
         
-        if (code.length !== 6) {
-          alert('Please enter the complete 6-digit code');
-          return;
-        }
+        if (!firstName) { showToast('First name is required', 'error'); return false; }
+        if (!lastName) { showToast('Last name is required', 'error'); return false; }
+        if (!email) { showToast('Email address is required', 'error'); return false; }
+        if (!email.includes('@') || !email.includes('.')) { showToast('Please enter a valid email address', 'error'); return false; }
+        if (!gender) { showToast('Please select your gender', 'error'); return false; }
+        if (!mobile) { showToast('Mobile number is required', 'error'); return false; }
+        if (!password) { showToast('Please create a password', 'error'); return false; }
+        if (password.length < 8) { showToast('Password must be at least 8 characters', 'error'); return false; }
+        if (password !== confirm) { showToast('Passwords do not match', 'error'); return false; }
+        if (!agreeTerms) { showToast('You must agree to the Terms of Service and Privacy Policy', 'error'); return false; }
         
-        // In a real application, you would verify this code with your backend
-        console.log('Verifying code:', code);
+        // Store user data
+        const userData = {
+          firstName: firstName,
+          lastName: lastName,
+          fullName: `${firstName} ${lastName}`,
+          email: email,
+          gender: gender,
+          mobile: mobile,
+          bvn: document.getElementById('bvn')?.value || '',
+          createdAt: new Date().toISOString()
+        };
         
-        // Move to step 3
-        step2Content.style.display = 'none';
-        step3Content.style.display = 'block';
+        sessionStorage.setItem('userData', JSON.stringify(userData));
+        sessionStorage.setItem('isLoggedIn', 'true');
+        sessionStorage.setItem('justSignedUp', 'true');
         
-        // Update step indicators
-        step2.classList.remove('active');
-        step2.classList.add('completed');
-        step3.classList.add('active');
-        
-        stepLabel2.classList.remove('active');
-        stepLabel3.classList.add('active');
+        return true;
+      }
+      
+      if (signupSubmitBtn) {
+        signupSubmitBtn.addEventListener('click', function(event) {
+          event.preventDefault();
+          if (validateSignup()) {
+            showToast('Account created successfully! Redirecting to dashboard...', 'success', 1500);
+            setTimeout(() => {
+              window.location.href = 'dashboard.html';
+            }, 1500);
+          }
+        });
+      }
+      
+      // ---------- LOGIN WITH DEMO MODE (accepts any credentials) ----------
+      const loginSubmit = document.getElementById('login-submit');
+      if (loginSubmit) {
+        loginSubmit.addEventListener('click', function(e) {
+          e.preventDefault();
+          const loginEmail = document.getElementById('login-email')?.value.trim();
+          const loginPassword = document.getElementById('login-password')?.value;
+          
+          if (!loginEmail) { 
+            showToast('Please enter your email', 'error');
+            return; 
+          }
+          if (!loginPassword) { 
+            showToast('Please enter your password', 'error');
+            return; 
+          }
+          
+          // Demo mode - accept any credentials
+          // For better UX, create a demo user profile
+          const demoUserData = {
+            firstName: loginEmail.split('@')[0] || 'Demo',
+            lastName: 'User',
+            fullName: `${loginEmail.split('@')[0] || 'Demo'} User`,
+            email: loginEmail,
+            isDemoAccount: true,
+            loggedInAt: new Date().toISOString()
+          };
+          
+          sessionStorage.setItem('userData', JSON.stringify(demoUserData));
+          sessionStorage.setItem('isLoggedIn', 'true');
+          
+          showToast(`Welcome back, ${demoUserData.firstName}! Redirecting...`, 'success', 1500);
+          setTimeout(() => {
+            window.location.href = 'files/dashboard.html';
+          }, 1500);
+        });
+      }
+      
+      // ---------- Ensure support page display none & auth visible initially ----------
+      if (supportPage) supportPage.style.display = 'none';
+      if (authSection) authSection.style.display = 'flex';
+      
+      // Additional support: For any "support" back buttons re-hide support
+      const supportBackBtns = document.querySelectorAll('#back-to-login, .back-btn');
+      supportBackBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          if (supportPage && authSection) {
+            supportPage.style.display = 'none';
+            authSection.style.display = 'flex';
+          }
+        });
       });
       
-      // Resend code
-      resendCodeLink.addEventListener('click', function(e) {
-        e.preventDefault();
-        const email = document.getElementById('reset-email').value;
-        
-        // In a real application, you would resend the code
-        console.log('Resending code to:', email);
-        
-        alert('A new verification code has been sent to your email');
-        
-        // Clear verification inputs
-        verificationInputs.forEach(input => {
-          input.value = '';
+      // fix for "Back to Login" inside support page duplication
+      const supportBackSpecific = document.getElementById('back-to-login');
+      if (supportBackSpecific) {
+        supportBackSpecific.addEventListener('click', (e) => {
+          if (supportPage && authSection) {
+            supportPage.style.display = 'none';
+            authSection.style.display = 'flex';
+          }
         });
-        
-        // Focus first input
-        verificationInputs[0].focus();
-      });
+      }
       
-      // Reset password
-      resetPasswordBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        const newPassword = document.getElementById('new-password').value;
-        const confirmPassword = document.getElementById('confirm-new-password').value;
-        
-        if (!newPassword || !confirmPassword) {
-          alert('Please fill in all fields');
-          return;
-        }
-        
-        if (newPassword !== confirmPassword) {
-          alert('Passwords do not match');
-          return;
-        }
-        
-        // In a real application, you would send this to your backend
-        console.log('Resetting password to:', newPassword);
-        
-        // Show success message
-        step3Content.style.display = 'none';
-        resetSuccess.style.display = 'block';
-        
-        // Update step indicators
-        step3.classList.remove('active');
-        step3.classList.add('completed');
-        
-        stepLabel3.classList.remove('active');
-      });
-      
-      // Reset form to initial state
-      function resetForm() {
-        step1Content.style.display = 'block';
-        step2Content.style.display = 'none';
-        step3Content.style.display = 'none';
-        resetSuccess.style.display = 'none';
-        
-        step1.classList.add('active');
-        step1.classList.remove('completed');
-        step2.classList.remove('active', 'completed');
-        step3.classList.remove('active', 'completed');
-        
-        stepLabel1.classList.add('active');
-        stepLabel2.classList.remove('active');
-        stepLabel3.classList.remove('active');
-        
-        document.getElementById('reset-email').value = '';
-        verificationInputs.forEach(input => {
-          input.value = '';
+      // mobile number & bvn dummy verification (visual only)
+      const mobileInput = document.getElementById('mobile');
+      const mobileSuccess = document.getElementById('mobile-success');
+      if (mobileInput && mobileSuccess) {
+        mobileInput.addEventListener('blur', function() {
+          if (this.value.trim().length >= 10) {
+            mobileSuccess.classList.remove('hidden-display');
+          } else {
+            mobileSuccess.classList.add('hidden-display');
+          }
         });
-        document.getElementById('new-password').value = '';
-        document.getElementById('confirm-new-password').value = '';
+      }
+      const bvnInput = document.getElementById('bvn');
+      const bvnSuccess = document.getElementById('bvn-success');
+      if (bvnInput && bvnSuccess) {
+        bvnInput.addEventListener('blur', function() {
+          if (this.value.trim().length === 11 && /^\d+$/.test(this.value.trim())) {
+            bvnSuccess.classList.remove('hidden-display');
+          } else {
+            bvnSuccess.classList.add('hidden-display');
+          }
+        });
       }
     });
   </script>

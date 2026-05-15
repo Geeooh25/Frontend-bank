@@ -2458,7 +2458,7 @@
       accountNumberInput.addEventListener('input', function() {
         clearError('accountNumberGroup');
         if (this.value.length === 10) {
-          accountNameInput.value = 'John Doe';
+          accountNameInput.value = 'Abidat Alao';
         } else {
           accountNameInput.value = '';
         }
@@ -2468,7 +2468,7 @@
       milesAccountNumberInput.addEventListener('input', function() {
         clearError('milesAccountNumberGroup');
         if (this.value.length === 10) {
-          milesAccountNameInput.value = 'Sarah Johnson';
+          milesAccountNameInput.value = 'Ganiyu Usman';
         } else {
           milesAccountNameInput.value = '';
         }

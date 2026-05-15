@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
     <link rel="stylesheet" href="../styles/style.css" />
     
+
 </head>
 <body>
     <div class="app">
@@ -40,10 +41,8 @@
             <a href="transfer.html">
               Transfers
             </a>
-            <a href="topup.html">
-              Top-up
-            </a>
-            <a href="history.html" class="active">
+            
+           <a href="history.html" class="active">
               History
             </a>
           </div>
@@ -452,5 +451,176 @@
    
     <script src="../app/app.js"></script>
     <script src="https://unpkg.com/phosphor-icons"></script>
-  </body>
+    <script>
+// Toast notification
+function showToast(message, type, duration) {
+    type = type || 'info';
+    duration = duration || 3000;
+    var toastContainer = document.getElementById('toast-container');
+    if (!toastContainer) {
+        toastContainer = document.createElement('div');
+        toastContainer.id = 'toast-container';
+        toastContainer.style.cssText = 'position: fixed; top: 80px; right: 20px; z-index: 10000;';
+        document.body.appendChild(toastContainer);
+    }
+    
+    var toast = document.createElement('div');
+    var borderColor = type === 'success' ? '#28a745' : (type === 'error' ? '#dc3545' : '#17a2b8');
+    var icon = type === 'success' ? 'fa-check-circle' : (type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle');
+    
+    toast.style.cssText = 'background: white; border-radius: 12px; padding: 14px 20px; margin-bottom: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.15); display: flex; align-items: center; gap: 12px; border-left: 4px solid ' + borderColor + '; animation: slideInRight 0.3s ease;';
+    toast.innerHTML = '<i class="fas ' + icon + '" style="color: ' + borderColor + ';"></i><div style="flex: 1; font-size: 14px;">' + message + '</div><button style="background: none; border: none; cursor: pointer; font-size: 18px;">&times;</button>';
+    
+    toastContainer.appendChild(toast);
+    toast.querySelector('button').onclick = function() { toast.remove(); };
+    setTimeout(function() { if(toast.parentNode) toast.remove(); }, duration);
+}
+
+// Check login
+document.addEventListener('DOMContentLoaded', function() {
+    var isLoggedIn = sessionStorage.getItem('isLoggedIn');
+    var userDataStr = sessionStorage.getItem('userData');
+    
+    if (!isLoggedIn || !userDataStr) {
+        showToast('Please login to continue', 'error', 2000);
+        setTimeout(function() { window.location.href = '../index.html'; }, 2000);
+        return;
+    }
+    
+    var userData = JSON.parse(userDataStr);
+    var fullName = userData.fullName || (userData.firstName ? userData.firstName + ' ' + (userData.lastName || '') : 'Client Name');
+    
+    // Update user name
+    var userNameSpans = document.querySelectorAll('.user-profile span:first-child, .mobile-user-info strong');
+    for (var i = 0; i < userNameSpans.length; i++) {
+        userNameSpans[i].textContent = fullName;
+    }
+    
+    // Load transactions from localStorage
+    var transactions = JSON.parse(localStorage.getItem('transactions') || '[]');
+    
+    function renderTransactions() {
+        var container = document.getElementById('transactionList');
+        if (!container) return;
+        
+        if (transactions.length === 0) {
+            container.innerHTML = '<div style="text-align: center; padding: 40px;">No transactions found</div>';
+            return;
+        }
+        
+        var html = '<table style="width: 100%; border-collapse: collapse;"><thead><tr>' +
+            '<th style="text-align: left; padding: 16px; background: #f8f9fa;">Type</th>' +
+            '<th style="text-align: left; padding: 16px; background: #f8f9fa;">Reference</th>' +
+            '<th style="text-align: left; padding: 16px; background: #f8f9fa;">Date</th>' +
+            '<th style="text-align: left; padding: 16px; background: #f8f9fa;">Description</th>' +
+            '<th style="text-align: left; padding: 16px; background: #f8f9fa;">Amount</th>' +
+            '</tr></thead><tbody>';
+        
+        for (var i = 0; i < transactions.length; i++) {
+            var t = transactions[i];
+            var currencySymbol = t.currency === 'USD' ? '$' : '₦';
+            var amountColor = t.type === 'deposit' ? '#28a745' : '#dc3545';
+            var amountSign = t.type === 'deposit' ? '+' : '-';
+            
+            html += '<tr style="border-bottom: 1px solid #e0e0e0;">' +
+                '<td style="padding: 16px;">' + t.type.charAt(0).toUpperCase() + t.type.slice(1) + '</td>' +
+                '<td style="padding: 16px;">' + t.reference + '</td>' +
+                '<td style="padding: 16px;">' + t.date + '</td>' +
+                '<td style="padding: 16px;">' + t.description + '</td>' +
+                '<td style="padding: 16px; color: ' + amountColor + '; font-weight: 600;">' + amountSign + ' ' + currencySymbol + t.amount.toLocaleString() + '</td>' +
+                '</tr>';
+        }
+        
+        html += '</tbody></table>';
+        container.innerHTML = html;
+        
+        // Update statistics
+        var totalIncome = 0, totalExpenses = 0;
+        for (var i = 0; i < transactions.length; i++) {
+            if (transactions[i].type === 'deposit') {
+                totalIncome += transactions[i].amount;
+            } else {
+                totalExpenses += transactions[i].amount;
+            }
+        }
+        
+        document.getElementById('totalTransactions').textContent = transactions.length;
+        document.getElementById('totalIncome').textContent = '₦' + totalIncome.toLocaleString();
+        document.getElementById('totalExpenses').textContent = '₦' + totalExpenses.toLocaleString();
+        document.getElementById('netFlow').textContent = '₦' + (totalIncome - totalExpenses).toLocaleString();
+    }
+    
+    renderTransactions();
+    
+    // Refresh button
+    document.getElementById('refreshBtn').onclick = function() {
+        transactions = JSON.parse(localStorage.getItem('transactions') || '[]');
+        renderTransactions();
+        showToast('Transactions refreshed', 'success', 1500);
+    };
+    
+    // Export button
+    document.getElementById('exportBtn').onclick = function() {
+        var csvContent = 'Type,Reference,Date,Description,Amount,Currency\n';
+        for (var i = 0; i < transactions.length; i++) {
+            var t = transactions[i];
+            csvContent += t.type + ',' + t.reference + ',' + t.date + ',' + t.description + ',' + t.amount + ',' + t.currency + '\n';
+        }
+        var blob = new Blob([csvContent], { type: 'text/csv' });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = 'transactions.csv';
+        a.click();
+        URL.revokeObjectURL(url);
+        showToast('Exported successfully', 'success', 2000);
+    };
+    
+    // User dropdown
+    var userProfileBtn = document.getElementById('userProfileBtn');
+    var userDropdown = document.getElementById('userDropdown');
+    if (userProfileBtn && userDropdown) {
+        userProfileBtn.onclick = function(e) {
+            e.stopPropagation();
+            userDropdown.classList.toggle('show');
+        };
+        document.onclick = function() { userDropdown.classList.remove('show'); };
+    }
+    
+    // Mobile menu
+    var mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    var mobileMenu = document.getElementById('mobileMenu');
+    var mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+    var closeMobileMenu = document.getElementById('closeMobileMenu');
+    
+    if (mobileMenuBtn) {
+        mobileMenuBtn.onclick = function() {
+            if (mobileMenu) mobileMenu.classList.add('open');
+            if (mobileMenuOverlay) mobileMenuOverlay.classList.add('open');
+        };
+    }
+    
+    var closeMobile = function() {
+        if (mobileMenu) mobileMenu.classList.remove('open');
+        if (mobileMenuOverlay) mobileMenuOverlay.classList.remove('open');
+    };
+    
+    if (closeMobileMenu) closeMobileMenu.onclick = closeMobile;
+    if (mobileMenuOverlay) mobileMenuOverlay.onclick = closeMobile;
+    
+    // Logout
+    var logoutLinks = document.querySelectorAll('.user-dropdown a:last-child, .mobile-nav a:last-child');
+    for (var i = 0; i < logoutLinks.length; i++) {
+        logoutLinks[i].onclick = function(e) {
+            e.preventDefault();
+            sessionStorage.removeItem('isLoggedIn');
+            sessionStorage.removeItem('userData');
+            showToast('Logged out', 'success', 1500);
+            setTimeout(function() { window.location.href = '../index.html'; }, 1500);
+        };
+    }
+});
+</script>
+
+      <script src="../app/toast.js"></script>`n</body>
 </html>

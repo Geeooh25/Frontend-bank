@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>dashboard MSB</title>
+    <title>Dashboard - Miles SmartBank</title>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
     <link rel="stylesheet" href="../styles/style.css" />
     
+   
 </head> 
 <body>
     <div class="app">
@@ -47,7 +48,7 @@
         </div>
         <div class="app-header-actions">
           <button class="user-profile" id="userProfileBtn">
-            <span>Client Name</span>
+            <span id="userNameSpan">Client Name</span>
             <span>
               <i class="fa-solid fa-circle-user"></i>
             </span>
@@ -61,22 +62,22 @@
               <i class="fas fa-cog"></i>
               <span>Settings</span>
             </a>
-            <a href="../index.html">
+            <a href="../index.html" id="logoutBtn">
               <i class="fas fa-sign-out-alt"></i>
               <span>Logout</span>
             </a>
           </div>
           <div class="app-header-actions-buttons">
-            <button class="icon-button large">
+            <button type="button" class="icon-button large" title="Search">
               <i class="ph-magnifying-glass"></i>
             </button>
-            <button class="icon-button large">
+            <button type="button" class="icon-button large" title="Notifications">
               <i class="ph-bell"></i>
             </button>
           </div>
         </div>
         <div class="app-header-mobile">
-          <button class="icon-button large" id="mobileMenuBtn">
+          <button type="button" class="icon-button large" id="mobileMenuBtn" title="Open mobile menu">
             <i class="fas fa-bars"></i>
           </button>
         </div>
@@ -87,7 +88,7 @@
       <div class="mobile-menu" id="mobileMenu">
         <div class="mobile-menu-header">
           <h3>Menu</h3>
-          <button class="icon-button" id="closeMobileMenu">
+          <button type="button" class="icon-button" id="closeMobileMenu" title="Close mobile menu">
             <i class="fas fa-times"></i>
           </button>
         </div>
@@ -95,8 +96,8 @@
         <div class="mobile-user-info">
           <i class="fa-solid fa-circle-user"></i>
           <div>
-            <strong>Client Name</strong>
-            <div style="font-size: 0.875rem; color: #666;">Welcome back!</div>
+            <strong id="mobileUserName">Client Name</strong>
+            <div class="welcome-message" id="mobileWelcomeMsg">Welcome back!</div>
           </div>
         </div>
 
@@ -133,7 +134,7 @@
             <i class="fas fa-cog"></i>
             <span>Settings</span>
           </a>
-          <a href="../index.html">
+          <a href="../index.html" id="mobileLogoutBtn">
             <i class="fas fa-sign-out-alt"></i>
             <span>Logout</span>
           </a>
@@ -300,10 +301,10 @@
               <h2>Latest transfers</h2>
               <div class="filter-options">
                 <p id="filterText">Filter selected: more than 100 ₦</p>
-                <button class="icon-button">
+                <button type="button" class="icon-button" title="Filter transfers">
                   <i class="ph-funnel"></i>
                 </button>
-                <button class="icon-button">
+                <button type="button" class="icon-button" title="Add new transfer">
                   <i class="ph-plus"></i>
                 </button>
               </div>
@@ -311,7 +312,7 @@
             <div class="transfers">
               <div class="transfer">
                 <div class="transfer-logo">
-                  <img src="https://assets.codepen.io/285131/apple.svg" />
+                  <img src="https://assets.codepen.io/285131/apple.svg" alt="Apple Inc." />
                 </div>
                 <dl class="transfer-details">
                   <div>
@@ -333,7 +334,7 @@
               </div>
               <div class="transfer">
                 <div class="transfer-logo">
-                  <img src="https://assets.codepen.io/285131/pinterest.svg" />
+                  <img src="https://assets.codepen.io/285131/pinterest.svg" alt="Pinterest" />
                 </div>
                 <dl class="transfer-details">
                   <div>
@@ -355,7 +356,7 @@
               </div>
               <div class="transfer">
                 <div class="transfer-logo">
-                  <img src="https://assets.codepen.io/285131/warner-bros.svg" />
+                  <img src="https://assets.codepen.io/285131/warner-bros.svg" alt="Warner Bros." />
                 </div>
                 <dl class="transfer-details">
                   <div>
@@ -384,7 +385,7 @@
             <div class="payment-section-header">
               <p>Choose a card to transfer money</p>
               <div>
-                <button class="card-button mastercard">
+                <button type="button" class="card-button mastercard" title="Mastercard">
                   <svg width="2001" height="1237" viewBox="0 0 2001 1237" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="a624784f2834e21c94a1c0c9a58bbbaa">
                       <path id="7869b07bea546aa59a5ee138adbcfd5a" d="M1270.57 1104.15H729.71V132.15H1270.58L1270.57 1104.15Z" fill="currentColor"></path>
@@ -393,7 +394,7 @@
                     </g>
                   </svg>
                 </button>
-                <button class="card-button visa active">
+                <button type="button" class="card-button visa active" title="Visa">
                   <svg xmlns="http://www.w3.org/2000/svg" width="2500" height="2500" viewBox="0 0 141.732 141.732">
                     <g fill="currentColor">
                       <path d="M62.935 89.571h-9.733l6.083-37.384h9.734zM45.014 52.187L35.735 77.9l-1.098-5.537.001.002-3.275-16.812s-.396-3.366-4.617-3.366h-15.34l-.18.633s4.691.976 10.181 4.273l8.456 32.479h10.141l15.485-37.385H45.014zM121.569 89.571h8.937l-7.792-37.385h-7.824c-3.613 0-4.493 2.786-4.493 2.786L95.881 89.571h10.146l2.029-5.553h12.373l1.14 5.553zm-10.71-13.224l5.114-13.99 2.877 13.99h-7.991zM96.642 61.177l1.389-8.028s-4.286-1.63-8.754-1.63c-4.83 0-16.3 2.111-16.3 12.376 0 9.658 13.462 9.778 13.462 14.851s-12.075 4.164-16.06.965l-1.447 8.394s4.346 2.111 10.986 2.111c6.642 0 16.662-3.439 16.662-12.799 0-9.72-13.583-10.625-13.583-14.851.001-4.227 9.48-3.684 13.645-1.389z" />
@@ -416,7 +417,7 @@
                   <h3>Internet</h3>
                   <div>
                     <span id="payment1">₦0</span>
-                    <button class="icon-button">
+                    <button type="button" class="icon-button" title="View details">
                       <i class="ph-caret-right-bold"></i>
                     </button>
                   </div>
@@ -433,7 +434,7 @@
                   <h3>Universal</h3>
                   <div>
                     <span id="payment2">₦0</span>
-                    <button class="icon-button">
+                    <button type="button" class="icon-button" title="View details">
                       <i class="ph-caret-right-bold"></i>
                     </button>
                   </div>
@@ -450,7 +451,7 @@
                   <h3>Gold</h3>
                   <div>
                     <span id="payment3">₦0</span>
-                    <button class="icon-button">
+                    <button type="button" class="icon-button" title="View details">
                       <i class="ph-caret-right-bold"></i>
                     </button>
                   </div>
@@ -490,16 +491,16 @@
             <label for="fromAccount">From Account</label>
             <select id="fromAccount" required>
               <option value="">Select account</option>
-              <option value="ngn">NGN Account</option>
-              <option value="usd">USD Account</option>
+              <option value="ngn">NGN Account (₦)</option>
+              <option value="usd">USD Account ($)</option>
             </select>
           </div>
           <div class="form-group">
             <label for="toAccount">To Account</label>
             <select id="toAccount" required>
               <option value="">Select account</option>
-              <option value="ngn">NGN Account</option>
-              <option value="usd">USD Account</option>
+              <option value="ngn">NGN Account (₦)</option>
+              <option value="usd">USD Account ($)</option>
             </select>
           </div>
           <div class="form-row">
@@ -526,7 +527,289 @@
         </form>
       </div>
     </div>
+    
+    <script>
+        // ======================== TOAST NOTIFICATION ========================
+        function showToast(message, type = 'info', duration = 3000) {
+            const toastContainer = document.getElementById('toast-container') || (() => {
+                const container = document.createElement('div');
+                container.id = 'toast-container';
+                container.className = 'toast-notification';
+                document.body.appendChild(container);
+                return container;
+            })();
+            
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            let icon = type === 'success' ? 'fa-check-circle' : (type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle');
+            
+            toast.innerHTML = `
+                <i class="fas ${icon}"></i>
+                <div class="toast-content">${message}</div>
+                <button class="toast-close">&times;</button>
+            `;
+            
+            toastContainer.appendChild(toast);
+            const closeBtn = toast.querySelector('.toast-close');
+            closeBtn.addEventListener('click', () => toast.remove());
+            setTimeout(() => toast.remove(), duration);
+        }
+        
+        // ======================== CHECK LOGIN & LOAD USER DATA ========================
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is logged in
+            const isLoggedIn = sessionStorage.getItem('isLoggedIn');
+            const userDataStr = sessionStorage.getItem('userData');
+            
+            if (!isLoggedIn || !userDataStr) {
+                // Not logged in, redirect to login page
+                showToast('Please login to continue', 'error', 2000);
+                setTimeout(() => {
+                    window.location.href = '../index.html';
+                }, 2000);
+                return;
+            }
+            
+            const userData = JSON.parse(userDataStr);
+            const firstName = userData.firstName || userData.fullName?.split(' ')[0] || 'Client';
+            const fullName = userData.fullName || `${userData.firstName || ''} ${userData.lastName || ''}`.trim() || 'Client Name';
+            const email = userData.email || '';
+            
+            // Update user name in header
+            const userNameSpan = document.getElementById('userNameSpan');
+            const mobileUserName = document.getElementById('mobileUserName');
+            const mobileWelcomeMsg = document.getElementById('mobileWelcomeMsg');
+            
+            if (userNameSpan) userNameSpan.textContent = fullName;
+            if (mobileUserName) mobileUserName.textContent = fullName;
+            if (mobileWelcomeMsg) mobileWelcomeMsg.textContent = `Welcome back, ${firstName}!`;
+            
+            // Show welcome toast for new signups
+            if (sessionStorage.getItem('justSignedUp') === 'true') {
+                showToast(`Welcome to Miles SmartBank, ${firstName}! 🎉`, 'success', 4000);
+                sessionStorage.removeItem('justSignedUp');
+            } else {
+                showToast(`Welcome back, ${firstName}!`, 'success', 3000);
+            }
+            
+            // Load/initialize balances
+            let ngnBalance = localStorage.getItem('ngnBalance') ? parseFloat(localStorage.getItem('ngnBalance')) : 25000.00;
+            let usdBalance = localStorage.getItem('usdBalance') ? parseFloat(localStorage.getItem('usdBalance')) : 500.00;
+            
+            // Display initial balance
+            function updateBalanceDisplay() {
+                const currentAccount = document.querySelector('.account-type-btn.active')?.id === 'usdAccountBtn' ? 'usd' : 'ngn';
+                const balanceElement = document.getElementById('serviceBalanceAmount');
+                if (currentAccount === 'ngn') {
+                    balanceElement.textContent = `₦${ngnBalance.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+                } else {
+                    balanceElement.textContent = `$${usdBalance.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+                }
+            }
+            
+            updateBalanceDisplay();
+            
+            // Account type switching
+            const ngnBtn = document.getElementById('ngnAccountBtn');
+            const usdBtn = document.getElementById('usdAccountBtn');
+            const accountNumberSpan = document.getElementById('accountNumber');
+            
+            ngnBtn.addEventListener('click', function() {
+                ngnBtn.classList.add('active');
+                usdBtn.classList.remove('active');
+                accountNumberSpan.textContent = '00133867509';
+                updateBalanceDisplay();
+                showToast('Switched to NGN Account', 'info', 2000);
+            });
+            
+            usdBtn.addEventListener('click', function() {
+                usdBtn.classList.add('active');
+                ngnBtn.classList.remove('active');
+                accountNumberSpan.textContent = '00133867510';
+                updateBalanceDisplay();
+                showToast('Switched to USD Account', 'info', 2000);
+            });
+            
+            // Open USD Account
+            const openAccountBtn = document.getElementById('openAccountBtn');
+            openAccountBtn.addEventListener('click', function() {
+                if (usdBalance > 0) {
+                    showToast('USD Account is already open!', 'info', 2000);
+                } else {
+                    usdBalance = 100.00;
+                    localStorage.setItem('usdBalance', usdBalance);
+                    updateBalanceDisplay();
+                    showToast('USD Account opened successfully! $100.00 credited as welcome bonus! 🎉', 'success', 4000);
+                }
+            });
+            
+            // Copy account number
+            const copyBtn = document.getElementById('copyAccountNumber');
+            copyBtn.addEventListener('click', function() {
+                const accountNum = accountNumberSpan.textContent;
+                navigator.clipboard.writeText(accountNum);
+                showToast(`Account number ${accountNum} copied!`, 'success', 2000);
+            });
+            
+            // Hide balance toggle
+            const hideBalanceToggle = document.getElementById('hideBalanceToggle');
+            let balanceHidden = false;
+            hideBalanceToggle.addEventListener('click', function() {
+                balanceHidden = !balanceHidden;
+                this.classList.toggle('active');
+                const balanceElement = document.getElementById('serviceBalanceAmount');
+                if (balanceHidden) {
+                    const currentText = balanceElement.textContent;
+                    balanceElement.setAttribute('data-original', currentText);
+                    balanceElement.textContent = '••••••••';
+                } else {
+                    balanceElement.textContent = balanceElement.getAttribute('data-original') || '₦0.00';
+                    updateBalanceDisplay();
+                }
+                showToast(balanceHidden ? 'Balance hidden' : 'Balance visible', 'info', 1500);
+            });
+            
+            // Transfer modal
+            const transferBtn = document.getElementById('transferBetweenAccounts');
+            const transferModal = document.getElementById('transferModal');
+            const closeTransferModal = document.getElementById('closeTransferModal');
+            const cancelTransfer = document.getElementById('cancelTransfer');
+            const fromAccount = document.getElementById('fromAccount');
+            const toAccount = document.getElementById('toAccount');
+            const amountInput = document.getElementById('amount');
+            const currencySelect = document.getElementById('currency');
+            const convertedAmountInput = document.getElementById('convertedAmount');
+            
+            const exchangeRate = 1500; // 1 USD = 1500 NGN
+            
+            function updateConvertedAmount() {
+                const amount = parseFloat(amountInput.value) || 0;
+                const currency = currencySelect.value;
+                const from = fromAccount.value;
+                const to = toAccount.value;
+                
+                if (from === 'ngn' && to === 'usd') {
+                    convertedAmountInput.value = `$${(amount / exchangeRate).toFixed(2)} USD`;
+                } else if (from === 'usd' && to === 'ngn') {
+                    convertedAmountInput.value = `₦${(amount * exchangeRate).toLocaleString('en-US', {minimumFractionDigits: 2})} NGN`;
+                } else {
+                    convertedAmountInput.value = currency === 'ngn' ? `₦${amount.toFixed(2)}` : `$${amount.toFixed(2)}`;
+                }
+            }
+            
+            amountInput.addEventListener('input', updateConvertedAmount);
+            currencySelect.addEventListener('change', updateConvertedAmount);
+            fromAccount.addEventListener('change', updateConvertedAmount);
+            toAccount.addEventListener('change', updateConvertedAmount);
+            
+            transferBtn.addEventListener('click', function() {
+                transferModal.style.display = 'flex';
+            });
+            
+            function closeModal() {
+                transferModal.style.display = 'none';
+                fromAccount.value = '';
+                toAccount.value = '';
+                amountInput.value = '';
+                convertedAmountInput.value = '';
+            }
+            
+            closeTransferModal.addEventListener('click', closeModal);
+            cancelTransfer.addEventListener('click', closeModal);
+            
+            document.getElementById('transferForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const from = fromAccount.value;
+                const to = toAccount.value;
+                const amount = parseFloat(amountInput.value);
+                
+                if (!from || !to) {
+                    showToast('Please select both accounts', 'error');
+                    return;
+                }
+                if (from === to) {
+                    showToast('Cannot transfer to the same account', 'error');
+                    return;
+                }
+                if (!amount || amount <= 0) {
+                    showToast('Please enter a valid amount', 'error');
+                    return;
+                }
+                
+                if (from === 'ngn' && to === 'usd') {
+                    const convertedAmount = amount / exchangeRate;
+                    if (ngnBalance >= amount) {
+                        ngnBalance -= amount;
+                        usdBalance += convertedAmount;
+                        localStorage.setItem('ngnBalance', ngnBalance);
+                        localStorage.setItem('usdBalance', usdBalance);
+                        updateBalanceDisplay();
+                        showToast(`Successfully transferred ₦${amount.toLocaleString()} to USD Account ($${convertedAmount.toFixed(2)})`, 'success');
+                        closeModal();
+                    } else {
+                        showToast('Insufficient NGN balance', 'error');
+                    }
+                } else if (from === 'usd' && to === 'ngn') {
+                    const convertedAmount = amount * exchangeRate;
+                    if (usdBalance >= amount) {
+                        usdBalance -= amount;
+                        ngnBalance += convertedAmount;
+                        localStorage.setItem('ngnBalance', ngnBalance);
+                        localStorage.setItem('usdBalance', usdBalance);
+                        updateBalanceDisplay();
+                        showToast(`Successfully transferred $${amount.toFixed(2)} to NGN Account (₦${convertedAmount.toLocaleString()})`, 'success');
+                        closeModal();
+                    } else {
+                        showToast('Insufficient USD balance', 'error');
+                    }
+                }
+            });
+            
+            // User dropdown
+            const userProfileBtn = document.getElementById('userProfileBtn');
+            const userDropdown = document.getElementById('userDropdown');
+            userProfileBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                userDropdown.classList.toggle('show');
+            });
+            document.addEventListener('click', function() {
+                userDropdown.classList.remove('show');
+            });
+            
+            // Mobile menu
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+            const closeMobileMenu = document.getElementById('closeMobileMenu');
+            
+            mobileMenuBtn.addEventListener('click', function() {
+                mobileMenu.classList.add('open');
+                mobileMenuOverlay.classList.add('open');
+            });
+            function closeMobileMenuFunc() {
+                mobileMenu.classList.remove('open');
+                mobileMenuOverlay.classList.remove('open');
+            }
+            closeMobileMenu.addEventListener('click', closeMobileMenuFunc);
+            mobileMenuOverlay.addEventListener('click', closeMobileMenuFunc);
+            
+            // Logout
+            function logout() {
+                sessionStorage.removeItem('isLoggedIn');
+                sessionStorage.removeItem('userData');
+                showToast('Logged out successfully!', 'success', 1500);
+                setTimeout(() => {
+                    window.location.href = '../index.html';
+                }, 1500);
+            }
+            
+            const logoutBtn = document.getElementById('logoutBtn');
+            const mobileLogoutBtn = document.getElementById('mobileLogoutBtn');
+            if (logoutBtn) logoutBtn.addEventListener('click', function(e) { e.preventDefault(); logout(); });
+            if (mobileLogoutBtn) mobileLogoutBtn.addEventListener('click', function(e) { e.preventDefault(); logout(); });
+        });
+    </script>
     <script src="../app/main.js"></script>
     <script src="https://unpkg.com/phosphor-icons"></script>
-  </body>
+    <script src="../app/toast.js"></script>`n</body>
 </html>
